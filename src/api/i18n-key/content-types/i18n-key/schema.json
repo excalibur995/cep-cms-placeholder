@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "i18n_keys",
+  "info": {
+    "singularName": "i18n-key",
+    "pluralName": "i18n-keys",
+    "displayName": "i18n-key"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "key": {
+      "type": "string"
+    }
+  }
+}

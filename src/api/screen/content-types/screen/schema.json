@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "screens",
+  "info": {
+    "singularName": "screen",
+    "pluralName": "screens",
+    "displayName": "screen"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "screenId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "content": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::component.component"
+    }
+  }
+}
