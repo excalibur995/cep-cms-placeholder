@@ -1,0 +1,357 @@
+{
+  "action": {
+    "bottomQuickAction": [
+      {
+        "id": "",
+        "title": "",
+        "items": [
+          {
+            "id": "",
+            "label": "",
+            "icon": ""
+          }
+        ]
+      }
+    ],
+    "button": [
+      {
+        "id": "",
+        "label": "",
+        "url": ""
+      }
+    ],
+    "chip": [
+      {
+        "id": "",
+        "label": ""
+      }
+    ]
+  },
+  "asset": {
+    "image": [
+      {
+        "id": "",
+        "url": "",
+        "altText": ""
+      }
+    ],
+    "icon": [
+      {
+        "id": "",
+        "name": ""
+      }
+    ]
+  },
+  "container": {
+    "accordion": [
+      {
+        "id": "",
+        "sections": [
+          {
+            "id": "",
+            "title": "",
+            "content": ""
+          },
+          {
+            "id": "",
+            "title": "",
+            "content": ""
+          }
+        ]
+      }
+    ],
+    "banner": [
+      {
+        "id": "",
+        "title": "",
+        "description": "",
+        "imageSource": ""
+      }
+    ],
+    "bento": [
+      {
+        "id": "",
+        "title": "",
+        "items": [
+          {
+            "id": "",
+            "title": "",
+            "description": "",
+            "iconId": ""
+          }
+        ]
+      }
+    ],
+    "card": [
+      {
+        "id": "",
+        "title": "",
+        "subtitle": "",
+        "description": ""
+      }
+    ],
+    "divider": [
+      {
+        "id": "",
+        "label": ""
+      }
+    ],
+    "list": [
+      {
+        "id": "",
+        "title": "",
+        "subTitle": "",
+        "items": [
+          {
+            "id": "",
+            "label": "",
+            "description": "",
+            "icon": ""
+          }
+        ]
+      }
+    ]
+  },
+  "core": {
+    "avatar": [
+      {
+        "id": "",
+        "name": "",
+        "imageSource": ""
+      }
+    ],
+    "grid": [
+      {
+        "id": "",
+        "title": "",
+        "items": [
+          {
+            "id": "",
+            "label": ""
+          }
+        ]
+      }
+    ],
+    "typo": [
+      {
+        "id": "",
+        "value": "",
+        "description": "",
+        "linkLabel": "",
+        "url": ""
+      }
+    ]
+  },
+  "input": {
+    "checkbox": [
+      {
+        "id": "",
+        "label": "",
+        "required": false,
+        "options": [
+          {
+            "id": "",
+            "label": ""
+          }
+        ]
+      }
+    ],
+    "dropdown": [
+      {
+        "id": "",
+        "label": "",
+        "placeholder": "",
+        "options": [
+          {
+            "id": "",
+            "label": ""
+          }
+        ]
+      }
+    ],
+    "numberInputStepper": [
+      {
+        "id": "",
+        "label": "",
+        "helperText": "",
+        "min": 1,
+        "max": 3,
+        "step": 1
+      }
+    ],
+    "pinInput": [
+      {
+        "id": "mpin_001",
+        "numberOfDigits": 6
+      }
+    ],
+    "radioButton": [
+      {
+        "id": "",
+        "label": "",
+        "options": [
+          {
+            "id": "",
+            "label": ""
+          }
+        ]
+      }
+    ],
+    "searchInput": [
+      {
+        "id": "",
+        "label": "",
+        "placeholder": ""
+      }
+    ],
+    "slider": [
+      {
+        "id": "",
+        "label": "",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "value": 5
+      }
+    ],
+    "textInput": [
+      {
+        "id": "",
+        "label": "",
+        "placeholder": "",
+        "required": true,
+        "maxLength": 200,
+        "minLength": 10,
+        "pattern": "^[0-9]{10,12}$",
+        "errorMessage": [
+          {
+            "id": "",
+            "message": ""
+          }
+        ]
+      }
+    ],
+    "toggle": [
+      {
+        "id": "",
+        "label": ""
+      }
+    ],
+    "uploader": [
+      {
+        "id": "",
+        "label": "",
+        "icon": "",
+        "acceptedTypes": ["application/pdf", "image/png"],
+        "maxFileSizeBytes": 5,
+        "maxFiles": 2
+      }
+    ]
+  },
+  "navigation": {
+    "bottoNavigation": [
+      {
+        "id": "",
+        "items": [
+          {
+            "id": "",
+            "label": "",
+            "icon": ""
+          }
+        ]
+      }
+    ],
+    "bottomTabItem": [
+      {
+        "id": "",
+        "label": "",
+        "icon": ""
+      }
+    ],
+    "navigationHeader": [
+      {
+        "id": "",
+        "title": "",
+        "subtitle": ""
+      }
+    ],
+    "sectionHeader": [
+      {
+        "id": "",
+        "title": "",
+        "description": "",
+        "rightContent": ""
+      }
+    ],
+    "tab": [
+      {
+        "id": "",
+        "label": ""
+      }
+    ],
+    "toolbar": [
+      {
+        "id": "",
+        "title": ""
+      }
+    ],
+    "topNavigation": [
+      {
+        "id": "",
+        "title": "",
+        "subtitle": ""
+      }
+    ]
+  },
+  "overlay": {
+    "coackmarkAndHint": [
+      {
+        "id": "",
+        "title": "",
+        "description": ""
+      }
+    ],
+    "editMenu": [
+      {
+        "id": "",
+        "label": "",
+        "icom": ""
+      }
+    ]
+  },
+  "statusAndFeedback": {
+    "alertBanner": [
+      {
+        "id": "",
+        "title": "",
+        "message": "",
+        "icon": "",
+        "linkLabel": ""
+      }
+    ],
+    "badge": [
+      {
+        "id": "",
+        "icon": ""
+      }
+    ],
+    "progressIndicator": [
+      {
+        "id": "",
+        "label": "",
+        "steps": [
+          {
+            "id": "",
+            "title": ""
+          }
+        ]
+      }
+    ],
+    "toast": [
+      {
+        "id": "",
+        "message": ""
+      }
+    ]
+  }
+}

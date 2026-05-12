@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_input_toggles",
+  "info": {
+    "displayName": "toggle",
+    "icon": "cast"
+  },
+  "options": {},
+  "attributes": {},
+  "config": {}
+}

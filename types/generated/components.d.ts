@@ -1,90 +1,71 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface MbbUiKitAccordion extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_accordions';
-  info: {
-    displayName: 'accordion';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitAlertBanner extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_alert_banners';
-  info: {
-    displayName: 'alertBanner';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitAvatar extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_avatars';
-  info: {
-    displayName: 'avatar';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitBadge extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_badges';
-  info: {
-    displayName: 'badge';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitBanner extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_banners';
-  info: {
-    displayName: 'banner';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitBento extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_bentos';
-  info: {
-    displayName: 'bento';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitBottomNavigation extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_bottom_navigations';
-  info: {
-    displayName: 'bottomNavigation';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitBottomQuickAction extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_bottom_quick_actions';
+export interface ActionBottomQuickAction extends Struct.ComponentSchema {
+  collectionName: 'components_action_bottom_quick_actions';
   info: {
     displayName: 'bottomQuickAction';
   };
   attributes: {};
 }
 
-export interface MbbUiKitBottomTabItem extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_bottom_tab_items';
-  info: {
-    displayName: 'bottomTabItem';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitButton extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_buttons';
+export interface ActionButton extends Struct.ComponentSchema {
+  collectionName: 'components_action_buttons';
   info: {
     displayName: 'button';
   };
   attributes: {};
 }
 
-export interface MbbUiKitCard extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_cards';
+export interface ActionChip extends Struct.ComponentSchema {
+  collectionName: 'components_action_chips';
+  info: {
+    displayName: 'chip';
+  };
+  attributes: {};
+}
+
+export interface AssetIcon extends Struct.ComponentSchema {
+  collectionName: 'components_asset_icons';
+  info: {
+    displayName: 'icon';
+  };
+  attributes: {};
+}
+
+export interface AssetImage extends Struct.ComponentSchema {
+  collectionName: 'components_asset_images';
+  info: {
+    displayName: 'image';
+  };
+  attributes: {};
+}
+
+export interface ContainerAccordion extends Struct.ComponentSchema {
+  collectionName: 'components_container_accordions';
+  info: {
+    displayName: 'accordion';
+  };
+  attributes: {};
+}
+
+export interface ContainerBanner extends Struct.ComponentSchema {
+  collectionName: 'components_container_banners';
+  info: {
+    displayName: 'banner';
+  };
+  attributes: {};
+}
+
+export interface ContainerBento extends Struct.ComponentSchema {
+  collectionName: 'components_container_bentos';
+  info: {
+    displayName: 'bento';
+  };
+  attributes: {};
+}
+
+export interface ContainerCard extends Struct.ComponentSchema {
+  collectionName: 'components_container_cards';
   info: {
     displayName: 'card';
     icon: 'cast';
@@ -92,33 +73,8 @@ export interface MbbUiKitCard extends Struct.ComponentSchema {
   attributes: {};
 }
 
-export interface MbbUiKitCheckbox extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_checkboxes';
-  info: {
-    displayName: 'checkbox';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitChip extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_chips';
-  info: {
-    displayName: 'chip';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitCoackmarkAndHint extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_coackmark_and_hints';
-  info: {
-    displayName: 'coackmarkAndHint';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitDivider extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_dividers';
+export interface ContainerDivider extends Struct.ComponentSchema {
+  collectionName: 'components_container_dividers';
   info: {
     displayName: 'divider';
     icon: 'cast';
@@ -126,50 +82,8 @@ export interface MbbUiKitDivider extends Struct.ComponentSchema {
   attributes: {};
 }
 
-export interface MbbUiKitDropdown extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_dropdowns';
-  info: {
-    displayName: 'dropdown';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitEditMenu extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_edit_menus';
-  info: {
-    displayName: 'editMenu';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitGrid extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_grids';
-  info: {
-    displayName: 'grid';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitIcon extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_icons';
-  info: {
-    displayName: 'icon';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitImage extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_images';
-  info: {
-    displayName: 'image';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitList extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_lists';
+export interface ContainerList extends Struct.ComponentSchema {
+  collectionName: 'components_container_lists';
   info: {
     displayName: 'list';
     icon: 'cast';
@@ -177,132 +91,26 @@ export interface MbbUiKitList extends Struct.ComponentSchema {
   attributes: {};
 }
 
-export interface MbbUiKitNavigationHeader extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_navigation_headers';
+export interface CoreAvatar extends Struct.ComponentSchema {
+  collectionName: 'components_core_avatars';
   info: {
-    displayName: 'navigationHeader';
+    displayName: 'avatar';
     icon: 'cast';
   };
   attributes: {};
 }
 
-export interface MbbUiKitNumberInputStepper extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_number_input_steppers';
+export interface CoreGrid extends Struct.ComponentSchema {
+  collectionName: 'components_core_grids';
   info: {
-    displayName: 'numberInputStepper';
+    displayName: 'grid';
     icon: 'cast';
   };
   attributes: {};
 }
 
-export interface MbbUiKitPinInput extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_pin_inputs';
-  info: {
-    displayName: 'pinInput';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitProgressIndicator extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_progress_indicators';
-  info: {
-    displayName: 'progressIndicator';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitRadioButton extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_radio_buttons';
-  info: {
-    displayName: 'radioButton';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitSearchInput extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_search_inputs';
-  info: {
-    displayName: 'searchInput';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitSectionHeader extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_section_headers';
-  info: {
-    displayName: 'sectionHeader';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitSlider extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_sliders';
-  info: {
-    displayName: 'slider';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitTab extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_tabs';
-  info: {
-    displayName: 'tab';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitTextInput extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_text_inputs';
-  info: {
-    displayName: 'textInput';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitToast extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_toasts';
-  info: {
-    displayName: 'toast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitToggle extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_toggles';
-  info: {
-    displayName: 'toggle';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitToolbar extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_toolbars';
-  info: {
-    displayName: 'toolbar';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitTopNavigation extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_top_navigations';
-  info: {
-    displayName: 'topNavigation';
-    icon: 'cast';
-  };
-  attributes: {};
-}
-
-export interface MbbUiKitTypo extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_typos';
+export interface CoreTypo extends Struct.ComponentSchema {
+  collectionName: 'components_core_typos';
   info: {
     displayName: 'typo';
     icon: 'cast';
@@ -310,8 +118,89 @@ export interface MbbUiKitTypo extends Struct.ComponentSchema {
   attributes: {};
 }
 
-export interface MbbUiKitUploader extends Struct.ComponentSchema {
-  collectionName: 'components_mbb_ui_kit_uploaders';
+export interface InputCheckbox extends Struct.ComponentSchema {
+  collectionName: 'components_input_checkboxes';
+  info: {
+    displayName: 'checkbox';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputDropdown extends Struct.ComponentSchema {
+  collectionName: 'components_input_dropdowns';
+  info: {
+    displayName: 'dropdown';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputNumberInputStepper extends Struct.ComponentSchema {
+  collectionName: 'components_input_number_input_steppers';
+  info: {
+    displayName: 'numberInputStepper';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputPinInput extends Struct.ComponentSchema {
+  collectionName: 'components_input_pin_inputs';
+  info: {
+    displayName: 'pinInput';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputRadioButton extends Struct.ComponentSchema {
+  collectionName: 'components_input_radio_buttons';
+  info: {
+    displayName: 'radioButton';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputSearchInput extends Struct.ComponentSchema {
+  collectionName: 'components_input_search_inputs';
+  info: {
+    displayName: 'searchInput';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputSlider extends Struct.ComponentSchema {
+  collectionName: 'components_input_sliders';
+  info: {
+    displayName: 'slider';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputTextInput extends Struct.ComponentSchema {
+  collectionName: 'components_input_text_inputs';
+  info: {
+    displayName: 'textInput';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputToggle extends Struct.ComponentSchema {
+  collectionName: 'components_input_toggles';
+  info: {
+    displayName: 'toggle';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface InputUploader extends Struct.ComponentSchema {
+  collectionName: 'components_input_uploaders';
   info: {
     displayName: 'uploader';
     icon: 'cast';
@@ -319,46 +208,158 @@ export interface MbbUiKitUploader extends Struct.ComponentSchema {
   attributes: {};
 }
 
+export interface NavigationBottomNavigation extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_bottom_navigations';
+  info: {
+    displayName: 'bottomNavigation';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface NavigationBottomTabItem extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_bottom_tab_items';
+  info: {
+    displayName: 'bottomTabItem';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface NavigationNavigationHeader extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_navigation_headers';
+  info: {
+    displayName: 'navigationHeader';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface NavigationSectionHeader extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_section_headers';
+  info: {
+    displayName: 'sectionHeader';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface NavigationTab extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_tabs';
+  info: {
+    displayName: 'tab';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface NavigationToolbar extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_toolbars';
+  info: {
+    displayName: 'toolbar';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface NavigationTopNavigation extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_top_navigations';
+  info: {
+    displayName: 'topNavigation';
+    icon: 'cast';
+  };
+  attributes: {};
+}
+
+export interface OverlayCoackmarkAndHint extends Struct.ComponentSchema {
+  collectionName: 'components_overlay_coackmark_and_hints';
+  info: {
+    displayName: 'coackmarkAndHint';
+  };
+  attributes: {};
+}
+
+export interface OverlayEditMenu extends Struct.ComponentSchema {
+  collectionName: 'components_overlay_edit_menus';
+  info: {
+    displayName: 'editMenu';
+  };
+  attributes: {};
+}
+
+export interface StatusAndFeedbackAlertBanner extends Struct.ComponentSchema {
+  collectionName: 'components_status_and_feedback_alert_banners';
+  info: {
+    displayName: 'alertBanner';
+  };
+  attributes: {};
+}
+
+export interface StatusAndFeedbackBadge extends Struct.ComponentSchema {
+  collectionName: 'components_status_and_feedback_badges';
+  info: {
+    displayName: 'badge';
+  };
+  attributes: {};
+}
+
+export interface StatusAndFeedbackProgressIndicator
+  extends Struct.ComponentSchema {
+  collectionName: 'components_status_and_feedback_progress_indicators';
+  info: {
+    displayName: 'progressIndicator';
+  };
+  attributes: {};
+}
+
+export interface StatusAndFeedbackToast extends Struct.ComponentSchema {
+  collectionName: 'components_status_and_feedback_toasts';
+  info: {
+    displayName: 'toast';
+  };
+  attributes: {};
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'mbb-ui-kit.accordion': MbbUiKitAccordion;
-      'mbb-ui-kit.alert-banner': MbbUiKitAlertBanner;
-      'mbb-ui-kit.avatar': MbbUiKitAvatar;
-      'mbb-ui-kit.badge': MbbUiKitBadge;
-      'mbb-ui-kit.banner': MbbUiKitBanner;
-      'mbb-ui-kit.bento': MbbUiKitBento;
-      'mbb-ui-kit.bottom-navigation': MbbUiKitBottomNavigation;
-      'mbb-ui-kit.bottom-quick-action': MbbUiKitBottomQuickAction;
-      'mbb-ui-kit.bottom-tab-item': MbbUiKitBottomTabItem;
-      'mbb-ui-kit.button': MbbUiKitButton;
-      'mbb-ui-kit.card': MbbUiKitCard;
-      'mbb-ui-kit.checkbox': MbbUiKitCheckbox;
-      'mbb-ui-kit.chip': MbbUiKitChip;
-      'mbb-ui-kit.coackmark-and-hint': MbbUiKitCoackmarkAndHint;
-      'mbb-ui-kit.divider': MbbUiKitDivider;
-      'mbb-ui-kit.dropdown': MbbUiKitDropdown;
-      'mbb-ui-kit.edit-menu': MbbUiKitEditMenu;
-      'mbb-ui-kit.grid': MbbUiKitGrid;
-      'mbb-ui-kit.icon': MbbUiKitIcon;
-      'mbb-ui-kit.image': MbbUiKitImage;
-      'mbb-ui-kit.list': MbbUiKitList;
-      'mbb-ui-kit.navigation-header': MbbUiKitNavigationHeader;
-      'mbb-ui-kit.number-input-stepper': MbbUiKitNumberInputStepper;
-      'mbb-ui-kit.pin-input': MbbUiKitPinInput;
-      'mbb-ui-kit.progress-indicator': MbbUiKitProgressIndicator;
-      'mbb-ui-kit.radio-button': MbbUiKitRadioButton;
-      'mbb-ui-kit.search-input': MbbUiKitSearchInput;
-      'mbb-ui-kit.section-header': MbbUiKitSectionHeader;
-      'mbb-ui-kit.slider': MbbUiKitSlider;
-      'mbb-ui-kit.tab': MbbUiKitTab;
-      'mbb-ui-kit.text-input': MbbUiKitTextInput;
-      'mbb-ui-kit.toast': MbbUiKitToast;
-      'mbb-ui-kit.toggle': MbbUiKitToggle;
-      'mbb-ui-kit.toolbar': MbbUiKitToolbar;
-      'mbb-ui-kit.top-navigation': MbbUiKitTopNavigation;
-      'mbb-ui-kit.typo': MbbUiKitTypo;
-      'mbb-ui-kit.uploader': MbbUiKitUploader;
+      'action.bottom-quick-action': ActionBottomQuickAction;
+      'action.button': ActionButton;
+      'action.chip': ActionChip;
+      'asset.icon': AssetIcon;
+      'asset.image': AssetImage;
+      'container.accordion': ContainerAccordion;
+      'container.banner': ContainerBanner;
+      'container.bento': ContainerBento;
+      'container.card': ContainerCard;
+      'container.divider': ContainerDivider;
+      'container.list': ContainerList;
+      'core.avatar': CoreAvatar;
+      'core.grid': CoreGrid;
+      'core.typo': CoreTypo;
+      'input.checkbox': InputCheckbox;
+      'input.dropdown': InputDropdown;
+      'input.number-input-stepper': InputNumberInputStepper;
+      'input.pin-input': InputPinInput;
+      'input.radio-button': InputRadioButton;
+      'input.search-input': InputSearchInput;
+      'input.slider': InputSlider;
+      'input.text-input': InputTextInput;
+      'input.toggle': InputToggle;
+      'input.uploader': InputUploader;
+      'navigation.bottom-navigation': NavigationBottomNavigation;
+      'navigation.bottom-tab-item': NavigationBottomTabItem;
+      'navigation.navigation-header': NavigationNavigationHeader;
+      'navigation.section-header': NavigationSectionHeader;
+      'navigation.tab': NavigationTab;
+      'navigation.toolbar': NavigationToolbar;
+      'navigation.top-navigation': NavigationTopNavigation;
+      'overlay.coackmark-and-hint': OverlayCoackmarkAndHint;
+      'overlay.edit-menu': OverlayEditMenu;
+      'status-and-feedback.alert-banner': StatusAndFeedbackAlertBanner;
+      'status-and-feedback.badge': StatusAndFeedbackBadge;
+      'status-and-feedback.progress-indicator': StatusAndFeedbackProgressIndicator;
+      'status-and-feedback.toast': StatusAndFeedbackToast;
     }
   }
 }

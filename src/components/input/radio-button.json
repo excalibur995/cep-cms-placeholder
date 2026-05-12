@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_input_radio_buttons",
+  "info": {
+    "displayName": "radioButton",
+    "icon": "cast"
+  },
+  "options": {},
+  "attributes": {},
+  "config": {}
+}

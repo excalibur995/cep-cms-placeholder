@@ -1,0 +1,132 @@
+{
+  "screenId": "email_form",
+  "version": 1,
+  "header": [
+    {
+      "navigation": {
+        "navigationHeader": [
+          {
+            "id": "apply-123",
+            "title": "Apply",
+            "subtitle": ""
+          }
+        ]
+      },
+      "statusAndFeedback": {
+        "progressIndicator": [
+          {
+            "id": "progress-123",
+            "type": "stepper",
+            "currentStep": 2,
+            "totalSteps": 11,
+            "showStepText": true
+          }
+        ]
+      }
+    }
+  ],
+  "body": [
+    {
+      "core": {
+        "typo": [
+          {
+            "id": "productName-123",
+            "variant": "body",
+            "value": "Global Access Account"
+          },
+          {
+            "id": "emailTitle-123",
+            "variant": "title1",
+            "value": "Your Email Address"
+          },
+          {
+            "id": "emailSubtitle-123",
+            "variant": "body",
+            "value": "Fill in your email address"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "textInput": [
+          {
+            "id": "emailInput-123",
+            "label": "Email Address",
+            "placeholder": "Enter your email address",
+            "keyboardType": "email",
+            "required": true,
+            "maxLength": 200,
+            "minLength": 10,
+            "pattern": "",
+            "value": "emailInput",
+            "errorMessage": [
+              {
+                "id": "emailError-123",
+                "message": "Please enter a valid email"
+              }
+            ]
+          },
+          {
+            "id": "confirmEmailInput-123",
+            "label": "Confirm Email Address",
+            "placeholder": "Re-enter your email address",
+            "keyboardType": "email",
+            "required": true,
+            "maxLength": 200,
+            "minLength": 10,
+            "pattern": "",
+            "value": "confirmEmailInput",
+            "errorMessage": [
+              {
+                "id": "confirmEmailError-123",
+                "message": "Please enter a valid email"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "footer": [
+    {
+      "action": {
+        "button": [
+          {
+            "id": "nextButton-123",
+            "label": "Next",
+            "variant": "primary"
+          }
+        ]
+      }
+    },
+    {
+      "container": {
+        "divider": [
+          {
+            "id": "divider-123",
+            "label": "Or continue with an account"
+          }
+        ]
+      }
+    },
+    {
+      "action": {
+        "button": [
+          {
+            "id": "google-123",
+            "label": "Continue with Google",
+            "variant": "secondary",
+            "iconName": "google"
+          },
+          {
+            "id": "apple-123",
+            "label": "Continue with Apple",
+            "variant": "secondary",
+            "iconName": "apple"
+          }
+        ]
+      }
+    }
+  ]
+}

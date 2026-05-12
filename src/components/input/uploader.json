@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_input_uploaders",
+  "info": {
+    "displayName": "uploader",
+    "icon": "cast"
+  },
+  "options": {},
+  "attributes": {},
+  "config": {}
+}
