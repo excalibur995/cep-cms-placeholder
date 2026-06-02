@@ -5,6 +5,29 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "title": {
+      "type": "string"
+    },
+    "disableSafeArea": {
+      "type": "boolean",
+      "default": false
+    },
+    "paddingTop": {
+      "type": "integer"
+    }
+  },
   "config": {}
 }

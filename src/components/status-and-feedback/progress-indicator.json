@@ -4,6 +4,37 @@
     "displayName": "progressIndicator"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "indicatorType": {
+      "type": "enumeration",
+      "enum": [
+        "stepper",
+        "bar",
+        "steps",
+        "circular"
+      ]
+    },
+    "currentStep": {
+      "type": "integer"
+    },
+    "totalSteps": {
+      "type": "integer"
+    },
+    "progress": {
+      "type": "decimal"
+    }
+  },
   "config": {}
 }

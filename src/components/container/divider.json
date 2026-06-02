@@ -5,6 +5,36 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "orientation": {
+      "type": "enumeration",
+      "enum": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    },
+    "label": {
+      "type": "string"
+    },
+    "inset": {
+      "type": "integer"
+    },
+    "thickness": {
+      "type": "integer"
+    }
+  },
   "config": {}
 }

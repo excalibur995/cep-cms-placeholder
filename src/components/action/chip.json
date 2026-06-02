@@ -4,6 +4,38 @@
     "displayName": "chip"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "label": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "filter",
+        "input",
+        "suggestion"
+      ]
+    },
+    "selected": {
+      "type": "boolean",
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    }
+  },
   "config": {}
 }

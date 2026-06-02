@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_form_dynamics",
+  "info": {
+    "displayName": "dynamic",
+    "icon": "refresh"
+  },
+  "options": {},
+  "attributes": {
+    "enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["CONTENT", "OPTIONS", "VALUE"]
+    },
+    "target": {
+      "type": "string"
+    },
+    "source": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.dynamic-source"
+    }
+  },
+  "config": {}
+}

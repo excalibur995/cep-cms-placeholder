@@ -5,6 +5,34 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "numOfColumns": {
+      "type": "integer"
+    },
+    "autoFit": {
+      "type": "boolean",
+      "default": false
+    },
+    "rowGap": {
+      "type": "integer"
+    },
+    "dynamic": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.dynamic"
+    }
+  },
   "config": {}
 }

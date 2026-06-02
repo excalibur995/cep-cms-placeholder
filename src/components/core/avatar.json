@@ -5,6 +5,38 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "imageUri": {
+      "type": "string"
+    },
+    "fallbackText": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "backgroundColor": {
+      "type": "string"
+    },
+    "textColor": {
+      "type": "string"
+    },
+    "bordered": {
+      "type": "boolean",
+      "default": false
+    }
+  },
   "config": {}
 }

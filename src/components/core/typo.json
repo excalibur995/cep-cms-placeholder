@@ -5,6 +5,45 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "value": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "textAlign": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center",
+        "right",
+        "justify"
+      ]
+    },
+    "weight": {
+      "type": "string"
+    },
+    "dynamic": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.dynamic"
+    }
+  },
   "config": {}
 }

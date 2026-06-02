@@ -5,6 +5,33 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "title": {
+      "type": "string"
+    },
+    "showBackButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "centerTitle": {
+      "type": "boolean",
+      "default": false
+    },
+    "backgroundColor": {
+      "type": "string"
+    }
+  },
   "config": {}
 }

@@ -4,6 +4,33 @@
     "displayName": "badge"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "icon",
+        "verified",
+        "drag-drop"
+      ]
+    },
+    "iconName": {
+      "type": "string"
+    },
+    "iconSize": {
+      "type": "integer"
+    }
+  },
   "config": {}
 }

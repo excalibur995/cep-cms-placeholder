@@ -4,6 +4,46 @@
     "displayName": "toast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "message": {
+      "type": "string"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "default",
+        "success",
+        "error"
+      ],
+      "default": "default"
+    },
+    "duration": {
+      "type": "integer"
+    },
+    "position": {
+      "type": "enumeration",
+      "enum": [
+        "top",
+        "bottom"
+      ],
+      "default": "bottom"
+    },
+    "dismissible": {
+      "type": "boolean",
+      "default": true
+    }
+  },
   "config": {}
 }

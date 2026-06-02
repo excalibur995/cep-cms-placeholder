@@ -4,6 +4,60 @@
     "displayName": "bottomQuickAction"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "title": {
+      "type": "string"
+    },
+    "expanded": {
+      "type": "boolean",
+      "default": false
+    },
+    "collapsedVariant": {
+      "type": "enumeration",
+      "enum": [
+        "fab",
+        "button-with-text",
+        "transparency"
+      ]
+    },
+    "collapsedLabel": {
+      "type": "string"
+    },
+    "collapsedIcon": {
+      "type": "string"
+    },
+    "skeleton": {
+      "type": "boolean",
+      "default": false
+    },
+    "secondRow": {
+      "type": "boolean",
+      "default": false
+    },
+    "horizontalScroll": {
+      "type": "boolean",
+      "default": false
+    },
+    "bottomInset": {
+      "type": "integer"
+    },
+    "dynamic": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.dynamic"
+    }
+  },
   "config": {}
 }

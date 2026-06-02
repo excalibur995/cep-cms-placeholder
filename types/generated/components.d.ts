@@ -5,7 +5,24 @@ export interface ActionBottomQuickAction extends Struct.ComponentSchema {
   info: {
     displayName: 'bottomQuickAction';
   };
-  attributes: {};
+  attributes: {
+    bottomInset: Schema.Attribute.Integer;
+    collapsedIcon: Schema.Attribute.String;
+    collapsedLabel: Schema.Attribute.String;
+    collapsedVariant: Schema.Attribute.Enumeration<
+      ['fab', 'button-with-text', 'transparency']
+    >;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    expanded: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    horizontalScroll: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    secondRow: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    skeleton: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    title: Schema.Attribute.String;
+  };
 }
 
 export interface ActionButton extends Struct.ComponentSchema {
@@ -13,7 +30,20 @@ export interface ActionButton extends Struct.ComponentSchema {
   info: {
     displayName: 'button';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    iconName: Schema.Attribute.String;
+    label: Schema.Attribute.String;
+    loading: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    size: Schema.Attribute.Enumeration<['sm', 'md', 'lg']>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.Enumeration<['filled', 'outlined', 'ghost']>;
+    variant: Schema.Attribute.Enumeration<
+      ['primary', 'secondary', 'destructive']
+    >;
+  };
 }
 
 export interface ActionChip extends Struct.ComponentSchema {
@@ -21,7 +51,15 @@ export interface ActionChip extends Struct.ComponentSchema {
   info: {
     displayName: 'chip';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String;
+    selected: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.Enumeration<['filter', 'input', 'suggestion']>;
+  };
 }
 
 export interface AssetIcon extends Struct.ComponentSchema {
@@ -29,7 +67,14 @@ export interface AssetIcon extends Struct.ComponentSchema {
   info: {
     displayName: 'icon';
   };
-  attributes: {};
+  attributes: {
+    color: Schema.Attribute.String;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    iconName: Schema.Attribute.String;
+    size: Schema.Attribute.Integer;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface AssetImage extends Struct.ComponentSchema {
@@ -37,7 +82,13 @@ export interface AssetImage extends Struct.ComponentSchema {
   info: {
     displayName: 'image';
   };
-  attributes: {};
+  attributes: {
+    alt: Schema.Attribute.String;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    imageUrl: Schema.Attribute.String;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface ContainerAccordion extends Struct.ComponentSchema {
@@ -45,7 +96,15 @@ export interface ContainerAccordion extends Struct.ComponentSchema {
   info: {
     displayName: 'accordion';
   };
-  attributes: {};
+  attributes: {
+    allowMultiple: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    gap: Schema.Attribute.Integer;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    variant: Schema.Attribute.Enumeration<['list', 'card']>;
+  };
 }
 
 export interface ContainerBanner extends Struct.ComponentSchema {
@@ -53,7 +112,15 @@ export interface ContainerBanner extends Struct.ComponentSchema {
   info: {
     displayName: 'banner';
   };
-  attributes: {};
+  attributes: {
+    carousel: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    loading: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    mode: Schema.Attribute.Enumeration<['picture', 'text']>;
+    size: Schema.Attribute.Enumeration<['S', 'M']>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface ContainerBento extends Struct.ComponentSchema {
@@ -61,7 +128,14 @@ export interface ContainerBento extends Struct.ComponentSchema {
   info: {
     displayName: 'bento';
   };
-  attributes: {};
+  attributes: {
+    columns: Schema.Attribute.Integer;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    gap: Schema.Attribute.Integer;
+    rowHeight: Schema.Attribute.Integer;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface ContainerCard extends Struct.ComponentSchema {
@@ -70,7 +144,14 @@ export interface ContainerCard extends Struct.ComponentSchema {
     displayName: 'card';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    variant: Schema.Attribute.Enumeration<
+      ['horizontal', 'withDetails', 'text', 'stepper']
+    >;
+  };
 }
 
 export interface ContainerDivider extends Struct.ComponentSchema {
@@ -79,7 +160,16 @@ export interface ContainerDivider extends Struct.ComponentSchema {
     displayName: 'divider';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    inset: Schema.Attribute.Integer;
+    label: Schema.Attribute.String;
+    orientation: Schema.Attribute.Enumeration<['horizontal', 'vertical']> &
+      Schema.Attribute.DefaultTo<'horizontal'>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    thickness: Schema.Attribute.Integer;
+  };
 }
 
 export interface ContainerList extends Struct.ComponentSchema {
@@ -88,7 +178,14 @@ export interface ContainerList extends Struct.ComponentSchema {
     displayName: 'list';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    emptyText: Schema.Attribute.String;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    title: Schema.Attribute.String;
+  };
 }
 
 export interface CoreAvatar extends Struct.ComponentSchema {
@@ -97,7 +194,17 @@ export interface CoreAvatar extends Struct.ComponentSchema {
     displayName: 'avatar';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    backgroundColor: Schema.Attribute.String;
+    bordered: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    fallbackText: Schema.Attribute.String;
+    imageUri: Schema.Attribute.String;
+    size: Schema.Attribute.String;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    textColor: Schema.Attribute.String;
+  };
 }
 
 export interface CoreGrid extends Struct.ComponentSchema {
@@ -106,7 +213,15 @@ export interface CoreGrid extends Struct.ComponentSchema {
     displayName: 'grid';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    autoFit: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    numOfColumns: Schema.Attribute.Integer;
+    rowGap: Schema.Attribute.Integer;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface CoreTypo extends Struct.ComponentSchema {
@@ -115,7 +230,62 @@ export interface CoreTypo extends Struct.ComponentSchema {
     displayName: 'typo';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    color: Schema.Attribute.String;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    textAlign: Schema.Attribute.Enumeration<
+      ['left', 'center', 'right', 'justify']
+    >;
+    type: Schema.Attribute.String;
+    value: Schema.Attribute.String;
+    weight: Schema.Attribute.String;
+  };
+}
+
+export interface FormDynamic extends Struct.ComponentSchema {
+  collectionName: 'components_form_dynamics';
+  info: {
+    displayName: 'dynamic';
+    icon: 'refresh';
+  };
+  attributes: {
+    enabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    source: Schema.Attribute.Component<'form.dynamic-source', false>;
+    target: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['CONTENT', 'OPTIONS', 'VALUE']>;
+  };
+}
+
+export interface FormDynamicSource extends Struct.ComponentSchema {
+  collectionName: 'components_form_dynamic_sources';
+  info: {
+    displayName: 'dynamic-source';
+    icon: 'plug';
+  };
+  attributes: {
+    path: Schema.Attribute.String;
+    serviceCode: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['FACT', 'SERVICE']>;
+  };
+}
+
+export interface FormMessages extends Struct.ComponentSchema {
+  collectionName: 'components_form_messages';
+  info: {
+    displayName: 'messages';
+    icon: 'message';
+  };
+  attributes: {
+    email: Schema.Attribute.String;
+    maxLength: Schema.Attribute.String;
+    minLength: Schema.Attribute.String;
+    pattern: Schema.Attribute.String;
+    required: Schema.Attribute.String;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputCheckbox extends Struct.ComponentSchema {
@@ -124,7 +294,19 @@ export interface InputCheckbox extends Struct.ComponentSchema {
     displayName: 'checkbox';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    label: Schema.Attribute.String;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    minLength: Schema.Attribute.Integer;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputDropdown extends Struct.ComponentSchema {
@@ -133,7 +315,20 @@ export interface InputDropdown extends Struct.ComponentSchema {
     displayName: 'dropdown';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    label: Schema.Attribute.String;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    minLength: Schema.Attribute.Integer;
+    placeholder: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputNumberInputStepper extends Struct.ComponentSchema {
@@ -142,7 +337,22 @@ export interface InputNumberInputStepper extends Struct.ComponentSchema {
     displayName: 'numberInputStepper';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    editable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String;
+    max: Schema.Attribute.Decimal;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    min: Schema.Attribute.Decimal;
+    minLength: Schema.Attribute.Integer;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    step: Schema.Attribute.Decimal;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputPinInput extends Struct.ComponentSchema {
@@ -151,7 +361,23 @@ export interface InputPinInput extends Struct.ComponentSchema {
     displayName: 'pinInput';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    autoFocus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    inputMode: Schema.Attribute.Enumeration<['numeric', 'alphanumeric']> &
+      Schema.Attribute.DefaultTo<'numeric'>;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    minLength: Schema.Attribute.Integer;
+    numberOfDigits: Schema.Attribute.Integer;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    secureTextEntry: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputRadioButton extends Struct.ComponentSchema {
@@ -160,7 +386,21 @@ export interface InputRadioButton extends Struct.ComponentSchema {
     displayName: 'radioButton';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    groupDirection: Schema.Attribute.Enumeration<['vertical', 'horizontal']> &
+      Schema.Attribute.DefaultTo<'vertical'>;
+    label: Schema.Attribute.String;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    minLength: Schema.Attribute.Integer;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputSearchInput extends Struct.ComponentSchema {
@@ -169,7 +409,19 @@ export interface InputSearchInput extends Struct.ComponentSchema {
     displayName: 'searchInput';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    minLength: Schema.Attribute.Integer;
+    placeholder: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputSlider extends Struct.ComponentSchema {
@@ -178,7 +430,21 @@ export interface InputSlider extends Struct.ComponentSchema {
     displayName: 'slider';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    label: Schema.Attribute.String;
+    max: Schema.Attribute.Decimal;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    min: Schema.Attribute.Decimal;
+    minLength: Schema.Attribute.Integer;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    step: Schema.Attribute.Decimal;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputTextInput extends Struct.ComponentSchema {
@@ -187,7 +453,20 @@ export interface InputTextInput extends Struct.ComponentSchema {
     displayName: 'textInput';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    label: Schema.Attribute.String;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    minLength: Schema.Attribute.Integer;
+    placeholder: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputToggle extends Struct.ComponentSchema {
@@ -196,7 +475,20 @@ export interface InputToggle extends Struct.ComponentSchema {
     displayName: 'toggle';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    minLength: Schema.Attribute.Integer;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    size: Schema.Attribute.Enumeration<['md', 'lg']> &
+      Schema.Attribute.DefaultTo<'md'>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface InputUploader extends Struct.ComponentSchema {
@@ -205,7 +497,21 @@ export interface InputUploader extends Struct.ComponentSchema {
     displayName: 'uploader';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    autoUpload: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    maxFiles: Schema.Attribute.Integer;
+    maxFileSizeBytes: Schema.Attribute.Integer;
+    maxLength: Schema.Attribute.Integer;
+    messages: Schema.Attribute.Component<'form.messages', false>;
+    minLength: Schema.Attribute.Integer;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    type: Schema.Attribute.String;
+  };
 }
 
 export interface NavigationBottomNavigation extends Struct.ComponentSchema {
@@ -214,7 +520,13 @@ export interface NavigationBottomNavigation extends Struct.ComponentSchema {
     displayName: 'bottomNavigation';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    blurEnabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface NavigationBottomTabItem extends Struct.ComponentSchema {
@@ -223,7 +535,14 @@ export interface NavigationBottomTabItem extends Struct.ComponentSchema {
     displayName: 'bottomTabItem';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    iconName: Schema.Attribute.String;
+    label: Schema.Attribute.String;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface NavigationNavigationHeader extends Struct.ComponentSchema {
@@ -232,7 +551,15 @@ export interface NavigationNavigationHeader extends Struct.ComponentSchema {
     displayName: 'navigationHeader';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    backgroundColor: Schema.Attribute.String;
+    centerTitle: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    showBackButton: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    title: Schema.Attribute.String;
+  };
 }
 
 export interface NavigationSectionHeader extends Struct.ComponentSchema {
@@ -241,7 +568,13 @@ export interface NavigationSectionHeader extends Struct.ComponentSchema {
     displayName: 'sectionHeader';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    color: Schema.Attribute.String;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    title: Schema.Attribute.String;
+  };
 }
 
 export interface NavigationTab extends Struct.ComponentSchema {
@@ -250,7 +583,14 @@ export interface NavigationTab extends Struct.ComponentSchema {
     displayName: 'tab';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    label: Schema.Attribute.String;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    tabKey: Schema.Attribute.String;
+  };
 }
 
 export interface NavigationToolbar extends Struct.ComponentSchema {
@@ -259,7 +599,12 @@ export interface NavigationToolbar extends Struct.ComponentSchema {
     displayName: 'toolbar';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    title: Schema.Attribute.String;
+  };
 }
 
 export interface NavigationTopNavigation extends Struct.ComponentSchema {
@@ -268,7 +613,15 @@ export interface NavigationTopNavigation extends Struct.ComponentSchema {
     displayName: 'topNavigation';
     icon: 'cast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    disableSafeArea: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    paddingTop: Schema.Attribute.Integer;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    title: Schema.Attribute.String;
+  };
 }
 
 export interface OverlayCoackmarkAndHint extends Struct.ComponentSchema {
@@ -276,7 +629,17 @@ export interface OverlayCoackmarkAndHint extends Struct.ComponentSchema {
   info: {
     displayName: 'coackmarkAndHint';
   };
-  attributes: {};
+  attributes: {
+    alignment: Schema.Attribute.Enumeration<['start', 'center', 'end']> &
+      Schema.Attribute.DefaultTo<'center'>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.String;
+    placement: Schema.Attribute.Enumeration<['top', 'bottom', 'auto']> &
+      Schema.Attribute.DefaultTo<'auto'>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    title: Schema.Attribute.String;
+  };
 }
 
 export interface OverlayEditMenu extends Struct.ComponentSchema {
@@ -284,7 +647,19 @@ export interface OverlayEditMenu extends Struct.ComponentSchema {
   info: {
     displayName: 'editMenu';
   };
-  attributes: {};
+  attributes: {
+    alignment: Schema.Attribute.Enumeration<['start', 'center', 'end']> &
+      Schema.Attribute.DefaultTo<'center'>;
+    autoSeparator: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    closeOnSelect: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    maxVisibleItems: Schema.Attribute.Integer;
+    placement: Schema.Attribute.Enumeration<['auto', 'above', 'below']> &
+      Schema.Attribute.DefaultTo<'auto'>;
+    showPointer: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface StatusAndFeedbackAlertBanner extends Struct.ComponentSchema {
@@ -292,7 +667,18 @@ export interface StatusAndFeedbackAlertBanner extends Struct.ComponentSchema {
   info: {
     displayName: 'alertBanner';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    ctaLabel: Schema.Attribute.String;
+    linkLabel: Schema.Attribute.String;
+    message: Schema.Attribute.String;
+    severity: Schema.Attribute.Enumeration<
+      ['info', 'warning', 'error', 'success']
+    >;
+    size: Schema.Attribute.Enumeration<['sm', 'md']>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+  };
 }
 
 export interface StatusAndFeedbackBadge extends Struct.ComponentSchema {
@@ -300,7 +686,14 @@ export interface StatusAndFeedbackBadge extends Struct.ComponentSchema {
   info: {
     displayName: 'badge';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    iconName: Schema.Attribute.String;
+    iconSize: Schema.Attribute.Integer;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    variant: Schema.Attribute.Enumeration<['icon', 'verified', 'drag-drop']>;
+  };
 }
 
 export interface StatusAndFeedbackProgressIndicator
@@ -309,7 +702,17 @@ export interface StatusAndFeedbackProgressIndicator
   info: {
     displayName: 'progressIndicator';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    currentStep: Schema.Attribute.Integer;
+    indicatorType: Schema.Attribute.Enumeration<
+      ['stepper', 'bar', 'steps', 'circular']
+    >;
+    progress: Schema.Attribute.Decimal;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    totalSteps: Schema.Attribute.Integer;
+  };
 }
 
 export interface StatusAndFeedbackToast extends Struct.ComponentSchema {
@@ -317,7 +720,18 @@ export interface StatusAndFeedbackToast extends Struct.ComponentSchema {
   info: {
     displayName: 'toast';
   };
-  attributes: {};
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dismissible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    duration: Schema.Attribute.Integer;
+    message: Schema.Attribute.String;
+    position: Schema.Attribute.Enumeration<['top', 'bottom']> &
+      Schema.Attribute.DefaultTo<'bottom'>;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    variant: Schema.Attribute.Enumeration<['default', 'success', 'error']> &
+      Schema.Attribute.DefaultTo<'default'>;
+  };
 }
 
 declare module '@strapi/strapi' {
@@ -337,6 +751,9 @@ declare module '@strapi/strapi' {
       'core.avatar': CoreAvatar;
       'core.grid': CoreGrid;
       'core.typo': CoreTypo;
+      'form.dynamic': FormDynamic;
+      'form.dynamic-source': FormDynamicSource;
+      'form.messages': FormMessages;
       'input.checkbox': InputCheckbox;
       'input.dropdown': InputDropdown;
       'input.number-input-stepper': InputNumberInputStepper;

@@ -5,6 +5,54 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "type": {
+      "type": "string"
+    },
+    "minLength": {
+      "type": "integer"
+    },
+    "maxLength": {
+      "type": "integer"
+    },
+    "label": {
+      "type": "string"
+    },
+    "min": {
+      "type": "decimal"
+    },
+    "max": {
+      "type": "decimal"
+    },
+    "step": {
+      "type": "decimal"
+    },
+    "messages": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.messages"
+    },
+    "dynamic": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.dynamic"
+    }
+  },
   "config": {}
 }

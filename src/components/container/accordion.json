@@ -4,6 +4,37 @@
     "displayName": "accordion"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "list",
+        "card"
+      ]
+    },
+    "allowMultiple": {
+      "type": "boolean",
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "gap": {
+      "type": "integer"
+    }
+  },
   "config": {}
 }

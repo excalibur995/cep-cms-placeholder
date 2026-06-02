@@ -2,6 +2,117 @@
  * stp-screen controller
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
+import { aggregateSchema } from "./schema-aggregator";
+import { transformZone } from "./transform";
 
-export default factories.createCoreController('api::stp-screen.stp-screen');
+const INPUT_POPULATE = {
+  populate: {
+    messages: true,
+    dynamic: { populate: { source: true } },
+  },
+};
+
+const DYNAMIC_POPULATE = {
+  populate: {
+    dynamic: { populate: { source: true } },
+  },
+};
+
+// Strapi v5: 'on' must list every component type you want returned.
+// Types not listed here are excluded from the response.
+const ZONE_ON = {
+  on: {
+    // input — need messages + dynamic.source
+    "input.checkbox": INPUT_POPULATE,
+    "input.dropdown": INPUT_POPULATE,
+    "input.number-input-stepper": INPUT_POPULATE,
+    "input.pin-input": INPUT_POPULATE,
+    "input.radio-button": INPUT_POPULATE,
+    "input.search-input": INPUT_POPULATE,
+    "input.slider": INPUT_POPULATE,
+    "input.text-input": INPUT_POPULATE,
+    "input.toggle": INPUT_POPULATE,
+    "input.uploader": INPUT_POPULATE,
+    // dynamic-capable non-input — need dynamic.source
+    "action.bottom-quick-action": DYNAMIC_POPULATE,
+    "container.list": DYNAMIC_POPULATE,
+    "core.grid": DYNAMIC_POPULATE,
+    "core.typo": DYNAMIC_POPULATE,
+    "navigation.bottom-navigation": DYNAMIC_POPULATE,
+    // remaining — no nested components, must still be listed
+    "action.button": true,
+    "action.chip": true,
+    "asset.icon": true,
+    "asset.image": true,
+    "container.accordion": true,
+    "container.banner": true,
+    "container.bento": true,
+    "container.card": true,
+    "container.divider": true,
+    "core.avatar": true,
+    "navigation.bottom-tab-item": true,
+    "navigation.navigation-header": true,
+    "navigation.section-header": true,
+    "navigation.tab": true,
+    "navigation.toolbar": true,
+    "navigation.top-navigation": true,
+    "overlay.coackmark-and-hint": true,
+    "overlay.edit-menu": true,
+    "status-and-feedback.alert-banner": true,
+    "status-and-feedback.badge": true,
+    "status-and-feedback.progress-indicator": true,
+    "status-and-feedback.toast": true,
+  },
+};
+
+const POPULATE = {
+  header: ZONE_ON,
+  body: ZONE_ON,
+  footer: ZONE_ON,
+};
+
+type ZoneEntry = Record<string, unknown>;
+
+function shapeEntity(entity: Record<string, unknown>) {
+  const header = (entity.header as ZoneEntry[]) ?? [];
+  const body = (entity.body as ZoneEntry[]) ?? [];
+  const footer = (entity.footer as ZoneEntry[]) ?? [];
+
+  const schema = aggregateSchema([header, body, footer]);
+
+  return {
+    screenId: entity.screenId,
+    version: entity.version,
+    schema,
+    uiSchema: {
+      header: { type: "VerticalLayout", elements: transformZone(header) },
+      body: { type: "VerticalLayout", elements: transformZone(body) },
+      footer: { type: "VerticalLayout", elements: transformZone(footer) },
+    },
+    data: Object.fromEntries(Object.keys(schema).map((k) => [k, ""])),
+  };
+}
+
+export default factories.createCoreController("api::stp-screen.stp-screen", ({ strapi }) => ({
+  async find(ctx) {
+    ctx.query = { ...ctx.query, populate: POPULATE };
+    const { data, meta } = await super.find(ctx);
+    return { data: (data as Record<string, unknown>[]).map(shapeEntity), meta };
+  },
+
+  async findByScreenId(ctx) {
+    const { screenId } = ctx.params as { screenId: string };
+
+    const results = await strapi.documents("api::stp-screen.stp-screen").findMany({
+      filters: { screenId: { $eq: screenId } },
+      populate: POPULATE,
+      sort: [{ version: "desc" }],
+      limit: 1,
+      status: "published",
+    });
+    const entity = results[0];
+    if (!entity) return ctx.notFound();
+    return { data: shapeEntity(entity as unknown as Record<string, unknown>) };
+  },
+}));

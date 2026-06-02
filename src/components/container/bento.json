@@ -4,6 +4,28 @@
     "displayName": "bento"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "columns": {
+      "type": "integer"
+    },
+    "gap": {
+      "type": "integer"
+    },
+    "rowHeight": {
+      "type": "integer"
+    }
+  },
   "config": {}
 }

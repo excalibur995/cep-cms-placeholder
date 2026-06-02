@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_form_dynamic_sources",
+  "info": {
+    "displayName": "dynamic-source",
+    "icon": "plug"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["FACT", "SERVICE"]
+    },
+    "path": {
+      "type": "string"
+    },
+    "serviceCode": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

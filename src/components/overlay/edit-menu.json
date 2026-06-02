@@ -4,6 +4,52 @@
     "displayName": "editMenu"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "placement": {
+      "type": "enumeration",
+      "enum": [
+        "auto",
+        "above",
+        "below"
+      ],
+      "default": "auto"
+    },
+    "alignment": {
+      "type": "enumeration",
+      "enum": [
+        "start",
+        "center",
+        "end"
+      ],
+      "default": "center"
+    },
+    "closeOnSelect": {
+      "type": "boolean",
+      "default": true
+    },
+    "showPointer": {
+      "type": "boolean",
+      "default": true
+    },
+    "maxVisibleItems": {
+      "type": "integer"
+    },
+    "autoSeparator": {
+      "type": "boolean",
+      "default": false
+    }
+  },
   "config": {}
 }

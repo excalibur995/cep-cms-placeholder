@@ -4,6 +4,57 @@
     "displayName": "button"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "label": {
+      "type": "string"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary",
+        "destructive"
+      ]
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "filled",
+        "outlined",
+        "ghost"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "loading": {
+      "type": "boolean",
+      "default": false
+    },
+    "iconName": {
+      "type": "string"
+    }
+  },
   "config": {}
 }

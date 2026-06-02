@@ -5,6 +5,29 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "label": {
+      "type": "string"
+    },
+    "iconName": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean",
+      "default": false
+    }
+  },
   "config": {}
 }

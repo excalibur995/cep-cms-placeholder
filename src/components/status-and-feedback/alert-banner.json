@@ -4,6 +4,44 @@
     "displayName": "alertBanner"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "severity": {
+      "type": "enumeration",
+      "enum": [
+        "info",
+        "warning",
+        "error",
+        "success"
+      ]
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "sm",
+        "md"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "linkLabel": {
+      "type": "string"
+    }
+  },
   "config": {}
 }

@@ -5,6 +5,28 @@
     "icon": "cast"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "horizontal",
+        "withDetails",
+        "text",
+        "stepper"
+      ]
+    }
+  },
   "config": {}
 }

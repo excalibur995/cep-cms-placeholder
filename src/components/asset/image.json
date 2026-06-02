@@ -4,6 +4,25 @@
     "displayName": "image"
   },
   "options": {},
-  "attributes": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "alt": {
+      "type": "string"
+    }
+  },
   "config": {}
 }
