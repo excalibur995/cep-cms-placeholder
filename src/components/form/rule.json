@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_form_rules",
+  "info": {
+    "displayName": "rule",
+    "icon": "filter"
+  },
+  "options": {},
+  "attributes": {
+    "effect": {
+      "type": "enumeration",
+      "enum": ["HIDE", "SHOW", "ENABLE", "DISABLE"],
+      "required": true
+    },
+    "condition": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.rule-condition"
+    }
+  },
+  "config": {}
+}

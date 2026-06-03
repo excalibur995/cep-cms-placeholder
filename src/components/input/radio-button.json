@@ -55,6 +55,21 @@
       "type": "component",
       "repeatable": false,
       "component": "form.dynamic"
+    },
+    "dependsOn": {
+      "type": "component",
+      "repeatable": true,
+      "component": "form.depends-on-item"
+    },
+    "rule": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.rule"
+    },
+    "choices": {
+      "type": "component",
+      "repeatable": true,
+      "component": "form.option"
     }
   },
   "config": {}

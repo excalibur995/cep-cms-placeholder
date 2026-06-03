@@ -9,58 +9,86 @@ interface MessagesEntry {
   type?: string;
 }
 
-interface SchemaEntry {
-  required?: boolean;
+interface OneOfEntry {
+  const: string;
+  title: string;
+}
+
+interface SchemaProperty {
   type?: string;
   minLength?: number;
   maxLength?: number;
   messages?: MessagesEntry;
+  oneOf?: OneOfEntry[];
+  items?: { oneOf: OneOfEntry[] };
+  uniqueItems?: boolean;
 }
 
-function stripNulls<T extends object>(obj: T): Partial<T> {
-  return Object.fromEntries(
-    Object.entries(obj).filter(([, v]) => v !== null && v !== undefined && v !== '')
-  ) as Partial<T>;
+export interface AggregatedSchema {
+  type: "object";
+  properties: Record<string, SchemaProperty>;
+  required: string[];
 }
 
-function extractSchemaEntry(entry: ZoneEntry): [string, SchemaEntry] | null {
+const formKeysCategory = ["input"];
+
+function extractSchemaEntry(entry: ZoneEntry): { id: string; prop: SchemaProperty; required: boolean } | null {
   const componentId = entry.componentId as string | undefined;
   if (!componentId) return null;
 
-  const raw: SchemaEntry = {};
-  if (entry.required !== undefined && entry.required !== null) raw.required = entry.required as boolean;
-  if (entry.type) raw.type = entry.type as string;
-  if (entry.minLength !== null && entry.minLength !== undefined) raw.minLength = entry.minLength as number;
-  if (entry.maxLength !== null && entry.maxLength !== undefined) raw.maxLength = entry.maxLength as number;
+  // Only input.* components participate in schema/data binding
+  const category = (entry.__component as string | undefined)?.split(".")[0];
+  if (!formKeysCategory.includes(category)) return null;
 
-  const msgs = entry.messages as Record<string, string> | undefined | null;
-  if (msgs && typeof msgs === 'object') {
-    const cleaned = stripNulls(msgs) as MessagesEntry;
-    delete (cleaned as Record<string, unknown>).id;
-    delete (cleaned as Record<string, unknown>).__component;
-    if (Object.keys(cleaned).length > 0) raw.messages = cleaned;
+  const isRequired = Boolean(entry.required);
+  const prop: SchemaProperty = {};
+  if (entry.type) prop.type = entry.type as string;
+  if (entry.minLength !== null && entry.minLength !== undefined) prop.minLength = entry.minLength as number;
+  if (entry.maxLength !== null && entry.maxLength !== undefined) prop.maxLength = entry.maxLength as number;
+
+  const msgs = entry.messages as Record<string, string | null> | undefined | null;
+  if (msgs && typeof msgs === "object") {
+    const cleaned = Object.fromEntries(
+      Object.entries(msgs).filter(([k, v]) => k !== "id" && k !== "__component" && v != null)
+    ) as MessagesEntry;
+    if (Object.keys(cleaned).length > 0) prop.messages = cleaned;
   }
 
-  // Only include components that have at least one schema attribute
-  const hasSchema = raw.required !== undefined || raw.type || raw.minLength !== undefined || raw.maxLength !== undefined || raw.messages;
-  if (!hasSchema) return null;
+  const rawOpts = entry.choices as Array<{ value?: unknown; label?: unknown }> | null | undefined;
+  if (Array.isArray(rawOpts) && rawOpts.length) {
+    const oneOf = rawOpts
+      .filter((o) => o && o.value !== undefined && o.value !== null)
+      .map((o) => ({ const: String(o.value), title: String(o.label ?? o.value) }));
+    if (oneOf.length) {
+      const isMulti = (entry.__component as string | undefined) === "input.checkbox";
+      if (isMulti) {
+        prop.type = "array";
+        prop.uniqueItems = true;
+        prop.items = { oneOf };
+      } else {
+        if (!prop.type) prop.type = "string";
+        prop.oneOf = oneOf;
+      }
+    }
+  }
 
-  return [componentId, raw];
+  return { id: componentId, prop, required: isRequired };
 }
 
-export function aggregateSchema(
-  zones: (ZoneEntry[] | null | undefined)[]
-): Record<string, SchemaEntry> {
-  const schema: Record<string, SchemaEntry> = {};
+export function aggregateSchema(zones: (ZoneEntry[] | null | undefined)[]): AggregatedSchema {
+  const properties: Record<string, SchemaProperty> = {};
+  const required: string[] = [];
+
   for (const zone of zones) {
     if (!zone?.length) continue;
     for (const entry of zone) {
       const result = extractSchemaEntry(entry);
       if (result) {
-        const [id, def] = result;
-        schema[id] = def;
+        properties[result.id] = result.prop;
+        if (result.required) required.push(result.id);
       }
     }
   }
-  return schema;
+
+  return { type: "object", properties, required };
 }

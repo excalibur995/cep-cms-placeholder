@@ -12,6 +12,9 @@ const LIFTED_FIELDS = new Set([
   "maxLength",
   "messages",
   "dynamic",
+  "dependsOn",
+  "rule",
+  "choices",
   "__component",
   "id",
   "span",
@@ -35,11 +38,23 @@ interface FlatItem {
   [key: string]: unknown;
 }
 
+interface OutputCondition {
+  scope: string;
+  schema?: unknown;
+}
+
+interface OutputRule {
+  effect: string;
+  condition?: OutputCondition;
+}
+
 interface Control {
   type: "Control";
   component: string;
   label?: string;
   dynamic?: DynamicEntry;
+  dependsOn?: string[];
+  rule?: OutputRule;
   options: Record<string, unknown>;
 }
 
@@ -58,6 +73,8 @@ interface MappedEntry {
   componentId?: string;
   label?: string;
   dynamic?: DynamicEntry;
+  dependsOn?: string[];
+  rule?: OutputRule;
   options: Record<string, unknown>;
   flatItem: FlatItem;
 }
@@ -76,6 +93,21 @@ function isMergeable(componentRaw: string): boolean {
   return !DISPLAY_NON_COMBINABLE.has(category);
 }
 
+function toRule(raw: unknown): OutputRule | undefined {
+  if (!raw || typeof raw !== "object") return undefined;
+  const r = raw as { effect?: string; condition?: { scope?: string; schema?: unknown } };
+  if (!r.effect) return undefined;
+  const out: OutputRule = { effect: r.effect };
+  const c = r.condition;
+  if (c?.scope) {
+    out.condition = {
+      scope: c.scope.startsWith("#/") ? c.scope : `#/properties/${c.scope}`,
+      ...(c.schema !== undefined && c.schema !== null ? { schema: c.schema } : {}),
+    };
+  }
+  return out;
+}
+
 function toMapped(entry: ZoneEntry): MappedEntry {
   const raw = entry as {
     __component: string;
@@ -87,7 +119,7 @@ function toMapped(entry: ZoneEntry): MappedEntry {
     [k: string]: unknown;
   };
 
-  const { __component, id, span, componentId, label, dynamic, ...rest } = raw;
+  const { __component, id, span, componentId, label, dynamic, dependsOn: rawDependsOn, rule: rawRule, ...rest } = raw;
 
   // Build options: everything not in LIFTED_FIELDS
   const options: Record<string, unknown> = {};
@@ -107,6 +139,11 @@ function toMapped(entry: ZoneEntry): MappedEntry {
   }
   if (label) flatItem.label = label;
 
+  const dependsOn =
+    Array.isArray(rawDependsOn) && rawDependsOn.length
+      ? (rawDependsOn as Array<{ componentId: string }>).map((d) => d.componentId).filter(Boolean)
+      : undefined;
+
   return {
     componentRaw: __component,
     component: pascalType(__component),
@@ -115,6 +152,8 @@ function toMapped(entry: ZoneEntry): MappedEntry {
     componentId: componentId || undefined,
     label: label || undefined,
     dynamic,
+    dependsOn,
+    rule: toRule(rawRule),
     options,
     flatItem,
   };
@@ -125,6 +164,8 @@ function toControl(mapped: MappedEntry): Control {
   const ctrl: Control = { type: "Control", component: mapped.component, options };
   if (mapped.label) ctrl.label = mapped.label;
   if (mapped.dynamic) ctrl.dynamic = mapped.dynamic;
+  if (mapped.dependsOn?.length) ctrl.dependsOn = mapped.dependsOn;
+  if (mapped.rule) ctrl.rule = mapped.rule;
   return ctrl;
 }
 

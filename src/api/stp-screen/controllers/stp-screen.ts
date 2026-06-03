@@ -10,6 +10,18 @@ const INPUT_POPULATE = {
   populate: {
     messages: true,
     dynamic: { populate: { source: true } },
+    dependsOn: true,
+    rule: { populate: { condition: true } },
+  },
+};
+
+const CHOICE_INPUT_POPULATE = {
+  populate: {
+    messages: true,
+    dynamic: { populate: { source: true } },
+    dependsOn: true,
+    rule: { populate: { condition: true } },
+    choices: true,
   },
 };
 
@@ -23,12 +35,12 @@ const DYNAMIC_POPULATE = {
 // Types not listed here are excluded from the response.
 const ZONE_ON = {
   on: {
-    // input — need messages + dynamic.source
-    "input.checkbox": INPUT_POPULATE,
-    "input.dropdown": INPUT_POPULATE,
+    // input — need messages + dynamic.source; choice inputs also need choices
+    "input.checkbox": CHOICE_INPUT_POPULATE,
+    "input.dropdown": CHOICE_INPUT_POPULATE,
+    "input.radio-button": CHOICE_INPUT_POPULATE,
     "input.number-input-stepper": INPUT_POPULATE,
     "input.pin-input": INPUT_POPULATE,
-    "input.radio-button": INPUT_POPULATE,
     "input.search-input": INPUT_POPULATE,
     "input.slider": INPUT_POPULATE,
     "input.text-input": INPUT_POPULATE,
@@ -90,15 +102,27 @@ function shapeEntity(entity: Record<string, unknown>) {
       body: { type: "VerticalLayout", elements: transformZone(body) },
       footer: { type: "VerticalLayout", elements: transformZone(footer) },
     },
-    data: Object.fromEntries(Object.keys(schema).map((k) => [k, ""])),
+    data: Object.fromEntries(
+      Object.keys(schema.properties).map((k) => [k, schema.properties[k].type === "array" ? [] : ""])
+    ),
   };
 }
 
 export default factories.createCoreController("api::stp-screen.stp-screen", ({ strapi }) => ({
   async find(ctx) {
-    ctx.query = { ...ctx.query, populate: POPULATE };
-    const { data, meta } = await super.find(ctx);
-    return { data: (data as Record<string, unknown>[]).map(shapeEntity), meta };
+    const { sort, filters, locale, pagination } = (ctx.query ?? {}) as Record<string, unknown>;
+    const results = await strapi.documents("api::stp-screen.stp-screen").findMany({
+      populate: POPULATE,
+      status: "published",
+      ...(sort ? { sort: sort as never } : {}),
+      ...(filters ? { filters: filters as never } : {}),
+      ...(locale ? { locale: locale as string } : {}),
+    });
+    const page = (pagination as Record<string, unknown>) ?? {};
+    return {
+      data: results.map((e) => shapeEntity(e as unknown as Record<string, unknown>)),
+      meta: { pagination: { page: page.page ?? 1, pageSize: page.pageSize ?? results.length, total: results.length } },
+    };
   },
 
   async findByScreenId(ctx) {

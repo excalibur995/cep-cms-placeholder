@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_form_rule_conditions",
+  "info": {
+    "displayName": "ruleCondition",
+    "icon": "filter"
+  },
+  "options": {},
+  "attributes": {
+    "scope": {
+      "type": "string",
+      "required": true
+    },
+    "schema": {
+      "type": "json"
+    }
+  },
+  "config": {}
+}
