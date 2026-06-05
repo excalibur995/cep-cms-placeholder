@@ -137,6 +137,6 @@ export default factories.createCoreController("api::stp-screen.stp-screen", ({ s
     });
     const entity = results[0];
     if (!entity) return ctx.notFound();
-    return { data: shapeEntity(entity as unknown as Record<string, unknown>) };
+    return shapeEntity(entity as unknown as Record<string, unknown>);
   },
 }));

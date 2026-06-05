@@ -41,6 +41,14 @@ const SCREEN = {
       type: 'h2',
       textAlign: 'center',
     },
+    {
+      __component: 'core.typo',
+      componentId: 'screenSubtitle',
+      span: '12',
+      value: 'Fill in all fields below',
+      type: 'body1',
+      textAlign: 'center',
+    },
   ],
 
   body: [
