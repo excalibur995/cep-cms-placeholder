@@ -1,29 +1,29 @@
 {
   "kind": "collectionType",
-  "collectionName": "stp_screens",
+  "collectionName": "overlays",
   "info": {
-    "singularName": "stp-screen",
-    "pluralName": "stp-screens",
-    "displayName": "stp-screen"
+    "singularName": "overlay",
+    "pluralName": "overlays",
+    "displayName": "overlay"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "screenId": {
-      "type": "string"
+    "overlayId": {
+      "type": "string",
+      "required": true
     },
-    "version": {
-      "type": "integer"
-    },
-    "overlay": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::overlay.overlay"
-    },
-    "url": {
-      "type": "string"
+    "type": {
+      "type": "enumeration",
+      "default": "modal",
+      "enum": [
+        "modal",
+        "bottom-sheet",
+        "full-screen",
+        "side-sheet"
+      ]
     },
     "header": {
       "type": "dynamiczone",
@@ -150,6 +150,9 @@
         "status-and-feedback.alert-banner",
         "container.accordion"
       ]
+    },
+    "version": {
+      "type": "integer"
     }
   }
 }

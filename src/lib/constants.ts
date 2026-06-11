@@ -12,9 +12,7 @@ export const WEBHOOK_EVENT_MAP = {
 
 export const WEBHOOK_EXCLUDED_UIDS: ReadonlySet<UID> = new Set([]);
 
-export const WEBHOOK_UID_CONFIG: Readonly<Partial<Record<UID, string>>> = {
-  "api::stp-screen.stp-screen": WEBHOOK_URL,
-};
+export const WEBHOOK_UID_CONFIG: Readonly<Partial<Record<UID, string>>> = {};
 
 export const DANGEROUS_TAG = /<(script|iframe|object|embed|link|meta|svg|img|form|input|button)[^>]*>/i;
 export const EVENT_HANDLER = /\bon\w+\s*=/i;

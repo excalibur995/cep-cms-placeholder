@@ -16,7 +16,9 @@
         "6",
         "12"
       ],
-      "default": "12"
+      "default": "12",
+      "visible": false,
+      "configurable": false
     },
     "required": {
       "type": "boolean",
@@ -48,7 +50,7 @@
       "repeatable": false,
       "component": "form.dynamic"
     },
-    "dependsOn": {
+    "dependent": {
       "type": "component",
       "repeatable": true,
       "component": "form.depends-on-item"

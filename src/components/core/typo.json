@@ -16,28 +16,82 @@
         "6",
         "12"
       ],
-      "default": "12"
+      "default": "12",
+      "visible": false,
+      "configurable": false
     },
     "value": {
       "type": "string"
     },
     "type": {
-      "type": "string"
+      "type": "enumeration",
+      "enum": [
+        "large-title",
+        "title1",
+        "title2",
+        "title3",
+        "headline",
+        "body",
+        "subhead",
+        "footnote",
+        "caption"
+      ]
+    },
+    "size": {
+      "type": "integer"
     },
     "color": {
       "type": "string"
     },
+    "weight": {
+      "type": "enumeration",
+      "enum": [
+        "100",
+        "200",
+        "300",
+        "400",
+        "500",
+        "600",
+        "700",
+        "800",
+        "900"
+      ],
+      "visible": false,
+      "configurable": false
+    },
+    "letterSpacing": {
+      "type": "decimal"
+    },
+    "lineHeight": {
+      "type": "decimal"
+    },
     "textAlign": {
       "type": "enumeration",
       "enum": [
+        "auto",
         "left",
         "center",
         "right",
         "justify"
       ]
     },
-    "weight": {
-      "type": "string"
+    "textDecorationLine": {
+      "type": "enumeration",
+      "enum": [
+        "none",
+        "underline",
+        "line-through",
+        "underline line-through"
+      ]
+    },
+    "textDecorationStyle": {
+      "type": "enumeration",
+      "enum": [
+        "solid",
+        "double",
+        "dotted",
+        "dashed"
+      ]
     },
     "dynamic": {
       "type": "component",

@@ -16,7 +16,9 @@
         "6",
         "12"
       ],
-      "default": "12"
+      "default": "12",
+      "visible": false,
+      "configurable": false
     },
     "orientation": {
       "type": "enumeration",

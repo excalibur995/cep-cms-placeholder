@@ -15,17 +15,27 @@
         "6",
         "12"
       ],
-      "default": "12"
+      "default": "12",
+      "visible": false,
+      "configurable": false
     },
     "label": {
       "type": "string"
     },
-    "variant": {
+    "type": {
       "type": "enumeration",
       "enum": [
         "primary",
         "secondary",
-        "destructive"
+        "tertiary"
+      ]
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "default",
+        "destructive",
+        "success"
       ]
     },
     "size": {
@@ -34,14 +44,6 @@
         "sm",
         "md",
         "lg"
-      ]
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "filled",
-        "outlined",
-        "ghost"
       ]
     },
     "disabled": {
@@ -54,6 +56,9 @@
     },
     "iconName": {
       "type": "string"
+    },
+    "action": {
+      "type": "json"
     }
   },
   "config": {}

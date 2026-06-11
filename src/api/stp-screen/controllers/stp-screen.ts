@@ -3,14 +3,14 @@
  */
 
 import { factories } from "@strapi/strapi";
-import { aggregateSchema } from "./schema-aggregator";
+import { aggregateSchema, SchemaProperty } from "./schema-aggregator";
 import { transformZone } from "./transform";
 
 const INPUT_POPULATE = {
   populate: {
     messages: true,
     dynamic: { populate: { source: true } },
-    dependsOn: true,
+    dependent: true,
     rule: { populate: { condition: true } },
   },
 };
@@ -19,7 +19,7 @@ const CHOICE_INPUT_POPULATE = {
   populate: {
     messages: true,
     dynamic: { populate: { source: true } },
-    dependsOn: true,
+    dependent: true,
     rule: { populate: { condition: true } },
     choices: true,
   },
@@ -28,6 +28,13 @@ const CHOICE_INPUT_POPULATE = {
 const DYNAMIC_POPULATE = {
   populate: {
     dynamic: { populate: { source: true } },
+  },
+};
+
+const LIST_POPULATE = {
+  populate: {
+    dynamic: { populate: { source: true } },
+    items: true,
   },
 };
 
@@ -48,7 +55,7 @@ const ZONE_ON = {
     "input.uploader": INPUT_POPULATE,
     // dynamic-capable non-input — need dynamic.source
     "action.bottom-quick-action": DYNAMIC_POPULATE,
-    "container.list": DYNAMIC_POPULATE,
+    "container.list": LIST_POPULATE,
     "core.grid": DYNAMIC_POPULATE,
     "core.typo": DYNAMIC_POPULATE,
     "navigation.bottom-navigation": DYNAMIC_POPULATE,
@@ -78,20 +85,61 @@ const ZONE_ON = {
   },
 };
 
-const POPULATE = {
+const OVERLAY_ZONE_POPULATE = {
   header: ZONE_ON,
   body: ZONE_ON,
   footer: ZONE_ON,
 };
 
+const POPULATE = {
+  header: ZONE_ON,
+  body: ZONE_ON,
+  footer: ZONE_ON,
+  overlay: { populate: OVERLAY_ZONE_POPULATE },
+};
+
 type ZoneEntry = Record<string, unknown>;
+
+function buildData(properties: Record<string, SchemaProperty>): Record<string, unknown> {
+  return Object.fromEntries(
+    Object.entries(properties).map(([k, prop]) => {
+      if (prop.type === "array") return [k, []];
+      if (prop.type === "object" && prop.properties) return [k, buildData(prop.properties)];
+      return [k, ""];
+    }),
+  );
+}
+
+interface OverlayEntity {
+  overlayId: string;
+  type?: string;
+  header?: ZoneEntry[];
+  body?: ZoneEntry[];
+  footer?: ZoneEntry[];
+}
+
+function shapeOverlay(overlay: OverlayEntity) {
+  const header = overlay.header ?? [];
+  const body = overlay.body ?? [];
+  const footer = overlay.footer ?? [];
+  return {
+    type: overlay.type ?? "modal",
+    header: { type: "VerticalLayout", elements: transformZone(header) },
+    body: { type: "VerticalLayout", elements: transformZone(body) },
+    footer: { type: "VerticalLayout", elements: transformZone(footer) },
+  };
+}
 
 function shapeEntity(entity: Record<string, unknown>) {
   const header = (entity.header as ZoneEntry[]) ?? [];
   const body = (entity.body as ZoneEntry[]) ?? [];
   const footer = (entity.footer as ZoneEntry[]) ?? [];
+  const rawOverlay = (entity.overlay as OverlayEntity[]) ?? [];
 
-  const schema = aggregateSchema([header, body, footer]);
+  const overlayZones = rawOverlay.flatMap((o) => [o.header ?? [], o.body ?? [], o.footer ?? []]);
+  const schema = aggregateSchema([header, body, footer, ...overlayZones], entity.url as string | undefined);
+
+  const overlay = Object.fromEntries(rawOverlay.map((o) => [o.overlayId, shapeOverlay(o)]));
 
   return {
     screenId: entity.screenId,
@@ -101,10 +149,9 @@ function shapeEntity(entity: Record<string, unknown>) {
       header: { type: "VerticalLayout", elements: transformZone(header) },
       body: { type: "VerticalLayout", elements: transformZone(body) },
       footer: { type: "VerticalLayout", elements: transformZone(footer) },
+      ...(rawOverlay.length ? { overlay } : {}),
     },
-    data: Object.fromEntries(
-      Object.keys(schema.properties).map((k) => [k, schema.properties[k].type === "array" ? [] : ""])
-    ),
+    data: buildData(schema.properties),
   };
 }
 

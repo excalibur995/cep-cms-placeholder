@@ -1,3 +1,5 @@
+import { toSchemaPath } from "./utils";
+
 type ZoneEntry = Record<string, unknown>;
 
 interface MessagesEntry {
@@ -14,7 +16,7 @@ interface OneOfEntry {
   title: string;
 }
 
-interface SchemaProperty {
+export interface SchemaProperty {
   type?: string;
   minLength?: number;
   maxLength?: number;
@@ -22,9 +24,15 @@ interface SchemaProperty {
   oneOf?: OneOfEntry[];
   items?: { oneOf: OneOfEntry[] };
   uniqueItems?: boolean;
+  endpoint?: string;
+  dependent?: string[];
+  // nested object support
+  properties?: Record<string, SchemaProperty>;
+  required?: string[];
 }
 
 export interface AggregatedSchema {
+  url?: string;
   type: "object";
   properties: Record<string, SchemaProperty>;
   required: string[];
@@ -32,11 +40,10 @@ export interface AggregatedSchema {
 
 const formKeysCategory = ["input"];
 
-function extractSchemaEntry(entry: ZoneEntry): { id: string; prop: SchemaProperty; required: boolean } | null {
+function extractSchemaEntry(entry: ZoneEntry): { path: string[]; prop: SchemaProperty; required: boolean } | null {
   const componentId = entry.componentId as string | undefined;
   if (!componentId) return null;
 
-  // Only input.* components participate in schema/data binding
   const category = (entry.__component as string | undefined)?.split(".")[0];
   if (!formKeysCategory.includes(category)) return null;
 
@@ -72,10 +79,59 @@ function extractSchemaEntry(entry: ZoneEntry): { id: string; prop: SchemaPropert
     }
   }
 
-  return { id: componentId, prop, required: isRequired };
+  if (entry.endpoint) prop.endpoint = entry.endpoint as string;
+
+  const dependent = entry.dependent as Array<{ componentId: string }> | null | undefined;
+  if (Array.isArray(dependent) && dependent.length) {
+    prop.dependent = dependent
+      .map((d) => d.componentId)
+      .filter(Boolean)
+      .map(toSchemaPath);
+  }
+
+  return { path: componentId.split("."), prop, required: isRequired };
 }
 
-export function aggregateSchema(zones: (ZoneEntry[] | null | undefined)[]): AggregatedSchema {
+function setNestedProp(
+  properties: Record<string, SchemaProperty>,
+  path: string[],
+  prop: SchemaProperty
+): void {
+  if (path.length === 1) {
+    properties[path[0]] = prop;
+    return;
+  }
+  const [head, ...rest] = path;
+  if (!properties[head]) {
+    properties[head] = { type: "object", properties: {}, required: [] };
+  }
+  const parent = properties[head];
+  if (!parent.properties) parent.properties = {};
+  setNestedProp(parent.properties, rest, prop);
+}
+
+function markRequired(
+  properties: Record<string, SchemaProperty>,
+  topRequired: string[],
+  path: string[]
+): void {
+  if (path.length === 1) {
+    topRequired.push(path[0]);
+    return;
+  }
+  const [head, ...rest] = path;
+  const parent = properties[head];
+  if (!parent) return;
+  if (rest.length === 1) {
+    if (!parent.required) parent.required = [];
+    if (!parent.required.includes(rest[0])) parent.required.push(rest[0]);
+  } else {
+    if (!parent.properties) return;
+    markRequired(parent.properties, parent.required ?? [], rest);
+  }
+}
+
+export function aggregateSchema(zones: (ZoneEntry[] | null | undefined)[], url?: string): AggregatedSchema {
   const properties: Record<string, SchemaProperty> = {};
   const required: string[] = [];
 
@@ -84,11 +140,11 @@ export function aggregateSchema(zones: (ZoneEntry[] | null | undefined)[]): Aggr
     for (const entry of zone) {
       const result = extractSchemaEntry(entry);
       if (result) {
-        properties[result.id] = result.prop;
-        if (result.required) required.push(result.id);
+        setNestedProp(properties, result.path, result.prop);
+        if (result.required) markRequired(properties, required, result.path);
       }
     }
   }
 
-  return { type: "object", properties, required };
+  return { ...(url ? { url } : {}), type: "object", properties, required };
 }

@@ -580,27 +580,159 @@ export interface ApiJourneyJourney extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiModalModal extends Struct.CollectionTypeSchema {
-  collectionName: 'modals';
+export interface ApiOverlayOverlay extends Struct.CollectionTypeSchema {
+  collectionName: 'overlays';
   info: {
-    displayName: 'modal';
-    pluralName: 'modals';
-    singularName: 'modal';
+    displayName: 'overlay';
+    pluralName: 'overlays';
+    singularName: 'overlay';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'input.uploader',
+        'core.typo',
+        'navigation.top-navigation',
+        'navigation.toolbar',
+        'input.toggle',
+        'status-and-feedback.toast',
+        'input.text-input',
+        'navigation.tab',
+        'input.slider',
+        'navigation.section-header',
+        'input.search-input',
+        'input.radio-button',
+        'status-and-feedback.progress-indicator',
+        'input.pin-input',
+        'input.number-input-stepper',
+        'navigation.navigation-header',
+        'container.list',
+        'asset.image',
+        'asset.icon',
+        'core.grid',
+        'overlay.edit-menu',
+        'input.dropdown',
+        'container.divider',
+        'overlay.coackmark-and-hint',
+        'action.chip',
+        'input.checkbox',
+        'container.card',
+        'action.button',
+        'navigation.bottom-tab-item',
+        'action.bottom-quick-action',
+        'navigation.bottom-navigation',
+        'container.bento',
+        'container.banner',
+        'status-and-feedback.badge',
+        'core.avatar',
+        'status-and-feedback.alert-banner',
+        'container.accordion',
+      ]
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    footer: Schema.Attribute.DynamicZone<
+      [
+        'input.uploader',
+        'core.typo',
+        'navigation.top-navigation',
+        'navigation.toolbar',
+        'input.toggle',
+        'status-and-feedback.toast',
+        'input.text-input',
+        'navigation.tab',
+        'input.slider',
+        'navigation.section-header',
+        'input.search-input',
+        'input.radio-button',
+        'status-and-feedback.progress-indicator',
+        'input.pin-input',
+        'input.number-input-stepper',
+        'navigation.navigation-header',
+        'container.list',
+        'asset.image',
+        'asset.icon',
+        'core.grid',
+        'overlay.edit-menu',
+        'input.dropdown',
+        'container.divider',
+        'overlay.coackmark-and-hint',
+        'action.chip',
+        'input.checkbox',
+        'container.card',
+        'action.button',
+        'navigation.bottom-tab-item',
+        'action.bottom-quick-action',
+        'navigation.bottom-navigation',
+        'container.bento',
+        'container.banner',
+        'status-and-feedback.badge',
+        'core.avatar',
+        'status-and-feedback.alert-banner',
+        'container.accordion',
+      ]
+    >;
+    header: Schema.Attribute.DynamicZone<
+      [
+        'input.uploader',
+        'core.typo',
+        'navigation.top-navigation',
+        'navigation.toolbar',
+        'input.toggle',
+        'status-and-feedback.toast',
+        'input.text-input',
+        'navigation.tab',
+        'input.slider',
+        'navigation.section-header',
+        'input.search-input',
+        'input.radio-button',
+        'status-and-feedback.progress-indicator',
+        'input.pin-input',
+        'input.number-input-stepper',
+        'navigation.navigation-header',
+        'container.list',
+        'asset.image',
+        'asset.icon',
+        'core.grid',
+        'overlay.edit-menu',
+        'input.dropdown',
+        'container.divider',
+        'overlay.coackmark-and-hint',
+        'action.chip',
+        'input.checkbox',
+        'container.card',
+        'action.button',
+        'navigation.bottom-tab-item',
+        'action.bottom-quick-action',
+        'navigation.bottom-navigation',
+        'container.bento',
+        'container.banner',
+        'status-and-feedback.badge',
+        'core.avatar',
+        'status-and-feedback.alert-banner',
+        'container.accordion',
+      ]
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::modal.modal'> &
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::overlay.overlay'
+    > &
       Schema.Attribute.Private;
+    overlayId: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<
+      ['modal', 'bottom-sheet', 'full-screen', 'side-sheet']
+    > &
+      Schema.Attribute.DefaultTo<'modal'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    version: Schema.Attribute.Integer;
   };
 }
 
@@ -777,11 +909,13 @@ export interface ApiStpScreenStpScreen extends Struct.CollectionTypeSchema {
       'api::stp-screen.stp-screen'
     > &
       Schema.Attribute.Private;
+    overlay: Schema.Attribute.Relation<'oneToMany', 'api::overlay.overlay'>;
     publishedAt: Schema.Attribute.DateTime;
     screenId: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    url: Schema.Attribute.String;
     version: Schema.Attribute.Integer;
   };
 }
@@ -1301,7 +1435,7 @@ declare module '@strapi/strapi' {
       'api::i18n-content.i18n-content': ApiI18NContentI18NContent;
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
       'api::journey.journey': ApiJourneyJourney;
-      'api::modal.modal': ApiModalModal;
+      'api::overlay.overlay': ApiOverlayOverlay;
       'api::screen.screen': ApiScreenScreen;
       'api::stp-screen.stp-screen': ApiStpScreenStpScreen;
       'plugin::content-releases.release': PluginContentReleasesRelease;
