@@ -6,6 +6,32 @@ import { factories } from "@strapi/strapi";
 import { aggregateSchema } from "./schema-aggregator";
 import { transformZone } from "./transform";
 
+const EXCLUDED_FIELDS = new Set(["__component", "id", "span"]);
+
+function kebabToCamel(s: string): string {
+  return s.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+}
+
+function groupByCategory(entries: ZoneEntry[]): Record<string, Record<string, unknown[]>> {
+  const result: Record<string, Record<string, unknown[]>> = {};
+  for (const entry of entries) {
+    const [cat, type] = (entry.__component as string).split(".");
+    const category = kebabToCamel(cat);
+    const componentType = kebabToCamel(type);
+    if (!result[category]) result[category] = {};
+    if (!result[category][componentType]) result[category][componentType] = [];
+    const item: Record<string, unknown> = {};
+    if (entry.componentId) item.id = entry.componentId;
+    for (const [k, v] of Object.entries(entry)) {
+      if (!EXCLUDED_FIELDS.has(k) && k !== "componentId" && v !== null && v !== undefined) {
+        item[k] = v;
+      }
+    }
+    result[category][componentType].push(item);
+  }
+  return result;
+}
+
 const INPUT_POPULATE = {
   populate: {
     messages: true,
@@ -48,6 +74,12 @@ const ZONE_ON = {
     "input.uploader": INPUT_POPULATE,
     // dynamic-capable non-input — need dynamic.source
     "action.bottom-quick-action": DYNAMIC_POPULATE,
+    "action.quick-action-section": {
+      populate: {
+        items: true,
+        dynamic: { populate: { source: true } },
+      },
+    },
     "container.list": DYNAMIC_POPULATE,
     "core.grid": DYNAMIC_POPULATE,
     "core.typo": DYNAMIC_POPULATE,
@@ -90,12 +122,23 @@ function shapeEntity(entity: Record<string, unknown>) {
   const header = (entity.header as ZoneEntry[]) ?? [];
   const body = (entity.body as ZoneEntry[]) ?? [];
   const footer = (entity.footer as ZoneEntry[]) ?? [];
+  const isSTPScreen = entity.isSTPScreen !== false;
+
+  if (!isSTPScreen) {
+    const allComponents = [...header, ...body, ...footer];
+    return {
+      screenId: entity.screenId,
+      version: entity.version,
+      ...groupByCategory(allComponents),
+    };
+  }
 
   const schema = aggregateSchema([header, body, footer]);
 
   return {
     screenId: entity.screenId,
     version: entity.version,
+    isSTPScreen: true,
     schema,
     uiSchema: {
       header: { type: "VerticalLayout", elements: transformZone(header) },

@@ -17,6 +17,9 @@
     "version": {
       "type": "integer"
     },
+    "isSTPScreen": {
+      "type": "boolean"
+    },
     "header": {
       "type": "dynamiczone",
       "components": [
@@ -45,6 +48,7 @@
         "container.divider",
         "overlay.coackmark-and-hint",
         "action.chip",
+        "action.quick-action-section",
         "input.checkbox",
         "container.card",
         "action.button",
@@ -87,6 +91,7 @@
         "container.divider",
         "overlay.coackmark-and-hint",
         "action.chip",
+        "action.quick-action-section",
         "input.checkbox",
         "container.card",
         "action.button",
@@ -129,6 +134,7 @@
         "container.divider",
         "overlay.coackmark-and-hint",
         "action.chip",
+        "action.quick-action-section",
         "input.checkbox",
         "container.card",
         "action.button",

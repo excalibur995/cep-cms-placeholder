@@ -62,6 +62,36 @@ export interface ActionChip extends Struct.ComponentSchema {
   };
 }
 
+export interface ActionQuickActionItem extends Struct.ComponentSchema {
+  collectionName: 'components_action_quick_action_items';
+  info: {
+    displayName: 'quickActionItem';
+  };
+  attributes: {
+    actionId: Schema.Attribute.String & Schema.Attribute.Required;
+    icon: Schema.Attribute.String;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ActionQuickActionSection extends Struct.ComponentSchema {
+  collectionName: 'components_action_quick_action_sections';
+  info: {
+    displayName: 'quickActionSection';
+  };
+  attributes: {
+    componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    horizontalScroll: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    items: Schema.Attribute.Component<'action.quick-action-item', true>;
+    maxColumns: Schema.Attribute.Integer;
+    span: Schema.Attribute.Enumeration<['6', '12']> &
+      Schema.Attribute.DefaultTo<'12'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface AssetIcon extends Struct.ComponentSchema {
   collectionName: 'components_asset_icons';
   info: {
@@ -813,6 +843,8 @@ declare module '@strapi/strapi' {
       'action.bottom-quick-action': ActionBottomQuickAction;
       'action.button': ActionButton;
       'action.chip': ActionChip;
+      'action.quick-action-item': ActionQuickActionItem;
+      'action.quick-action-section': ActionQuickActionSection;
       'asset.icon': AssetIcon;
       'asset.image': AssetImage;
       'container.accordion': ContainerAccordion;

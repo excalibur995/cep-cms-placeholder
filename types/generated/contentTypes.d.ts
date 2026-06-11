@@ -604,6 +604,78 @@ export interface ApiModalModal extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNonStpScreenNonStpScreen
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'non_stp_screens';
+  info: {
+    displayName: 'non-stp-screen';
+    pluralName: 'non-stp-screens';
+    singularName: 'non-stp-screen';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    components: Schema.Attribute.DynamicZone<
+      [
+        'action.bottom-quick-action',
+        'action.button',
+        'action.chip',
+        'action.quick-action-section',
+        'asset.icon',
+        'asset.image',
+        'container.accordion',
+        'container.banner',
+        'container.bento',
+        'container.card',
+        'container.divider',
+        'container.list',
+        'core.avatar',
+        'core.grid',
+        'core.typo',
+        'input.checkbox',
+        'input.dropdown',
+        'input.number-input-stepper',
+        'input.pin-input',
+        'input.radio-button',
+        'input.search-input',
+        'input.slider',
+        'input.text-input',
+        'input.toggle',
+        'input.uploader',
+        'navigation.bottom-navigation',
+        'navigation.bottom-tab-item',
+        'navigation.navigation-header',
+        'navigation.section-header',
+        'navigation.tab',
+        'navigation.toolbar',
+        'navigation.top-navigation',
+        'overlay.coackmark-and-hint',
+        'overlay.edit-menu',
+        'status-and-feedback.alert-banner',
+        'status-and-feedback.badge',
+        'status-and-feedback.progress-indicator',
+        'status-and-feedback.toast',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::non-stp-screen.non-stp-screen'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    screenId: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    version: Schema.Attribute.Integer;
+  };
+}
+
 export interface ApiScreenScreen extends Struct.CollectionTypeSchema {
   collectionName: 'screens';
   info: {
@@ -631,6 +703,35 @@ export interface ApiScreenScreen extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     version: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiSecurityImageSecurityImage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'security_images';
+  info: {
+    displayName: 'Security Image';
+    pluralName: 'security-images';
+    singularName: 'security-image';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    filename: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::security-image.security-image'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -672,6 +773,7 @@ export interface ApiStpScreenStpScreen extends Struct.CollectionTypeSchema {
         'container.divider',
         'overlay.coackmark-and-hint',
         'action.chip',
+        'action.quick-action-section',
         'input.checkbox',
         'container.card',
         'action.button',
@@ -716,6 +818,7 @@ export interface ApiStpScreenStpScreen extends Struct.CollectionTypeSchema {
         'container.divider',
         'overlay.coackmark-and-hint',
         'action.chip',
+        'action.quick-action-section',
         'input.checkbox',
         'container.card',
         'action.button',
@@ -757,6 +860,7 @@ export interface ApiStpScreenStpScreen extends Struct.CollectionTypeSchema {
         'container.divider',
         'overlay.coackmark-and-hint',
         'action.chip',
+        'action.quick-action-section',
         'input.checkbox',
         'container.card',
         'action.button',
@@ -771,6 +875,7 @@ export interface ApiStpScreenStpScreen extends Struct.CollectionTypeSchema {
         'container.accordion',
       ]
     >;
+    isSTPScreen: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1302,7 +1407,9 @@ declare module '@strapi/strapi' {
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
       'api::journey.journey': ApiJourneyJourney;
       'api::modal.modal': ApiModalModal;
+      'api::non-stp-screen.non-stp-screen': ApiNonStpScreenNonStpScreen;
       'api::screen.screen': ApiScreenScreen;
+      'api::security-image.security-image': ApiSecurityImageSecurityImage;
       'api::stp-screen.stp-screen': ApiStpScreenStpScreen;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

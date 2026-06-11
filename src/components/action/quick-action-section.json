@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_action_quick_action_sections",
+  "info": {
+    "displayName": "quickActionSection"
+  },
+  "options": {},
+  "attributes": {
+    "componentId": {
+      "type": "string",
+      "required": true
+    },
+    "span": {
+      "type": "enumeration",
+      "enum": [
+        "6",
+        "12"
+      ],
+      "default": "12"
+    },
+    "title": {
+      "type": "string"
+    },
+    "maxColumns": {
+      "type": "integer"
+    },
+    "horizontalScroll": {
+      "type": "boolean",
+      "default": false
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "action.quick-action-item"
+    },
+    "dynamic": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.dynamic"
+    }
+  }
+}
