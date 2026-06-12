@@ -1,5 +1,3 @@
-import { toSchemaPath } from "./utils";
-
 type ZoneEntry = Record<string, unknown>;
 
 interface MessagesEntry {
@@ -24,8 +22,6 @@ export interface SchemaProperty {
   oneOf?: OneOfEntry[];
   items?: { oneOf: OneOfEntry[] };
   uniqueItems?: boolean;
-  endpoint?: string;
-  dependent?: string[];
   // nested object support
   properties?: Record<string, SchemaProperty>;
   required?: string[];
@@ -77,16 +73,6 @@ function extractSchemaEntry(entry: ZoneEntry): { path: string[]; prop: SchemaPro
         prop.oneOf = oneOf;
       }
     }
-  }
-
-  if (entry.endpoint) prop.endpoint = entry.endpoint as string;
-
-  const dependent = entry.dependent as Array<{ componentId: string }> | null | undefined;
-  if (Array.isArray(dependent) && dependent.length) {
-    prop.dependent = dependent
-      .map((d) => d.componentId)
-      .filter(Boolean)
-      .map(toSchemaPath);
   }
 
   return { path: componentId.split("."), prop, required: isRequired };

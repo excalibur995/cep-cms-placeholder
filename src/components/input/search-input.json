@@ -50,18 +50,15 @@
       "repeatable": false,
       "component": "form.dynamic"
     },
-    "dependent": {
-      "type": "component",
-      "repeatable": true,
-      "component": "form.depends-on-item"
-    },
     "rule": {
       "type": "component",
       "repeatable": false,
       "component": "form.rule"
     },
-    "endpoint": {
-      "type": "string"
+    "dataSource": {
+      "type": "component",
+      "repeatable": false,
+      "component": "form.data-source"
     }
   },
   "config": {}

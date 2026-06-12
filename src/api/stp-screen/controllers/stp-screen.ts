@@ -10,8 +10,8 @@ const INPUT_POPULATE = {
   populate: {
     messages: true,
     dynamic: { populate: { source: true } },
-    dependent: true,
     rule: { populate: { condition: true } },
+    dataSource: { populate: { responseMap: true } },
   },
 };
 
@@ -19,8 +19,8 @@ const CHOICE_INPUT_POPULATE = {
   populate: {
     messages: true,
     dynamic: { populate: { source: true } },
-    dependent: true,
     rule: { populate: { condition: true } },
+    dataSource: { populate: { responseMap: true } },
     choices: true,
   },
 };

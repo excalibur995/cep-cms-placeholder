@@ -13,7 +13,7 @@
  *   - All 4 rule effects: SHOW, HIDE, ENABLE, DISABLE
  *   - Condition schema forms: { const: string }, { const: boolean }, { enum: [...] }
  *   - choices (dropdown, radio-button, checkbox)
- *   - dependent + endpoint (cascade dropdowns)
+ *   - dataSource cascade: country (static) → region → city (each depends on previous)
  *   - dynamic source (VALUE from FACT)
  *   - messages validation
  *   - HorizontalLayout via span-6 pair
@@ -38,7 +38,7 @@ const OVERLAY_CONFIRM_LEAVE = {
       span: '12',
       value: 'Leave Application?',
       type: 'title2',
-      weight: 'bold',
+      weight: '700',
     },
   ],
 
@@ -49,7 +49,7 @@ const OVERLAY_CONFIRM_LEAVE = {
       span: '12',
       value: 'Your progress will be saved. You can continue from where you left off.',
       type: 'body',
-      weight: 'regular',
+      weight: '400',
     },
   ],
 
@@ -89,7 +89,7 @@ const OVERLAY_PROMO_INFO = {
       span: '12',
       value: 'About Promo Code',
       type: 'title2',
-      weight: 'bold',
+      weight: '700',
     },
   ],
 
@@ -100,7 +100,7 @@ const OVERLAY_PROMO_INFO = {
       span: '12',
       value: 'Enter a valid promo code to unlock exclusive discounts on your application fee.',
       type: 'body',
-      weight: 'regular',
+      weight: '400',
     },
     {
       __component: 'core.typo',
@@ -108,7 +108,7 @@ const OVERLAY_PROMO_INFO = {
       span: '12',
       value: 'Promo codes are case-sensitive and can only be used once per account.',
       type: 'footnote',
-      weight: 'regular',
+      weight: '400',
     },
   ],
 
@@ -234,8 +234,7 @@ const SCREEN = {
       },
     },
 
-    // ── dropdown with endpoint (remote) — depends on country ─────────────────
-    // schema.url + endpoint = "regions"; dependent on country → cascade reset
+    // ── dropdown with dataSource (remote) — depends on country ───────────────
     {
       __component: 'input.dropdown',
       componentId: 'region',
@@ -244,10 +243,32 @@ const SCREEN = {
       placeholder: 'Select your region',
       required: true,
       type: 'string',
-      endpoint: 'regions',
-      dependent: [{ componentId: 'country' }],
+      dataSource: {
+        url: '/api/ref/regions/:country',
+        depends: 'country',
+        responseMap: { valueKey: 'code', labelKey: 'name' },
+      },
       messages: {
         required: 'Please select a region',
+      },
+    },
+
+    // ── dropdown with dataSource (remote) — depends on region ─────────────────
+    {
+      __component: 'input.dropdown',
+      componentId: 'city',
+      span: '12',
+      label: 'City',
+      placeholder: 'Select your city',
+      required: true,
+      type: 'string',
+      dataSource: {
+        url: '/api/ref/cities/:region',
+        depends: 'region',
+        responseMap: { valueKey: 'code', labelKey: 'name' },
+      },
+      messages: {
+        required: 'Please select a city',
       },
     },
 
@@ -278,7 +299,6 @@ const SCREEN = {
       label: 'Phone Number',
       placeholder: '+60 12 345 6789',
       type: 'string',
-      dependent: [{ componentId: 'contactMethod' }],
       rule: {
         effect: 'SHOW',
         condition: {
@@ -356,7 +376,6 @@ const SCREEN = {
       label: 'Promo Code',
       placeholder: 'Enter promo code (optional)',
       type: 'string',
-      dependent: [{ componentId: 'agreeToTerms' }],
       rule: {
         effect: 'ENABLE',
         condition: {
