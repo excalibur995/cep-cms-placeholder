@@ -56,6 +56,18 @@
           }
         ]
       },
+      "region": {
+        "type": "string",
+        "messages": {
+          "required": "Please select a region"
+        }
+      },
+      "city": {
+        "type": "string",
+        "messages": {
+          "required": "Please select a city"
+        }
+      },
       "contactMethod": {
         "type": "string",
         "messages": {
@@ -126,9 +138,40 @@
           "required": "Verification PIN is required"
         }
       },
-      "supportingDocs": {}
+      "supportingDocs": {},
+      "personalData": {
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "integer",
+            "messages": {
+              "required": "Please enter your age"
+            }
+          },
+          "height": {
+            "type": "number",
+            "messages": {
+              "required": "Please enter your height"
+            }
+          },
+          "drivingSkill": {
+            "type": "number"
+          }
+        },
+        "required": ["age", "height"]
+      }
     },
-    "required": ["firstName", "lastName", "emailAddress", "country", "contactMethod", "agreeToTerms", "verificationPin"]
+    "required": [
+      "firstName",
+      "lastName",
+      "emailAddress",
+      "country",
+      "region",
+      "city",
+      "contactMethod",
+      "agreeToTerms",
+      "verificationPin"
+    ]
   },
   "uiSchema": {
     "header": {
@@ -137,7 +180,7 @@
         {
           "component": "TopNavigation",
           "options": {
-            "id": "topNav",
+            "id": "properties.topNav",
             "title": "Complete Form Example",
             "disableSafeArea": false
           }
@@ -145,7 +188,8 @@
         {
           "component": "Typo",
           "options": {
-            "id": "screenTitle",
+            "id": "properties.screenTitle",
+            "variant": "title2",
             "value": "All Conditions Demo",
             "textAlign": "center"
           }
@@ -153,7 +197,8 @@
         {
           "component": "Typo",
           "options": {
-            "id": "screenSubtitle",
+            "id": "properties.screenSubtitle",
+            "variant": "body",
             "value": "Fill in all fields below",
             "textAlign": "center"
           }
@@ -169,38 +214,38 @@
             {
               "component": "TextInput",
               "options": {
-                "id": "firstName",
-                "label": "First Name",
+                "id": "properties.firstName",
                 "placeholder": "Enter first name",
                 "disabled": false
-              }
+              },
+              "label": "First Name"
             },
             {
               "component": "TextInput",
               "options": {
-                "id": "lastName",
-                "label": "Last Name",
+                "id": "properties.lastName",
                 "placeholder": "Enter last name",
                 "disabled": false
-              }
+              },
+              "label": "Last Name"
             }
           ]
         },
         {
           "component": "TextInput",
           "options": {
-            "id": "emailAddress",
-            "label": "Email Address",
+            "id": "properties.emailAddress",
             "placeholder": "Enter your email",
             "disabled": false
           },
+          "label": "Email Address",
           "dynamic": {
-            "id": 10,
+            "id": 29,
             "enabled": true,
             "type": "VALUE",
             "target": "defaultValue",
             "source": {
-              "id": 10,
+              "id": 29,
               "type": "FACT",
               "path": "userEmail",
               "serviceCode": null
@@ -210,30 +255,63 @@
         {
           "component": "Dropdown",
           "options": {
-            "id": "country",
-            "label": "Country",
+            "id": "properties.country",
             "placeholder": "Select your country",
             "disabled": false
-          }
+          },
+          "label": "Country"
+        },
+        {
+          "component": "Dropdown",
+          "options": {
+            "id": "properties.region",
+            "placeholder": "Select your region",
+            "disabled": false,
+            "dataSource": {
+              "url": "/api/ref/regions/:country",
+              "depends": "country",
+              "responseMap": {
+                "valueKey": "code",
+                "labelKey": "name"
+              }
+            }
+          },
+          "label": "Region"
+        },
+        {
+          "component": "Dropdown",
+          "options": {
+            "id": "properties.city",
+            "placeholder": "Select your city",
+            "disabled": false,
+            "dataSource": {
+              "url": "/api/ref/cities/:region",
+              "depends": "region",
+              "responseMap": {
+                "valueKey": "code",
+                "labelKey": "name"
+              }
+            }
+          },
+          "label": "City"
         },
         {
           "component": "RadioButton",
           "options": {
-            "id": "contactMethod",
-            "label": "Preferred Contact Method",
+            "id": "properties.contactMethod",
             "groupDirection": "vertical",
             "disabled": false
-          }
+          },
+          "label": "Preferred Contact Method"
         },
         {
           "component": "TextInput",
           "options": {
-            "id": "phoneNumber",
-            "label": "Phone Number",
+            "id": "properties.phoneNumber",
             "placeholder": "+60 12 345 6789",
             "disabled": false
           },
-          "dependsOn": ["contactMethod"],
+          "label": "Phone Number",
           "rule": {
             "effect": "SHOW",
             "condition": {
@@ -247,11 +325,11 @@
         {
           "component": "TextInput",
           "options": {
-            "id": "foreignId",
-            "label": "Foreign ID Number",
+            "id": "properties.foreignId",
             "placeholder": "Enter foreign identification number",
             "disabled": false
           },
+          "label": "Foreign ID Number",
           "rule": {
             "effect": "HIDE",
             "condition": {
@@ -265,7 +343,7 @@
         {
           "component": "SearchInput",
           "options": {
-            "id": "areaCode",
+            "id": "properties.areaCode",
             "placeholder": "Search area code",
             "disabled": false
           },
@@ -282,15 +360,15 @@
         {
           "component": "Checkbox",
           "options": {
-            "id": "notifications",
-            "label": "Notification Preferences",
+            "id": "properties.notifications",
             "disabled": false
-          }
+          },
+          "label": "Notification Preferences"
         },
         {
           "component": "Toggle",
           "options": {
-            "id": "agreeToTerms",
+            "id": "properties.agreeToTerms",
             "size": "md",
             "disabled": false
           }
@@ -298,12 +376,11 @@
         {
           "component": "TextInput",
           "options": {
-            "id": "promoCode",
-            "label": "Promo Code",
+            "id": "properties.promoCode",
             "placeholder": "Enter promo code (optional)",
             "disabled": false
           },
-          "dependsOn": ["agreeToTerms"],
+          "label": "Promo Code",
           "rule": {
             "effect": "ENABLE",
             "condition": {
@@ -315,14 +392,31 @@
           }
         },
         {
+          "component": "Button",
+          "options": {
+            "id": "properties.promoInfoBtn",
+            "variant": "tertiary",
+            "size": "sm",
+            "disabled": false,
+            "loading": false,
+            "action": {
+              "type": "show_modal",
+              "payload": {
+                "overlayId": "promoInfo"
+              }
+            }
+          },
+          "label": "What is a promo code?"
+        },
+        {
           "component": "Slider",
           "options": {
-            "id": "discountLevel",
-            "label": "Discount Level (%)",
+            "id": "properties.discountLevel",
             "min": 0,
             "max": 100,
             "step": 10
           },
+          "label": "Discount Level (%)",
           "rule": {
             "effect": "DISABLE",
             "condition": {
@@ -336,18 +430,18 @@
         {
           "component": "NumberInputStepper",
           "options": {
-            "id": "quantity",
-            "label": "Quantity",
+            "id": "properties.quantity",
             "min": 1,
             "max": 99,
             "step": 1,
             "editable": true
-          }
+          },
+          "label": "Quantity"
         },
         {
           "component": "PinInput",
           "options": {
-            "id": "verificationPin",
+            "id": "properties.verificationPin",
             "numberOfDigits": 6,
             "inputMode": "numeric",
             "secureTextEntry": false,
@@ -357,12 +451,61 @@
         {
           "component": "Uploader",
           "options": {
-            "id": "supportingDocs",
+            "id": "properties.supportingDocs",
             "maxFiles": 3,
             "maxFileSizeBytes": 5242880,
             "autoUpload": false,
             "disabled": false
           }
+        },
+        {
+          "component": "NumberInputStepper",
+          "options": {
+            "id": "properties.personalData.properties.age",
+            "min": 18,
+            "max": 99,
+            "step": 1,
+            "editable": true
+          },
+          "label": "Age"
+        },
+        {
+          "component": "NumberInputStepper",
+          "options": {
+            "id": "properties.personalData.properties.height",
+            "min": 50,
+            "max": 250,
+            "step": 1,
+            "editable": true
+          },
+          "label": "Height (cm)"
+        },
+        {
+          "component": "Slider",
+          "options": {
+            "id": "properties.personalData.properties.drivingSkill",
+            "min": 1,
+            "max": 10,
+            "step": 1
+          },
+          "label": "Driving Skill"
+        },
+        {
+          "component": "Button",
+          "options": {
+            "id": "properties.leaveBtn",
+            "variant": "secondary",
+            "size": "md",
+            "disabled": false,
+            "loading": false,
+            "action": {
+              "type": "show_modal",
+              "payload": {
+                "overlayId": "confirmLeave"
+              }
+            }
+          },
+          "label": "Leave Application"
         }
       ]
     },
@@ -372,13 +515,16 @@
         {
           "component": "Button",
           "options": {
-            "id": "submitButton",
-            "label": "Submit",
+            "id": "properties.submitButton",
             "variant": "primary",
             "size": "lg",
             "disabled": false,
-            "loading": false
-          }
+            "loading": false,
+            "action": {
+              "type": "submit"
+            }
+          },
+          "label": "Submit"
         }
       ]
     }
@@ -388,6 +534,8 @@
     "lastName": "",
     "emailAddress": "",
     "country": "",
+    "region": "",
+    "city": "",
     "contactMethod": "",
     "phoneNumber": "",
     "foreignId": "",
@@ -398,6 +546,11 @@
     "discountLevel": "",
     "quantity": "",
     "verificationPin": "",
-    "supportingDocs": ""
+    "supportingDocs": "",
+    "personalData": {
+      "age": "",
+      "height": "",
+      "drivingSkill": ""
+    }
   }
 }

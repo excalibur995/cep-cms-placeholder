@@ -580,6 +580,119 @@ export interface ApiJourneyJourney extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNotificationTemplateNotificationTemplate
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'notification_templates';
+  info: {
+    displayName: 'notification-template';
+    pluralName: 'notification-templates';
+    singularName: 'notification-template';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    categoryTitle: Schema.Attribute.Enumeration<
+      ['Alert', 'Promotion', 'Transaction', 'Action']
+    > &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    emailAuth: Schema.Attribute.String;
+    emailImages: Schema.Attribute.Text;
+    emailIsHtml: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    emailMsg: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    emailMsgHtml: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    emailSubject: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    iconName: Schema.Attribute.String;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notification-template.notification-template'
+    >;
+    note: Schema.Attribute.Text;
+    promoImages: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    pushMsg1: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    pushMsg2: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    pushTitle1: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    pushTitle2: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    smsMsg: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    subCategoryTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    templateId: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    version: Schema.Attribute.Integer;
+    webInboxDetails: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    webInboxIsHtml: Schema.Attribute.Boolean;
+    webInboxMsg: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    webInboxSubject: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    webInboxTemplateId: Schema.Attribute.Integer;
+  };
+}
+
 export interface ApiOverlayOverlay extends Struct.CollectionTypeSchema {
   collectionName: 'overlays';
   info: {
@@ -1435,6 +1548,7 @@ declare module '@strapi/strapi' {
       'api::i18n-content.i18n-content': ApiI18NContentI18NContent;
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
       'api::journey.journey': ApiJourneyJourney;
+      'api::notification-template.notification-template': ApiNotificationTemplateNotificationTemplate;
       'api::overlay.overlay': ApiOverlayOverlay;
       'api::screen.screen': ApiScreenScreen;
       'api::stp-screen.stp-screen': ApiStpScreenStpScreen;
