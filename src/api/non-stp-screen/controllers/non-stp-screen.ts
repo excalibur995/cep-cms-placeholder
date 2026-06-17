@@ -98,9 +98,12 @@ function groupByCategory(
 function shapeEntity(entity: Record<string, unknown>) {
   const components = (entity.components as ZoneEntry[]) ?? [];
   return {
-    screenId: entity.screenId,
+    journeyId: entity.journeyId,
     version: entity.version,
-    ...groupByCategory(components),
+    screens: {
+      screenId: entity.screenId,
+      ...groupByCategory(components),
+    },
   };
 }
 
@@ -137,11 +140,11 @@ export default factories.createCoreController(
     },
 
     async findByScreenId(ctx) {
-      const { screenId } = ctx.params as { screenId: string };
+      const { journeyId } = ctx.params as { journeyId: string };
       const results = await strapi
         .documents("api::non-stp-screen.non-stp-screen")
         .findMany({
-          filters: { screenId: { $eq: screenId } },
+          filters: { journeyId: { $eq: journeyId } },
           populate: POPULATE,
           sort: [{ version: "desc" }],
           limit: 1,
@@ -149,9 +152,7 @@ export default factories.createCoreController(
         });
       const entity = results[0];
       if (!entity) return ctx.notFound();
-      return {
-        data: shapeEntity(entity as unknown as Record<string, unknown>),
-      };
+      return shapeEntity(entity as unknown as Record<string, unknown>);
     },
   }),
 );
