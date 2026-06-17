@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_container_list_items",
+  "info": {
+    "displayName": "listItem",
+    "icon": "cast"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "iconName": {
+      "type": "string"
+    },
+    "imageUrl": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

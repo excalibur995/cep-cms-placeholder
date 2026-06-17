@@ -1,0 +1,403 @@
+{
+  "screenId": "complete-form-example",
+  "version": 1,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 50,
+        "messages": {
+          "required": "First name is required",
+          "minLength": "Minimum 2 characters"
+        }
+      },
+      "lastName": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 50,
+        "messages": {
+          "required": "Last name is required"
+        }
+      },
+      "emailAddress": {
+        "type": "string",
+        "minLength": 5,
+        "maxLength": 200,
+        "messages": {
+          "required": "Email is required",
+          "email": "Enter a valid email address",
+          "minLength": "Email must be at least 5 characters",
+          "maxLength": "Email must be at most 200 characters"
+        }
+      },
+      "country": {
+        "type": "string",
+        "messages": {
+          "required": "Please select a country"
+        },
+        "oneOf": [
+          {
+            "const": "MY",
+            "title": "Malaysia"
+          },
+          {
+            "const": "SG",
+            "title": "Singapore"
+          },
+          {
+            "const": "TH",
+            "title": "Thailand"
+          },
+          {
+            "const": "ID",
+            "title": "Indonesia"
+          }
+        ]
+      },
+      "contactMethod": {
+        "type": "string",
+        "messages": {
+          "required": "Please select a contact method"
+        },
+        "oneOf": [
+          {
+            "const": "email",
+            "title": "Email"
+          },
+          {
+            "const": "phone",
+            "title": "Phone Call"
+          },
+          {
+            "const": "sms",
+            "title": "SMS"
+          }
+        ]
+      },
+      "phoneNumber": {
+        "type": "string"
+      },
+      "foreignId": {
+        "type": "string"
+      },
+      "areaCode": {
+        "type": "string"
+      },
+      "notifications": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "oneOf": [
+            {
+              "const": "news",
+              "title": "News & Updates"
+            },
+            {
+              "const": "promos",
+              "title": "Promotions"
+            },
+            {
+              "const": "reminders",
+              "title": "Reminders"
+            }
+          ]
+        }
+      },
+      "agreeToTerms": {
+        "type": "boolean",
+        "messages": {
+          "required": "You must agree to the terms"
+        }
+      },
+      "promoCode": {
+        "type": "string"
+      },
+      "discountLevel": {
+        "type": "number"
+      },
+      "quantity": {
+        "type": "number"
+      },
+      "verificationPin": {
+        "type": "string",
+        "messages": {
+          "required": "Verification PIN is required"
+        }
+      },
+      "supportingDocs": {}
+    },
+    "required": ["firstName", "lastName", "emailAddress", "country", "contactMethod", "agreeToTerms", "verificationPin"]
+  },
+  "uiSchema": {
+    "header": {
+      "type": "VerticalLayout",
+      "elements": [
+        {
+          "component": "TopNavigation",
+          "options": {
+            "id": "topNav",
+            "title": "Complete Form Example",
+            "disableSafeArea": false
+          }
+        },
+        {
+          "component": "Typo",
+          "options": {
+            "id": "screenTitle",
+            "value": "All Conditions Demo",
+            "textAlign": "center"
+          }
+        },
+        {
+          "component": "Typo",
+          "options": {
+            "id": "screenSubtitle",
+            "value": "Fill in all fields below",
+            "textAlign": "center"
+          }
+        }
+      ]
+    },
+    "body": {
+      "type": "VerticalLayout",
+      "elements": [
+        {
+          "type": "HorizontalLayout",
+          "elements": [
+            {
+              "component": "TextInput",
+              "options": {
+                "id": "firstName",
+                "label": "First Name",
+                "placeholder": "Enter first name",
+                "disabled": false
+              }
+            },
+            {
+              "component": "TextInput",
+              "options": {
+                "id": "lastName",
+                "label": "Last Name",
+                "placeholder": "Enter last name",
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "component": "TextInput",
+          "options": {
+            "id": "emailAddress",
+            "label": "Email Address",
+            "placeholder": "Enter your email",
+            "disabled": false
+          },
+          "dynamic": {
+            "id": 10,
+            "enabled": true,
+            "type": "VALUE",
+            "target": "defaultValue",
+            "source": {
+              "id": 10,
+              "type": "FACT",
+              "path": "userEmail",
+              "serviceCode": null
+            }
+          }
+        },
+        {
+          "component": "Dropdown",
+          "options": {
+            "id": "country",
+            "label": "Country",
+            "placeholder": "Select your country",
+            "disabled": false
+          }
+        },
+        {
+          "component": "RadioButton",
+          "options": {
+            "id": "contactMethod",
+            "label": "Preferred Contact Method",
+            "groupDirection": "vertical",
+            "disabled": false
+          }
+        },
+        {
+          "component": "TextInput",
+          "options": {
+            "id": "phoneNumber",
+            "label": "Phone Number",
+            "placeholder": "+60 12 345 6789",
+            "disabled": false
+          },
+          "dependsOn": ["contactMethod"],
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#/properties/contactMethod",
+              "schema": {
+                "const": "phone"
+              }
+            }
+          }
+        },
+        {
+          "component": "TextInput",
+          "options": {
+            "id": "foreignId",
+            "label": "Foreign ID Number",
+            "placeholder": "Enter foreign identification number",
+            "disabled": false
+          },
+          "rule": {
+            "effect": "HIDE",
+            "condition": {
+              "scope": "#/properties/country",
+              "schema": {
+                "const": "MY"
+              }
+            }
+          }
+        },
+        {
+          "component": "SearchInput",
+          "options": {
+            "id": "areaCode",
+            "placeholder": "Search area code",
+            "disabled": false
+          },
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#/properties/contactMethod",
+              "schema": {
+                "enum": ["phone", "sms"]
+              }
+            }
+          }
+        },
+        {
+          "component": "Checkbox",
+          "options": {
+            "id": "notifications",
+            "label": "Notification Preferences",
+            "disabled": false
+          }
+        },
+        {
+          "component": "Toggle",
+          "options": {
+            "id": "agreeToTerms",
+            "size": "md",
+            "disabled": false
+          }
+        },
+        {
+          "component": "TextInput",
+          "options": {
+            "id": "promoCode",
+            "label": "Promo Code",
+            "placeholder": "Enter promo code (optional)",
+            "disabled": false
+          },
+          "dependsOn": ["agreeToTerms"],
+          "rule": {
+            "effect": "ENABLE",
+            "condition": {
+              "scope": "#/properties/agreeToTerms",
+              "schema": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "component": "Slider",
+          "options": {
+            "id": "discountLevel",
+            "label": "Discount Level (%)",
+            "min": 0,
+            "max": 100,
+            "step": 10
+          },
+          "rule": {
+            "effect": "DISABLE",
+            "condition": {
+              "scope": "#/properties/agreeToTerms",
+              "schema": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "component": "NumberInputStepper",
+          "options": {
+            "id": "quantity",
+            "label": "Quantity",
+            "min": 1,
+            "max": 99,
+            "step": 1,
+            "editable": true
+          }
+        },
+        {
+          "component": "PinInput",
+          "options": {
+            "id": "verificationPin",
+            "numberOfDigits": 6,
+            "inputMode": "numeric",
+            "secureTextEntry": false,
+            "autoFocus": false
+          }
+        },
+        {
+          "component": "Uploader",
+          "options": {
+            "id": "supportingDocs",
+            "maxFiles": 3,
+            "maxFileSizeBytes": 5242880,
+            "autoUpload": false,
+            "disabled": false
+          }
+        }
+      ]
+    },
+    "footer": {
+      "type": "VerticalLayout",
+      "elements": [
+        {
+          "component": "Button",
+          "options": {
+            "id": "submitButton",
+            "label": "Submit",
+            "variant": "primary",
+            "size": "lg",
+            "disabled": false,
+            "loading": false
+          }
+        }
+      ]
+    }
+  },
+  "data": {
+    "firstName": "",
+    "lastName": "",
+    "emailAddress": "",
+    "country": "",
+    "contactMethod": "",
+    "phoneNumber": "",
+    "foreignId": "",
+    "areaCode": "",
+    "notifications": [],
+    "agreeToTerms": "",
+    "promoCode": "",
+    "discountLevel": "",
+    "quantity": "",
+    "verificationPin": "",
+    "supportingDocs": ""
+  }
+}

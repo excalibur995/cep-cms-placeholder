@@ -16,7 +16,9 @@
         "6",
         "12"
       ],
-      "default": "12"
+      "default": "12",
+      "visible": false,
+      "configurable": false
     },
     "title": {
       "type": "string"
@@ -31,6 +33,13 @@
     },
     "backgroundColor": {
       "type": "string"
+    },
+    "enableCloseButton": {
+      "type": "boolean",
+      "default": false
+    },
+    "disableSafeArea": {
+      "type": "boolean"
     }
   },
   "config": {}
