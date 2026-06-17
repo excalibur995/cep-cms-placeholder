@@ -11,6 +11,9 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "journeyId": {
+      "type": "string"
+    },
     "screenId": {
       "type": "string"
     },
