@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_settings_contacts",
+  "info": {
+    "displayName": "contacts"
+  },
+  "options": {},
+  "attributes": {
+    "hotline": {
+      "type": "string"
+    },
+    "overseas": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    }
+  }
+}
