@@ -833,6 +833,40 @@ export interface OverlayEditMenu extends Struct.ComponentSchema {
   };
 }
 
+export interface SettingsAbout extends Struct.ComponentSchema {
+  collectionName: 'components_settings_about';
+  info: {
+    displayName: 'about';
+  };
+  attributes: {
+    privPol: Schema.Attribute.String;
+    securityPolicy: Schema.Attribute.String;
+    tnc: Schema.Attribute.String;
+  };
+}
+
+export interface SettingsContacts extends Struct.ComponentSchema {
+  collectionName: 'components_settings_contacts';
+  info: {
+    displayName: 'contacts';
+  };
+  attributes: {
+    email: Schema.Attribute.String;
+    hotline: Schema.Attribute.String;
+    overseas: Schema.Attribute.String;
+  };
+}
+
+export interface SettingsGuide extends Struct.ComponentSchema {
+  collectionName: 'components_settings_guide';
+  info: {
+    displayName: 'guide';
+  };
+  attributes: {
+    link: Schema.Attribute.String;
+  };
+}
+
 export interface StatusAndFeedbackAlertBanner extends Struct.ComponentSchema {
   collectionName: 'components_status_and_feedback_alert_banners';
   info: {
@@ -953,6 +987,9 @@ declare module '@strapi/strapi' {
       'navigation.top-navigation': NavigationTopNavigation;
       'overlay.coackmark-and-hint': OverlayCoackmarkAndHint;
       'overlay.edit-menu': OverlayEditMenu;
+      'settings.about': SettingsAbout;
+      'settings.contacts': SettingsContacts;
+      'settings.guide': SettingsGuide;
       'status-and-feedback.alert-banner': StatusAndFeedbackAlertBanner;
       'status-and-feedback.badge': StatusAndFeedbackBadge;
       'status-and-feedback.progress-indicator': StatusAndFeedbackProgressIndicator;

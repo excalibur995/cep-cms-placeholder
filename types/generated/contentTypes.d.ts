@@ -440,36 +440,38 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiComponentComponent extends Struct.CollectionTypeSchema {
-  collectionName: 'components';
+export interface ApiHelpSupportSettingHelpSupportSetting
+  extends Struct.SingleTypeSchema {
+  collectionName: 'help_support_settings';
   info: {
-    displayName: 'component';
-    pluralName: 'components';
-    singularName: 'component';
+    displayName: 'Help Support Settings';
+    pluralName: 'help-support-settings';
+    singularName: 'help-support-setting';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    componentId: Schema.Attribute.String;
+    about: Schema.Attribute.Component<'settings.about', false>;
+    contacts: Schema.Attribute.Component<'settings.contacts', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    enable: Schema.Attribute.Boolean;
-    items: Schema.Attribute.Relation<'oneToMany', 'api::component.component'>;
-    label: Schema.Attribute.Relation<'oneToOne', 'api::i18n-key.i18n-key'>;
-    link: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    guide: Schema.Attribute.Component<'settings.guide', false>;
+    locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::component.component'
-    > &
-      Schema.Attribute.Private;
+      'api::help-support-setting.help-support-setting'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    url: Schema.Attribute.String;
   };
 }
 
@@ -550,109 +552,6 @@ export interface ApiI18NKeyI18NKey extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiJourneyJourney extends Struct.CollectionTypeSchema {
-  collectionName: 'journeys';
-  info: {
-    displayName: 'journey';
-    pluralName: 'journeys';
-    singularName: 'journey';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    journeyId: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::journey.journey'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    screens: Schema.Attribute.Relation<'oneToMany', 'api::screen.screen'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    version: Schema.Attribute.Integer;
-  };
-}
-
-export interface ApiNonStpScreenNonStpScreen
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'non_stp_screens';
-  info: {
-    displayName: 'non-stp-screen';
-    pluralName: 'non-stp-screens';
-    singularName: 'non-stp-screen';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    components: Schema.Attribute.DynamicZone<
-      [
-        'action.bottom-quick-action',
-        'action.button',
-        'action.chip',
-        'action.quick-action-section',
-        'asset.icon',
-        'asset.image',
-        'container.accordion',
-        'container.banner',
-        'container.bento',
-        'container.card',
-        'container.divider',
-        'container.list',
-        'core.avatar',
-        'core.grid',
-        'core.typo',
-        'input.checkbox',
-        'input.dropdown',
-        'input.number-input-stepper',
-        'input.pin-input',
-        'input.radio-button',
-        'input.search-input',
-        'input.slider',
-        'input.text-input',
-        'input.toggle',
-        'input.uploader',
-        'navigation.bottom-navigation',
-        'navigation.bottom-tab-item',
-        'navigation.navigation-header',
-        'navigation.section-header',
-        'navigation.tab',
-        'navigation.toolbar',
-        'navigation.top-navigation',
-        'overlay.coackmark-and-hint',
-        'overlay.edit-menu',
-        'status-and-feedback.alert-banner',
-        'status-and-feedback.badge',
-        'status-and-feedback.progress-indicator',
-        'status-and-feedback.toast',
-      ]
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    journeyId: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::non-stp-screen.non-stp-screen'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    screenId: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    version: Schema.Attribute.Integer;
-  };
-}
-
 export interface ApiNotificationTemplateNotificationTemplate
   extends Struct.CollectionTypeSchema {
   collectionName: 'notification_templates';
@@ -671,7 +570,7 @@ export interface ApiNotificationTemplateNotificationTemplate
   };
   attributes: {
     categoryTitle: Schema.Attribute.Enumeration<
-      ['Alert', 'Promotion', 'Transaction', 'Action']
+      ['Alert', 'Transaction', 'Promo']
     > &
       Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
@@ -737,7 +636,7 @@ export interface ApiNotificationTemplateNotificationTemplate
           localized: true;
         };
       }>;
-    subCategoryTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    subCategoryTitle: Schema.Attribute.String;
     templateId: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -933,7 +832,6 @@ export interface ApiScreenScreen extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    content: Schema.Attribute.Relation<'oneToMany', 'api::component.component'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1649,11 +1547,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::component.component': ApiComponentComponent;
+      'api::help-support-setting.help-support-setting': ApiHelpSupportSettingHelpSupportSetting;
       'api::i18n-content.i18n-content': ApiI18NContentI18NContent;
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
-      'api::journey.journey': ApiJourneyJourney;
-      'api::non-stp-screen.non-stp-screen': ApiNonStpScreenNonStpScreen;
       'api::notification-template.notification-template': ApiNotificationTemplateNotificationTemplate;
       'api::overlay.overlay': ApiOverlayOverlay;
       'api::screen.screen': ApiScreenScreen;

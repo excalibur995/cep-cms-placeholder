@@ -16,11 +16,6 @@
     },
     "version": {
       "type": "integer"
-    },
-    "content": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::component.component"
     }
   }
 }

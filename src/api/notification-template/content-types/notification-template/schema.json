@@ -24,12 +24,12 @@
     },
     "categoryTitle": {
       "type": "enumeration",
-      "enum": ["Alert", "Promotion", "Transaction", "Action"],
-      "required": true
-    },
-    "subCategoryTitle": {
-      "type": "string",
-      "required": true
+      "required": true,
+      "enum": [
+        "Alert",
+        "Transaction",
+        "Promo"
+      ]
     },
     "iconName": {
       "type": "string"
@@ -143,6 +143,9 @@
     },
     "promoImages": {
       "type": "text"
+    },
+    "subCategoryTitle": {
+      "type": "string"
     }
   }
 }

@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_settings_guide",
+  "info": {
+    "displayName": "guide"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string"
+    }
+  }
+}

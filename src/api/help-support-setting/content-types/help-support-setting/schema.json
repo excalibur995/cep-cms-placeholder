@@ -1,0 +1,34 @@
+{
+  "kind": "singleType",
+  "collectionName": "help_support_settings",
+  "info": {
+    "singularName": "help-support-setting",
+    "pluralName": "help-support-settings",
+    "displayName": "Help Support Settings"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "contacts": {
+      "type": "component",
+      "component": "settings.contacts",
+      "repeatable": false
+    },
+    "guide": {
+      "type": "component",
+      "component": "settings.guide",
+      "repeatable": false
+    },
+    "about": {
+      "type": "component",
+      "component": "settings.about",
+      "repeatable": false
+    }
+  }
+}
