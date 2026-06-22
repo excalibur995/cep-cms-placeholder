@@ -314,6 +314,19 @@ export interface CoreTypo extends Struct.ComponentSchema {
   };
 }
 
+export interface FormDataSource extends Struct.ComponentSchema {
+  collectionName: 'components_form_data_sources';
+  info: {
+    displayName: 'data-source';
+    icon: 'cast';
+  };
+  attributes: {
+    depends: Schema.Attribute.String;
+    responseMap: Schema.Attribute.Component<'form.response-map', false>;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface FormDependsOnItem extends Struct.ComponentSchema {
   collectionName: 'components_form_depends_on_items';
   info: {
@@ -380,6 +393,18 @@ export interface FormOption extends Struct.ComponentSchema {
   };
 }
 
+export interface FormResponseMap extends Struct.ComponentSchema {
+  collectionName: 'components_form_response_maps';
+  info: {
+    displayName: 'response-map';
+    icon: 'cast';
+  };
+  attributes: {
+    labelKey: Schema.Attribute.String & Schema.Attribute.Required;
+    valueKey: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface FormRule extends Struct.ComponentSchema {
   collectionName: 'components_form_rules';
   info: {
@@ -416,7 +441,7 @@ export interface InputCheckbox extends Struct.ComponentSchema {
   attributes: {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     label: Schema.Attribute.String;
@@ -440,10 +465,9 @@ export interface InputDropdown extends Struct.ComponentSchema {
   attributes: {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
-    endpoint: Schema.Attribute.String;
     label: Schema.Attribute.String;
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
@@ -465,7 +489,7 @@ export interface InputNumberInputStepper extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     editable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String;
@@ -492,7 +516,7 @@ export interface InputPinInput extends Struct.ComponentSchema {
   attributes: {
     autoFocus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     inputMode: Schema.Attribute.Enumeration<['numeric', 'alphanumeric']> &
       Schema.Attribute.DefaultTo<'numeric'>;
@@ -519,10 +543,9 @@ export interface InputRadioButton extends Struct.ComponentSchema {
   attributes: {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
-    endpoint: Schema.Attribute.String;
     groupDirection: Schema.Attribute.Enumeration<['vertical', 'horizontal']> &
       Schema.Attribute.DefaultTo<'vertical'>;
     label: Schema.Attribute.String;
@@ -545,10 +568,9 @@ export interface InputSearchInput extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
-    endpoint: Schema.Attribute.String;
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
     minLength: Schema.Attribute.Integer;
@@ -569,7 +591,7 @@ export interface InputSlider extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     label: Schema.Attribute.String;
     max: Schema.Attribute.Decimal;
@@ -594,7 +616,7 @@ export interface InputTextInput extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     label: Schema.Attribute.String;
@@ -619,7 +641,7 @@ export interface InputToggle extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     maxLength: Schema.Attribute.Integer;
@@ -644,7 +666,7 @@ export interface InputUploader extends Struct.ComponentSchema {
   attributes: {
     autoUpload: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
-    dependent: Schema.Attribute.Component<'form.depends-on-item', true>;
+    dataSource: Schema.Attribute.Component<'form.data-source', false>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     maxFiles: Schema.Attribute.Integer;
@@ -903,11 +925,13 @@ declare module '@strapi/strapi' {
       'core.avatar': CoreAvatar;
       'core.grid': CoreGrid;
       'core.typo': CoreTypo;
+      'form.data-source': FormDataSource;
       'form.depends-on-item': FormDependsOnItem;
       'form.dynamic': FormDynamic;
       'form.dynamic-source': FormDynamicSource;
       'form.messages': FormMessages;
       'form.option': FormOption;
+      'form.response-map': FormResponseMap;
       'form.rule': FormRule;
       'form.rule-condition': FormRuleCondition;
       'input.checkbox': InputCheckbox;

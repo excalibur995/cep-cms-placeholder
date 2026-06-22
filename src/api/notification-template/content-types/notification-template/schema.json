@@ -1,0 +1,148 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notification_templates",
+  "info": {
+    "singularName": "notification-template",
+    "pluralName": "notification-templates",
+    "displayName": "notification-template"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "templateId": {
+      "type": "string",
+      "required": true
+    },
+    "version": {
+      "type": "integer"
+    },
+    "categoryTitle": {
+      "type": "enumeration",
+      "enum": ["Alert", "Promotion", "Transaction", "Action"],
+      "required": true
+    },
+    "subCategoryTitle": {
+      "type": "string",
+      "required": true
+    },
+    "iconName": {
+      "type": "string"
+    },
+    "note": {
+      "type": "text"
+    },
+    "pushTitle1": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "pushMsg1": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "pushTitle2": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "pushMsg2": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "webInboxSubject": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "webInboxMsg": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "webInboxDetails": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "webInboxIsHtml": {
+      "type": "boolean"
+    },
+    "webInboxTemplateId": {
+      "type": "integer"
+    },
+    "emailSubject": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "emailMsg": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "emailMsgHtml": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "emailIsHtml": {
+      "type": "boolean",
+      "required": true
+    },
+    "emailAuth": {
+      "type": "string"
+    },
+    "emailImages": {
+      "type": "text"
+    },
+    "smsMsg": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "promoImages": {
+      "type": "text"
+    }
+  }
+}

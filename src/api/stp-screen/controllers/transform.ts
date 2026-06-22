@@ -10,7 +10,6 @@ const LIFTED_FIELDS = new Set([
   "maxLength",
   "messages",
   "dynamic",
-  "dependent",
   "rule",
   "choices",
   "__component",
@@ -46,7 +45,6 @@ interface Control {
   component: string;
   label?: string;
   dynamic?: DynamicEntry;
-  dependent?: string[];
   rule?: OutputRule;
   options: Record<string, unknown>;
 }
@@ -64,7 +62,6 @@ interface MappedEntry {
   span: number;
   label?: string;
   dynamic?: DynamicEntry;
-  dependent?: string[];
   rule?: OutputRule;
   options: Record<string, unknown>;
 }
@@ -93,6 +90,17 @@ function toRule(raw: unknown): OutputRule | undefined {
   return out;
 }
 
+function sanitizeComponent(val: unknown): unknown {
+  if (!val || typeof val !== "object" || Array.isArray(val)) return val;
+  const obj = val as Record<string, unknown>;
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(obj)) {
+    if (k === "id" || k === "__component") continue;
+    out[k] = sanitizeComponent(v);
+  }
+  return out;
+}
+
 function toMapped(entry: ZoneEntry): MappedEntry {
   const raw = entry as {
     __component: string;
@@ -104,7 +112,7 @@ function toMapped(entry: ZoneEntry): MappedEntry {
     [k: string]: unknown;
   };
 
-  const { __component, id, span, componentId, label, dynamic, dependent: rawDependent, rule: rawRule, type: rawType, ...rest } = raw;
+  const { __component, id, span, componentId, label, dynamic, rule: rawRule, type: rawType, ...rest } = raw;
 
   const isInput = __component.startsWith("input.");
   const resolvedId = componentId ?? String(id ?? "");
@@ -112,14 +120,9 @@ function toMapped(entry: ZoneEntry): MappedEntry {
   if (!isInput && rawType !== null && rawType !== undefined) options.variant = rawType;
   for (const [k, v] of Object.entries(rest)) {
     if (!LIFTED_FIELDS.has(k) && v !== null && v !== undefined) {
-      options[k] = v;
+      options[k] = k === "dataSource" ? sanitizeComponent(v) : v;
     }
   }
-
-  const dependent =
-    Array.isArray(rawDependent) && rawDependent.length
-      ? (rawDependent as Array<{ componentId: string }>).map((d) => d.componentId).filter(Boolean).map(toSchemaPath)
-      : undefined;
 
   return {
     componentRaw: __component,
@@ -127,7 +130,6 @@ function toMapped(entry: ZoneEntry): MappedEntry {
     span: Number(span ?? 12),
     label: label ?? undefined,
     dynamic,
-    dependent,
     rule: toRule(rawRule),
     options,
   };
@@ -137,7 +139,6 @@ function toControl(mapped: MappedEntry): Control {
   const ctrl: Control = { component: mapped.component, options: mapped.options };
   if (mapped.label) ctrl.label = mapped.label;
   if (mapped.dynamic) ctrl.dynamic = mapped.dynamic;
-  if (mapped.dependent?.length) ctrl.dependent = mapped.dependent;
   if (mapped.rule) ctrl.rule = mapped.rule;
   return ctrl;
 }

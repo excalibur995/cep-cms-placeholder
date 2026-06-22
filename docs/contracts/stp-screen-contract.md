@@ -44,7 +44,6 @@ A JSON Schema object representing every input field on the screen (including ove
 
 ```json
 {
-  "url": "https://stp-api.example.com",
   "type": "object",
   "properties": {
     "fieldName": { ... }
@@ -55,7 +54,7 @@ A JSON Schema object representing every input field on the screen (including ove
 
 | Field | Type | Description |
 |---|---|---|
-| `url` | string? | Base API URL for remote option fetching. STP may override this at hydration time. NGA calls `{url}/{endpoint}` to get dynamic choices. |
+| `url` | string? | Optional screen-level URL. Present if authored on the stp-screen record. No longer used for endpoint-based option fetching — per-field remote sources are in `options.dataSource.url`. |
 | `type` | `"object"` | Always `"object"` |
 | `properties` | object | Map of field names to property definitions |
 | `required` | string[] | Field names that must be non-empty before submission |
@@ -68,10 +67,8 @@ A JSON Schema object representing every input field on the screen (including ove
 | `minLength` | integer | Text inputs | Minimum character count |
 | `maxLength` | integer | Text inputs | Maximum character count |
 | `messages` | object | When any validation message is authored | Keyed validation error strings (see below) |
-| `oneOf` | array | Dropdown, RadioButton, SearchInput | Static choice list for single-select fields |
+| `oneOf` | array | Dropdown, RadioButton, SearchInput with static choices | Static choice list for single-select fields |
 | `items.oneOf` | array | Checkbox | Static choice list for multi-select fields; `type` is `"array"`, `uniqueItems: true` |
-| `endpoint` | string | Dropdown, RadioButton, SearchInput with remote options | Path segment for dynamic option fetching |
-| `dependent` | string[] | Any field that depends on another | Schema paths of parent fields (see [Dependent Fields](#dependent-fields)) |
 | `properties` | object | Nested field groups | Child properties when `componentId` uses dot-notation |
 | `required` | string[] | Nested field groups | Required children within a nested object |
 
@@ -174,7 +171,6 @@ The standard element. Represents one component on the screen.
     "disabled": false
   },
   "dynamic": { ... },
-  "dependent": ["properties.contactMethod"],
   "rule": { ... }
 }
 ```
@@ -185,8 +181,8 @@ The standard element. Represents one component on the screen.
 | `label` | string? | Display label (absent for display-only components like Typo) |
 | `options` | object | All component-specific props. Always includes `id`. |
 | `options.id` | string | Schema path (`properties.fieldName`). NGA binds the control to `data[fieldName]`. |
+| `options.dataSource` | object? | Remote option loading config for choice inputs (see [Data Source](#data-source)) |
 | `dynamic` | object? | Reactive pre-fill / content injection (see [Dynamic](#dynamic)) |
-| `dependent` | string[]? | Parent field schema paths (see [Dependent Fields](#dependent-fields)) |
 | `rule` | object? | Conditional visibility/interactivity rule (see [Rules](#rules)) |
 
 **Note on `options.variant`**: For non-input display components (e.g. `Typo`), the Strapi `type` field (e.g. `"title1"`) is emitted as `options.variant` to avoid collision with the structural `type` field used in layouts.
@@ -284,54 +280,73 @@ Pre-fills a field value or injects content from an external source at runtime.
 
 ---
 
-## Dependent Fields
+## Data Source
 
-The `dependent` field appears on both the uiSchema element and in `schema.properties`.
-
-### On `schema.properties[field]`
-
-```json
-"region": {
-  "type": "string",
-  "endpoint": "regions",
-  "dependent": ["properties.country"]
-}
-```
-
-A `string[]` of schema paths. When a parent field changes:
-1. NGA clears this field's value
-2. If `endpoint` is also present, NGA re-fetches options by calling `{schema.url}/{endpoint}?{parentField}={newValue}`
-
-### On `uiSchema` element
+`options.dataSource` on a uiSchema Control tells NGA how to load choice options from a remote API. Used by `Dropdown`, `RadioButton`, and `SearchInput` when choices are not static.
 
 ```json
 {
-  "component": "TextInput",
-  "options": { "id": "properties.phoneNumber", ... },
-  "dependent": ["properties.contactMethod"],
-  "rule": { "effect": "SHOW", ... }
+  "component": "Dropdown",
+  "label": "Region",
+  "options": {
+    "id": "properties.region",
+    "dataSource": {
+      "url": "https://stp-api.example.com/regions",
+      "depends": "country",
+      "responseMap": {
+        "valueKey": "code",
+        "labelKey": "name"
+      }
+    }
+  }
 }
 ```
 
-Same list — tells NGA which parent fields' changes should trigger this element's rule to re-evaluate.
+| Field | Type | Description |
+|---|---|---|
+| `url` | string | Full URL to call for options |
+| `depends` | string? | Name of the parent field whose value is sent as a query param when fetching options. When present, NGA re-fetches and clears this field's value whenever the parent changes. |
+| `responseMap.valueKey` | string | Key in each response item to use as the choice `const` (stored value) |
+| `responseMap.labelKey` | string | Key in each response item to use as the choice display label |
 
-### `endpoint` + `dependent` together (cascade dropdowns)
+### Cascade dropdowns
 
 ```json
-"schema": {
-  "url": "https://stp-api.example.com",
-  "properties": {
-    "country": { "type": "string", "endpoint": "countries" },
-    "region":  { "type": "string", "endpoint": "regions",  "dependent": ["properties.country"] },
-    "city":    { "type": "string", "endpoint": "cities",   "dependent": ["properties.region"] }
+"uiSchema": {
+  "body": {
+    "type": "VerticalLayout",
+    "elements": [
+      {
+        "component": "Dropdown",
+        "label": "Country",
+        "options": {
+          "id": "properties.country",
+          "dataSource": {
+            "url": "https://stp-api.example.com/countries",
+            "responseMap": { "valueKey": "code", "labelKey": "name" }
+          }
+        }
+      },
+      {
+        "component": "Dropdown",
+        "label": "Region",
+        "options": {
+          "id": "properties.region",
+          "dataSource": {
+            "url": "https://stp-api.example.com/regions",
+            "depends": "country",
+            "responseMap": { "valueKey": "code", "labelKey": "name" }
+          }
+        }
+      }
+    ]
   }
 }
 ```
 
 NGA flow:
-1. Screen load → fetch `{url}/countries` for `country` options
-2. User selects `country = "MY"` → clear `region` + fetch `{url}/regions?country=MY` → clear `city`
-3. User selects `region = "KL"` → clear `city` + fetch `{url}/cities?region=KL`
+1. Screen load → fetch `url` for `country` options
+2. User selects `country = "MY"` → clear `region` value + fetch `{url}?country=MY` for region options
 
 ---
 
