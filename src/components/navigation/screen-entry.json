@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_navigation_screen_entries",
+  "info": {
+    "displayName": "Screen Entry",
+    "icon": "layer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "screenId": {
+      "type": "string",
+      "required": true
+    },
+    "screenName": {
+      "type": "string",
+      "required": true
+    },
+    "sequence": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

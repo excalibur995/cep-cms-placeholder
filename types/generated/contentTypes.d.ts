@@ -552,6 +552,37 @@ export interface ApiI18NKeyI18NKey extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNavigatorNavigator extends Struct.CollectionTypeSchema {
+  collectionName: 'navigators';
+  info: {
+    displayName: 'Navigator';
+    pluralName: 'navigators';
+    singularName: 'navigator';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navigator.navigator'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    screens: Schema.Attribute.Component<'navigation.screen-entry', true>;
+    subJourneyId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiNotificationTemplateNotificationTemplate
   extends Struct.CollectionTypeSchema {
   collectionName: 'notification_templates';
@@ -563,105 +594,74 @@ export interface ApiNotificationTemplateNotificationTemplate
   options: {
     draftAndPublish: true;
   };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
   attributes: {
-    categoryTitle: Schema.Attribute.Enumeration<
-      ['Alert', 'Transaction', 'Promo']
-    > &
-      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     emailAuth: Schema.Attribute.String;
     emailImages: Schema.Attribute.Text;
     emailIsHtml: Schema.Attribute.Boolean & Schema.Attribute.Required;
-    emailMsg: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    emailMsgHtml: Schema.Attribute.RichText &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    emailSubject: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    emailMsg: Schema.Attribute.Text;
+    emailMsgHtml: Schema.Attribute.RichText;
+    emailSubject: Schema.Attribute.String;
     iconName: Schema.Attribute.String;
-    locale: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::notification-template.notification-template'
-    >;
+    > &
+      Schema.Attribute.Private;
     note: Schema.Attribute.Text;
-    promoImages: Schema.Attribute.Text;
+    parent_tbl_language_id: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    pushMsg1: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    pushMsg2: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    pushTitle1: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    pushTitle2: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    smsMsg: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    subCategoryTitle: Schema.Attribute.String;
+    pushMsg1: Schema.Attribute.Text;
+    pushMsg2: Schema.Attribute.Text;
+    pushTitle1: Schema.Attribute.String;
+    pushTitle2: Schema.Attribute.String;
+    smsMsg: Schema.Attribute.Text;
     templateId: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     version: Schema.Attribute.Integer;
-    webInboxDetails: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    webInboxDetails: Schema.Attribute.String;
     webInboxIsHtml: Schema.Attribute.Boolean;
-    webInboxMsg: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    webInboxSubject: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    webInboxMsg: Schema.Attribute.Text;
+    webInboxSubject: Schema.Attribute.String;
     webInboxTemplateId: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiOptionsGroupOptionsGroup
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'options_groups';
+  info: {
+    displayName: 'Options Group';
+    mainField: 'slug';
+    pluralName: 'options-groups';
+    singularName: 'options-group';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    items: Schema.Attribute.Component<'options.option-item', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::options-group.options-group'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -824,7 +824,7 @@ export interface ApiOverlayOverlay extends Struct.CollectionTypeSchema {
 export interface ApiScreenScreen extends Struct.CollectionTypeSchema {
   collectionName: 'screens';
   info: {
-    displayName: 'screen';
+    displayName: 'Screen';
     pluralName: 'screens';
     singularName: 'screen';
   };
@@ -832,9 +832,52 @@ export interface ApiScreenScreen extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    components: Schema.Attribute.DynamicZone<
+      [
+        'action.bottom-quick-action',
+        'action.button',
+        'action.chip',
+        'action.quick-action-section',
+        'asset.icon',
+        'asset.image',
+        'container.accordion',
+        'container.banner',
+        'container.bento',
+        'container.card',
+        'container.divider',
+        'container.list',
+        'core.avatar',
+        'core.grid',
+        'core.typo',
+        'input.checkbox',
+        'input.dropdown',
+        'input.number-input-stepper',
+        'input.pin-input',
+        'input.radio-button',
+        'input.search-input',
+        'input.slider',
+        'input.text-input',
+        'input.toggle',
+        'input.uploader',
+        'navigation.bottom-navigation',
+        'navigation.bottom-tab-item',
+        'navigation.navigation-header',
+        'navigation.section-header',
+        'navigation.tab',
+        'navigation.toolbar',
+        'navigation.top-navigation',
+        'overlay.coackmark-and-hint',
+        'overlay.edit-menu',
+        'status-and-feedback.alert-banner',
+        'status-and-feedback.badge',
+        'status-and-feedback.progress-indicator',
+        'status-and-feedback.toast',
+      ]
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    journeyId: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1033,6 +1076,80 @@ export interface ApiStpScreenStpScreen extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     url: Schema.Attribute.String;
     version: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiTemplateScreenTemplateScreen
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'template_screens';
+  info: {
+    displayName: 'Template Screen';
+    pluralName: 'template-screens';
+    singularName: 'template-screen';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    components: Schema.Attribute.DynamicZone<
+      [
+        'action.bottom-quick-action',
+        'action.button',
+        'action.chip',
+        'action.quick-action-section',
+        'asset.icon',
+        'asset.image',
+        'container.accordion',
+        'container.banner',
+        'container.bento',
+        'container.card',
+        'container.divider',
+        'container.list',
+        'core.avatar',
+        'core.grid',
+        'core.typo',
+        'input.checkbox',
+        'input.dropdown',
+        'input.number-input-stepper',
+        'input.pin-input',
+        'input.radio-button',
+        'input.search-input',
+        'input.slider',
+        'input.text-input',
+        'input.toggle',
+        'input.uploader',
+        'navigation.bottom-navigation',
+        'navigation.bottom-tab-item',
+        'navigation.navigation-header',
+        'navigation.section-header',
+        'navigation.tab',
+        'navigation.toolbar',
+        'navigation.top-navigation',
+        'overlay.coackmark-and-hint',
+        'overlay.edit-menu',
+        'status-and-feedback.alert-banner',
+        'status-and-feedback.badge',
+        'status-and-feedback.progress-indicator',
+        'status-and-feedback.toast',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::template-screen.template-screen'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    screenId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    template: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1550,11 +1667,14 @@ declare module '@strapi/strapi' {
       'api::help-support-setting.help-support-setting': ApiHelpSupportSettingHelpSupportSetting;
       'api::i18n-content.i18n-content': ApiI18NContentI18NContent;
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
+      'api::navigator.navigator': ApiNavigatorNavigator;
       'api::notification-template.notification-template': ApiNotificationTemplateNotificationTemplate;
+      'api::options-group.options-group': ApiOptionsGroupOptionsGroup;
       'api::overlay.overlay': ApiOverlayOverlay;
       'api::screen.screen': ApiScreenScreen;
       'api::security-image.security-image': ApiSecurityImageSecurityImage;
       'api::stp-screen.stp-screen': ApiStpScreenStpScreen;
+      'api::template-screen.template-screen': ApiTemplateScreenTemplateScreen;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

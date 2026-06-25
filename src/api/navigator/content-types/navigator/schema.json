@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "navigators",
+  "info": {
+    "singularName": "navigator",
+    "pluralName": "navigators",
+    "displayName": "Navigator"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "subJourneyId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "screens": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.screen-entry"
+    }
+  }
+}

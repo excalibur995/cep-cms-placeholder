@@ -23,6 +23,9 @@
     "title": {
       "type": "string"
     },
+    "url": {
+      "type": "string"
+    },
     "emptyText": {
       "type": "string"
     },

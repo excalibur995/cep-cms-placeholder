@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "options_groups",
+  "info": {
+    "singularName": "options-group",
+    "pluralName": "options-groups",
+    "displayName": "Options Group",
+    "mainField": "slug"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "options.option-item"
+    }
+  }
+}

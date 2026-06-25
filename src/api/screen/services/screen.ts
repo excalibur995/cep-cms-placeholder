@@ -2,6 +2,6 @@
  * screen service
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreService('api::screen.screen');
+export default factories.createCoreService("api::screen.screen");

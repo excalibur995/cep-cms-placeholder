@@ -217,6 +217,7 @@ export interface ContainerList extends Struct.ComponentSchema {
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
     title: Schema.Attribute.String;
+    url: Schema.Attribute.String;
   };
 }
 
@@ -472,6 +473,10 @@ export interface InputDropdown extends Struct.ComponentSchema {
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
     minLength: Schema.Attribute.Integer;
+    optionsGroup: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::options-group.options-group'
+    >;
     placeholder: Schema.Attribute.String;
     required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     rule: Schema.Attribute.Component<'form.rule', false>;
@@ -733,6 +738,20 @@ export interface NavigationNavigationHeader extends Struct.ComponentSchema {
   };
 }
 
+export interface NavigationScreenEntry extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_screen_entries';
+  info: {
+    description: '';
+    displayName: 'Screen Entry';
+    icon: 'layer';
+  };
+  attributes: {
+    screenId: Schema.Attribute.String & Schema.Attribute.Required;
+    screenName: Schema.Attribute.String & Schema.Attribute.Required;
+    sequence: Schema.Attribute.Integer & Schema.Attribute.Required;
+  };
+}
+
 export interface NavigationSectionHeader extends Struct.ComponentSchema {
   collectionName: 'components_navigation_section_headers';
   info: {
@@ -792,6 +811,18 @@ export interface NavigationTopNavigation extends Struct.ComponentSchema {
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
     title: Schema.Attribute.String;
+  };
+}
+
+export interface OptionsOptionItem extends Struct.ComponentSchema {
+  collectionName: 'components_options_option_items';
+  info: {
+    displayName: 'Option Item';
+    icon: 'bulletList';
+  };
+  attributes: {
+    displayValue: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -981,10 +1012,12 @@ declare module '@strapi/strapi' {
       'navigation.bottom-navigation': NavigationBottomNavigation;
       'navigation.bottom-tab-item': NavigationBottomTabItem;
       'navigation.navigation-header': NavigationNavigationHeader;
+      'navigation.screen-entry': NavigationScreenEntry;
       'navigation.section-header': NavigationSectionHeader;
       'navigation.tab': NavigationTab;
       'navigation.toolbar': NavigationToolbar;
       'navigation.top-navigation': NavigationTopNavigation;
+      'options.option-item': OptionsOptionItem;
       'overlay.coackmark-and-hint': OverlayCoackmarkAndHint;
       'overlay.edit-menu': OverlayEditMenu;
       'settings.about': SettingsAbout;

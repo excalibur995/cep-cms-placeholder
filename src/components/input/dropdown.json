@@ -67,6 +67,11 @@
       "type": "component",
       "repeatable": true,
       "component": "form.option"
+    },
+    "optionsGroup": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::options-group.options-group"
     }
   },
   "config": {}

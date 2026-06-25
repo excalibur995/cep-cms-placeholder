@@ -9,11 +9,7 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
     "templateId": {
       "type": "string",
@@ -22,14 +18,9 @@
     "version": {
       "type": "integer"
     },
-    "categoryTitle": {
-      "type": "enumeration",
-      "required": true,
-      "enum": [
-        "Alert",
-        "Transaction",
-        "Promo"
-      ]
+    "parent_tbl_language_id": {
+      "type": "string",
+      "required": true
     },
     "iconName": {
       "type": "string"
@@ -38,60 +29,25 @@
       "type": "text"
     },
     "pushTitle1": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "string"
     },
     "pushMsg1": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "text"
     },
     "pushTitle2": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "string"
     },
     "pushMsg2": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "text"
     },
     "webInboxSubject": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "string"
     },
     "webInboxMsg": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "text"
     },
     "webInboxDetails": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "string"
     },
     "webInboxIsHtml": {
       "type": "boolean"
@@ -100,28 +56,13 @@
       "type": "integer"
     },
     "emailSubject": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "string"
     },
     "emailMsg": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "text"
     },
     "emailMsgHtml": {
-      "type": "richtext",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "richtext"
     },
     "emailIsHtml": {
       "type": "boolean",
@@ -134,18 +75,7 @@
       "type": "text"
     },
     "smsMsg": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "promoImages": {
       "type": "text"
-    },
-    "subCategoryTitle": {
-      "type": "string"
     }
   }
 }

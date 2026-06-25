@@ -1,24 +1,24 @@
 {
   "kind": "collectionType",
-  "collectionName": "non_stp_screens",
+  "collectionName": "template_screens",
   "info": {
-    "singularName": "non-stp-screen",
-    "pluralName": "non-stp-screens",
-    "displayName": "non-stp-screen"
+    "singularName": "template-screen",
+    "pluralName": "template-screens",
+    "displayName": "Template Screen"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "journeyId": {
-      "type": "string"
-    },
     "screenId": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
-    "version": {
-      "type": "integer"
+    "template": {
+      "type": "string",
+      "required": true
     },
     "components": {
       "type": "dynamiczone",
