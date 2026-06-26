@@ -28,6 +28,11 @@
         "text",
         "stepper"
       ]
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

@@ -29,6 +29,11 @@
     },
     "paddingTop": {
       "type": "integer"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

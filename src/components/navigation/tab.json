@@ -29,6 +29,11 @@
     "active": {
       "type": "boolean",
       "default": false
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

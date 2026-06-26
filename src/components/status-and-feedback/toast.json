@@ -45,6 +45,11 @@
     "dismissible": {
       "type": "boolean",
       "default": true
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

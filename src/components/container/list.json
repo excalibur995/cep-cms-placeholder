@@ -38,6 +38,11 @@
       "type": "component",
       "repeatable": true,
       "component": "container.list-item"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

@@ -40,6 +40,11 @@
     },
     "disableSafeArea": {
       "type": "boolean"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

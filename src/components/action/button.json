@@ -59,6 +59,11 @@
     },
     "action": {
       "type": "json"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

@@ -42,6 +42,11 @@
         "end"
       ],
       "default": "center"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

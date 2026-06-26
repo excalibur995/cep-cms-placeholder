@@ -28,6 +28,11 @@
       "type": "component",
       "repeatable": false,
       "component": "form.dynamic"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

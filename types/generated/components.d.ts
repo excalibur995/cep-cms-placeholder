@@ -15,6 +15,9 @@ export interface ActionBottomQuickAction extends Struct.ComponentSchema {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     expanded: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     horizontalScroll: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     secondRow: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -34,6 +37,9 @@ export interface ActionButton extends Struct.ComponentSchema {
     action: Schema.Attribute.JSON;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     iconName: Schema.Attribute.String;
     label: Schema.Attribute.String;
     loading: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -55,6 +61,9 @@ export interface ActionChip extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
     selected: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
@@ -83,6 +92,9 @@ export interface ActionQuickActionSection extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     horizontalScroll: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     items: Schema.Attribute.Component<'action.quick-action-item', true>;
@@ -101,6 +113,9 @@ export interface AssetIcon extends Struct.ComponentSchema {
   attributes: {
     color: Schema.Attribute.String;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     iconName: Schema.Attribute.String;
     size: Schema.Attribute.Integer;
     span: Schema.Attribute.Enumeration<['6', '12']> &
@@ -116,6 +131,9 @@ export interface AssetImage extends Struct.ComponentSchema {
   attributes: {
     alt: Schema.Attribute.String;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     imageUrl: Schema.Attribute.String;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
@@ -132,6 +150,9 @@ export interface ContainerAccordion extends Struct.ComponentSchema {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     gap: Schema.Attribute.Integer;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
     variant: Schema.Attribute.Enumeration<['list', 'card']>;
@@ -146,6 +167,9 @@ export interface ContainerBanner extends Struct.ComponentSchema {
   attributes: {
     carousel: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     loading: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     mode: Schema.Attribute.Enumeration<['picture', 'text']>;
     size: Schema.Attribute.Enumeration<['S', 'M']>;
@@ -163,6 +187,9 @@ export interface ContainerBento extends Struct.ComponentSchema {
     columns: Schema.Attribute.Integer;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     gap: Schema.Attribute.Integer;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     rowHeight: Schema.Attribute.Integer;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
@@ -177,6 +204,9 @@ export interface ContainerCard extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
     variant: Schema.Attribute.Enumeration<
@@ -193,6 +223,9 @@ export interface ContainerDivider extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     inset: Schema.Attribute.Integer;
     label: Schema.Attribute.String;
     orientation: Schema.Attribute.Enumeration<['horizontal', 'vertical']> &
@@ -213,6 +246,9 @@ export interface ContainerList extends Struct.ComponentSchema {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     emptyText: Schema.Attribute.String;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     items: Schema.Attribute.Component<'container.list-item', true>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
@@ -246,6 +282,9 @@ export interface CoreAvatar extends Struct.ComponentSchema {
     bordered: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     fallbackText: Schema.Attribute.String;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     imageUri: Schema.Attribute.String;
     size: Schema.Attribute.String;
     span: Schema.Attribute.Enumeration<['6', '12']> &
@@ -264,6 +303,9 @@ export interface CoreGrid extends Struct.ComponentSchema {
     autoFit: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     numOfColumns: Schema.Attribute.Integer;
     rowGap: Schema.Attribute.Integer;
     span: Schema.Attribute.Enumeration<['6', '12']> &
@@ -281,6 +323,9 @@ export interface CoreTypo extends Struct.ComponentSchema {
     color: Schema.Attribute.String;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     letterSpacing: Schema.Attribute.Decimal;
     lineHeight: Schema.Attribute.Decimal;
     size: Schema.Attribute.Integer;
@@ -306,6 +351,9 @@ export interface CoreTypo extends Struct.ComponentSchema {
         'subhead',
         'footnote',
         'caption',
+        'title',
+        'empty-state',
+        'address-card',
       ]
     >;
     value: Schema.Attribute.String;
@@ -443,8 +491,12 @@ export interface InputCheckbox extends Struct.ComponentSchema {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
@@ -467,8 +519,12 @@ export interface InputDropdown extends Struct.ComponentSchema {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
@@ -495,8 +551,12 @@ export interface InputNumberInputStepper extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     editable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
     max: Schema.Attribute.Decimal;
     maxLength: Schema.Attribute.Integer;
@@ -522,7 +582,11 @@ export interface InputPinInput extends Struct.ComponentSchema {
     autoFocus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     inputMode: Schema.Attribute.Enumeration<['numeric', 'alphanumeric']> &
       Schema.Attribute.DefaultTo<'numeric'>;
     maxLength: Schema.Attribute.Integer;
@@ -549,10 +613,14 @@ export interface InputRadioButton extends Struct.ComponentSchema {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     groupDirection: Schema.Attribute.Enumeration<['vertical', 'horizontal']> &
       Schema.Attribute.DefaultTo<'vertical'>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
@@ -574,8 +642,12 @@ export interface InputSearchInput extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
     minLength: Schema.Attribute.Integer;
@@ -597,7 +669,11 @@ export interface InputSlider extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
     max: Schema.Attribute.Decimal;
     maxLength: Schema.Attribute.Integer;
@@ -622,8 +698,12 @@ export interface InputTextInput extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String;
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
@@ -647,8 +727,12 @@ export interface InputToggle extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     maxLength: Schema.Attribute.Integer;
     messages: Schema.Attribute.Component<'form.messages', false>;
     minLength: Schema.Attribute.Integer;
@@ -672,8 +756,12 @@ export interface InputUploader extends Struct.ComponentSchema {
     autoUpload: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
+    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     maxFiles: Schema.Attribute.Integer;
     maxFileSizeBytes: Schema.Attribute.Integer;
     maxLength: Schema.Attribute.Integer;
@@ -697,6 +785,9 @@ export interface NavigationBottomNavigation extends Struct.ComponentSchema {
     blurEnabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
   };
@@ -711,6 +802,9 @@ export interface NavigationBottomTabItem extends Struct.ComponentSchema {
   attributes: {
     active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     iconName: Schema.Attribute.String;
     label: Schema.Attribute.String;
     span: Schema.Attribute.Enumeration<['6', '12']> &
@@ -731,6 +825,9 @@ export interface NavigationNavigationHeader extends Struct.ComponentSchema {
     disableSafeArea: Schema.Attribute.Boolean;
     enableCloseButton: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     showBackButton: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
@@ -761,6 +858,9 @@ export interface NavigationSectionHeader extends Struct.ComponentSchema {
   attributes: {
     color: Schema.Attribute.String;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
     title: Schema.Attribute.String;
@@ -776,6 +876,9 @@ export interface NavigationTab extends Struct.ComponentSchema {
   attributes: {
     active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
@@ -791,6 +894,9 @@ export interface NavigationToolbar extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
     title: Schema.Attribute.String;
@@ -807,6 +913,9 @@ export interface NavigationTopNavigation extends Struct.ComponentSchema {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     disableSafeArea: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     paddingTop: Schema.Attribute.Integer;
     span: Schema.Attribute.Enumeration<['6', '12']> &
       Schema.Attribute.DefaultTo<'12'>;
@@ -836,6 +945,9 @@ export interface OverlayCoackmarkAndHint extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'center'>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     description: Schema.Attribute.String;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     placement: Schema.Attribute.Enumeration<['top', 'bottom', 'auto']> &
       Schema.Attribute.DefaultTo<'auto'>;
     span: Schema.Attribute.Enumeration<['6', '12']> &
@@ -855,6 +967,9 @@ export interface OverlayEditMenu extends Struct.ComponentSchema {
     autoSeparator: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     closeOnSelect: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     maxVisibleItems: Schema.Attribute.Integer;
     placement: Schema.Attribute.Enumeration<['auto', 'above', 'below']> &
       Schema.Attribute.DefaultTo<'auto'>;
@@ -906,6 +1021,9 @@ export interface StatusAndFeedbackAlertBanner extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     ctaLabel: Schema.Attribute.String;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     linkLabel: Schema.Attribute.String;
     message: Schema.Attribute.String;
     severity: Schema.Attribute.Enumeration<
@@ -924,6 +1042,9 @@ export interface StatusAndFeedbackBadge extends Struct.ComponentSchema {
   };
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     iconName: Schema.Attribute.String;
     iconSize: Schema.Attribute.Integer;
     span: Schema.Attribute.Enumeration<['6', '12']> &
@@ -941,6 +1062,9 @@ export interface StatusAndFeedbackProgressIndicator
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     currentStep: Schema.Attribute.Integer;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     indicatorType: Schema.Attribute.Enumeration<
       ['stepper', 'bar', 'steps', 'circular']
     >;
@@ -960,6 +1084,9 @@ export interface StatusAndFeedbackToast extends Struct.ComponentSchema {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dismissible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     duration: Schema.Attribute.Integer;
+    hide: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<true>;
     message: Schema.Attribute.String;
     position: Schema.Attribute.Enumeration<['top', 'bottom']> &
       Schema.Attribute.DefaultTo<'bottom'>;

@@ -34,7 +34,10 @@
         "body",
         "subhead",
         "footnote",
-        "caption"
+        "caption",
+        "title",
+        "empty-state",
+        "address-card"
       ]
     },
     "size": {
@@ -97,6 +100,11 @@
       "type": "component",
       "repeatable": false,
       "component": "form.dynamic"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

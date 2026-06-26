@@ -27,6 +27,9 @@
     "type": {
       "type": "string"
     },
+    "defaultValue": {
+      "type": "string"
+    },
     "minLength": {
       "type": "integer"
     },
@@ -64,6 +67,11 @@
       "type": "component",
       "repeatable": true,
       "component": "form.option"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

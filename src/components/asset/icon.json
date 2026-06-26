@@ -27,6 +27,11 @@
     },
     "color": {
       "type": "string"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}

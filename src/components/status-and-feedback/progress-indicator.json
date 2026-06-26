@@ -36,6 +36,11 @@
     },
     "progress": {
       "type": "decimal"
+    },
+    "hide": {
+      "type": "boolean",
+      "private": true,
+      "default": true
     }
   },
   "config": {}
