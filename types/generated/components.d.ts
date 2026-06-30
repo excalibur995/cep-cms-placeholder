@@ -843,7 +843,7 @@ export interface NavigationScreenEntry extends Struct.ComponentSchema {
     icon: 'layer';
   };
   attributes: {
-    screenId: Schema.Attribute.String & Schema.Attribute.Required;
+    screenCode: Schema.Attribute.String & Schema.Attribute.Required;
     screenName: Schema.Attribute.String & Schema.Attribute.Required;
     sequence: Schema.Attribute.Integer & Schema.Attribute.Required;
   };

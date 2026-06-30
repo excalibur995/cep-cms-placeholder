@@ -4,7 +4,7 @@
   "info": {
     "singularName": "overlay",
     "pluralName": "overlays",
-    "displayName": "overlay"
+    "displayName": "Overlay"
   },
   "options": {
     "draftAndPublish": true

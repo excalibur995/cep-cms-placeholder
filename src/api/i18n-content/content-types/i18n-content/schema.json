@@ -4,7 +4,7 @@
   "info": {
     "singularName": "i18n-content",
     "pluralName": "i18n-contents",
-    "displayName": "i18n-content"
+    "displayName": "I18n Content"
   },
   "options": {
     "draftAndPublish": true

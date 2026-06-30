@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "screenId": {
+    "screenCode": {
       "type": "string",
       "required": true
     },

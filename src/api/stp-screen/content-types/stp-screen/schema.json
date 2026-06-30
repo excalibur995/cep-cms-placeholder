@@ -4,7 +4,7 @@
   "info": {
     "singularName": "stp-screen",
     "pluralName": "stp-screens",
-    "displayName": "stp-screen"
+    "displayName": "STP Screen"
   },
   "options": {
     "draftAndPublish": true

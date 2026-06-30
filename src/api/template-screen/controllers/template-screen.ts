@@ -16,6 +16,7 @@ const DROPDOWN_POPULATE = {
     rule: { populate: { condition: true } },
     dataSource: { populate: { responseMap: true } },
     choices: true,
+    optionsGroup: { populate: { items: true } },
   },
 };
 
@@ -78,77 +79,43 @@ const POPULATE = { components: ZONE_ON };
 type ZoneEntry = Record<string, unknown>;
 type OptionItem = { displayValue: string; value: string };
 
-// Strapi 5 does not populate manyToOne relations inside dynamic zone `on` blocks.
-// Work around by traversing the link table directly then fetching the published OG.
-async function resolveOptionsGroupValues(
-  strapi: any,
-  entries: ZoneEntry[]
-): Promise<Map<number, OptionItem[]>> {
-  const map = new Map<number, OptionItem[]>();
-  const knex = strapi.db.connection;
-
-  for (const entry of entries) {
-    if (entry.__component !== "input.dropdown" || !entry.id) continue;
-
-    const link = await knex("components_input_dropdowns_options_group_lnk as lnk")
-      .join("options_groups as og", "og.id", "lnk.options_group_id")
-      .where("lnk.dropdown_id", entry.id)
-      .whereNotNull("og.published_at")
-      .select("og.document_id")
-      .first();
-
-    if (!link) continue;
-
-    const og = await strapi
-      .documents("api::options-group.options-group")
-      .findOne({ documentId: link.document_id, populate: { items: true }, status: "published" });
-
-    if (og?.items?.length) {
-      map.set(
-        entry.id as number,
-        og.items.map(({ displayValue, value }: OptionItem) => ({ displayValue, value }))
-      );
-    }
-  }
-
-  return map;
-}
-
-function shapeComponent(entry: ZoneEntry, ogValues: Map<number, OptionItem[]>): Record<string, unknown> {
+function shapeComponent(entry: ZoneEntry): Record<string, unknown> {
   const shaped: Record<string, unknown> = {};
 
   for (const [k, v] of Object.entries(entry)) {
-    if (EXCLUDED_FIELDS.has(k) || v === null || v === undefined) continue;
+    if (EXCLUDED_FIELDS.has(k) || k === "optionsGroup" || v === null || v === undefined) continue;
     shaped[k] = v;
   }
 
   if ("defaultValue" in entry) shaped.defaultValue = entry.defaultValue ?? null;
 
-  if (entry.__component === "input.dropdown" && entry.id) {
-    const items = ogValues.get(entry.id as number);
-    if (items) shaped.values = items;
+  if (entry.__component === "input.dropdown") {
+    const items = (entry.optionsGroup as { items?: OptionItem[] } | null)?.items;
+    if (items?.length) {
+      shaped.values = items.map(({ displayValue, value }) => ({ displayValue, value }));
+    }
   }
 
   return shaped;
 }
 
-function shapeComponents(entries: ZoneEntry[], ogValues: Map<number, OptionItem[]>): Record<string, unknown> {
+function shapeComponents(entries: ZoneEntry[]): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   for (const entry of entries) {
     if (entry.hide === true) continue;
     const key = entry.componentId as string | undefined;
     if (!key) continue;
-    result[key] = shapeComponent(entry, ogValues);
+    result[key] = shapeComponent(entry);
   }
   return result;
 }
 
-function shapeEntity(entity: Record<string, unknown>, ogValues: Map<number, OptionItem[]>) {
+function shapeEntity(entity: Record<string, unknown>) {
   const components = (entity.components as ZoneEntry[]) ?? [];
   return {
     screenId: entity.screenId,
     template: entity.template,
-    components: shapeComponents(components, ogValues),
+    components: shapeComponents(components),
   };
 }
 
@@ -158,9 +125,7 @@ export default factories.createCoreController("api::template-screen.template-scr
       populate: POPULATE,
       status: "published",
     });
-    const allEntries = results.flatMap((e) => ((e as any).components as ZoneEntry[]) ?? []);
-    const ogValues = await resolveOptionsGroupValues(strapi, allEntries);
-    return results.map((e) => shapeEntity(e as unknown as Record<string, unknown>, ogValues));
+    return results.map((e) => shapeEntity(e as unknown as Record<string, unknown>));
   },
 
   async findByScreenId(ctx) {
@@ -173,8 +138,6 @@ export default factories.createCoreController("api::template-screen.template-scr
     });
     const entity = results[0];
     if (!entity) return ctx.notFound();
-    const entries = ((entity as any).components as ZoneEntry[]) ?? [];
-    const ogValues = await resolveOptionsGroupValues(strapi, entries);
-    return shapeEntity(entity as unknown as Record<string, unknown>, ogValues);
+    return shapeEntity(entity as unknown as Record<string, unknown>);
   },
 }));

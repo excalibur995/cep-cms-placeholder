@@ -4,7 +4,7 @@
   "info": {
     "singularName": "i18n-key",
     "pluralName": "i18n-keys",
-    "displayName": "i18n-key"
+    "displayName": "I18n Key"
   },
   "options": {
     "draftAndPublish": true

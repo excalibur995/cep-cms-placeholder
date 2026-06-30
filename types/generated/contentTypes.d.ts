@@ -478,7 +478,7 @@ export interface ApiHelpSupportSettingHelpSupportSetting
 export interface ApiI18NContentI18NContent extends Struct.CollectionTypeSchema {
   collectionName: 'i18n_contents';
   info: {
-    displayName: 'i18n-content';
+    displayName: 'I18n Content';
     pluralName: 'i18n-contents';
     singularName: 'i18n-content';
   };
@@ -527,7 +527,7 @@ export interface ApiI18NContentI18NContent extends Struct.CollectionTypeSchema {
 export interface ApiI18NKeyI18NKey extends Struct.CollectionTypeSchema {
   collectionName: 'i18n_keys';
   info: {
-    displayName: 'i18n-key';
+    displayName: 'I18n Key';
     pluralName: 'i18n-keys';
     singularName: 'i18n-key';
   };
@@ -587,7 +587,7 @@ export interface ApiNotificationTemplateNotificationTemplate
   extends Struct.CollectionTypeSchema {
   collectionName: 'notification_templates';
   info: {
-    displayName: 'notification-template';
+    displayName: 'Notification Template';
     pluralName: 'notification-templates';
     singularName: 'notification-template';
   };
@@ -668,7 +668,7 @@ export interface ApiOptionsGroupOptionsGroup
 export interface ApiOverlayOverlay extends Struct.CollectionTypeSchema {
   collectionName: 'overlays';
   info: {
-    displayName: 'overlay';
+    displayName: 'Overlay';
     pluralName: 'overlays';
     singularName: 'overlay';
   };
@@ -925,7 +925,7 @@ export interface ApiSecurityImageSecurityImage
 export interface ApiStpScreenStpScreen extends Struct.CollectionTypeSchema {
   collectionName: 'stp_screens';
   info: {
-    displayName: 'stp-screen';
+    displayName: 'STP Screen';
     pluralName: 'stp-screens';
     singularName: 'stp-screen';
   };

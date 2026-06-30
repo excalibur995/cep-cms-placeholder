@@ -12,7 +12,9 @@
     "start": "strapi start",
     "strapi": "strapi",
     "seed:stp-screen": "node scripts/seed-stp-screen.cjs",
+    "seed:navigator": "node scripts/seed-navigator.cjs",
     "seed:template-screens": "node scripts/seed-template-screens.cjs",
+    "seed:s2u-screen": "node scripts/seed-s2u-screen.cjs",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },

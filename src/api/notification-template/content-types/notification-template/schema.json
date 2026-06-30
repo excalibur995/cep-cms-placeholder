@@ -4,7 +4,7 @@
   "info": {
     "singularName": "notification-template",
     "pluralName": "notification-templates",
-    "displayName": "notification-template"
+    "displayName": "Notification Template"
   },
   "options": {
     "draftAndPublish": true
