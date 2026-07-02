@@ -491,7 +491,6 @@ export interface InputCheckbox extends Struct.ComponentSchema {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     hide: Schema.Attribute.Boolean &
@@ -519,7 +518,6 @@ export interface InputDropdown extends Struct.ComponentSchema {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     hide: Schema.Attribute.Boolean &
@@ -551,7 +549,6 @@ export interface InputNumberInputStepper extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     editable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hide: Schema.Attribute.Boolean &
@@ -582,7 +579,6 @@ export interface InputPinInput extends Struct.ComponentSchema {
     autoFocus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     hide: Schema.Attribute.Boolean &
       Schema.Attribute.Private &
@@ -613,7 +609,6 @@ export interface InputRadioButton extends Struct.ComponentSchema {
     choices: Schema.Attribute.Component<'form.option', true>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     groupDirection: Schema.Attribute.Enumeration<['vertical', 'horizontal']> &
@@ -642,7 +637,6 @@ export interface InputSearchInput extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     hide: Schema.Attribute.Boolean &
@@ -669,7 +663,6 @@ export interface InputSlider extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     hide: Schema.Attribute.Boolean &
       Schema.Attribute.Private &
@@ -698,7 +691,6 @@ export interface InputTextInput extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     hide: Schema.Attribute.Boolean &
@@ -727,7 +719,6 @@ export interface InputToggle extends Struct.ComponentSchema {
   attributes: {
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     hide: Schema.Attribute.Boolean &
@@ -756,7 +747,6 @@ export interface InputUploader extends Struct.ComponentSchema {
     autoUpload: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     componentId: Schema.Attribute.String & Schema.Attribute.Required;
     dataSource: Schema.Attribute.Component<'form.data-source', false>;
-    defaultValue: Schema.Attribute.String;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     dynamic: Schema.Attribute.Component<'form.dynamic', false>;
     hide: Schema.Attribute.Boolean &

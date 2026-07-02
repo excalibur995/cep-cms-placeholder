@@ -15,7 +15,9 @@ End-to-end flow of how the app drives a CMS/orchestrator-defined journey (e.g. t
 Key files:
 - [`journeyApi.ts`](../src/features/apply/api/journeyApi.ts) — navigator fetch, start/submit journey, screen-code → route resolution
 - [`cmsService.ts`](../src/engine/cmsService.ts) — template screen (field/layout config) fetch
-- [`resolveBindings.ts`](../src/engine/resolveBindings.ts) — variable prefill + submit payload remapping
+- [`resolveBindings.ts`](../src/engine/resolveBindings.ts) — submit payload key remapping (legacy binding-resolution helpers, mostly superseded — see step 5)
+- [`templateScreenApi.ts`](../src/features/apply/api/templateScreenApi.ts) — component type guards, incl. `isDropdownComponent`
+- [`useDropdownResponse.ts`](../src/features/apply/hooks/useDropdownResponse.ts) — fetches live option lists for dropdown-backed select fields
 - [`journeyStore.ts`](../src/store/journeyStore.ts) — `variables`, `navigatorScreens`, `screenCodeStack`, `submittedData`
 
 ---
@@ -23,7 +25,7 @@ Key files:
 ## Flow
 
 1. **Fetch the Navigator (screen sequence) from the CMS.**
-   Before starting a journey, the app calls `GET /api/navigator/:journeyCode` to get the ordered list of `{ screenCode, screenName, sequence }` the journey can visit. This is stored in `journeyStore.navigatorScreens` — it's the map used later to translate a backend `screenCode` into an actual RN route.
+   Before starting a journey, the app calls `GET /api/navigators/:journeyCode` to get the ordered list of `{ screenCode, screenName, sequence }` the journey can visit. This is stored in `journeyStore.navigatorScreens` — it's the map used later to translate a backend `screenCode` into an actual RN route.
 
 2. **Start the journey with the orchestrator.**
    The app POSTs initial applicant data to `/orchestrator/journeys/:journeyCode/start`. The orchestrator creates a journey instance and responds with the **first step**: `instanceId`, `currentStepCode`, `screenCode`, and a `variables` bag (session data collected so far, e.g. mobile number, product name).
@@ -32,13 +34,15 @@ Key files:
    The app looks up the response's `screenCode` in the stored `navigatorScreens`, maps it to a concrete RN screen + `template_id` via a static screen→route table, and navigates there. `journeyStore.screenCodeStack` is pushed so client-side back-navigation still knows which orchestrator step to resubmit to.
 
 4. **The destination screen fetches its Template Screen config from the CMS.**
-   Each journey-step screen calls its hook, which fetches `GET /api/template-screens/:template_id` — a CMS-authored `ScreenConfig` describing every field/component on the screen (labels, types, options, and a `defaultValue` that's either a static string or a binding to a backend variable name).
+   Each journey-step screen calls its hook, which fetches `GET /api/template-screens/:template_id` — a CMS-authored `ScreenConfig` describing every field/component on the screen (labels, types, options, validation messages).
 
-5. **Resolve/prefill form defaults from session `variables`.**
-   The hook matches each component's `defaultValue` against `journeyStore.variables` (`resolveDefaultsFromVariables`) and prefills the react-hook-form instance — this is what lets a user navigate back to a previously-completed step and see their prior answers.
+   *If a field's component is a dropdown backed by a live data source (`isDropdownComponent`, e.g. relationship or payment-option pickers), the hook makes a second, independent request via `useDropdownResponse(dataSource.url, template_id)` to fetch that field's option list — separate from the Template Screen config fetch above.*
+
+5. **Prefill form defaults directly from session `variables`.**
+   The orchestrator's `variables` bag is keyed by the same canonical, UPPER_SNAKE_CASE names the form's Zod schema and react-hook-form fields use (e.g. `EMERGENCY_MOBILE_NUMBER`, `ADDRESS_TYPE`). Because the names already match, prefill is a direct spread — `useForm({ defaultValues: { ...variables } })` — with no separate binding-resolution/lookup step. This is what lets a user navigate back to a previously-completed step and see their prior answers.
 
 6. **User fills the form and submits.**
-   On submit, the hook remaps the form's local field keys to the backend's canonical variable names using the same CMS `defaultValue` bindings (`buildSubmitPayload`), then POSTs to `/orchestrator/journeys/:refNo/runtime-tasks/:currentStepCode/submit` with `{ instanceId, ...remappedFields }`.
+   The hook posts to `/orchestrator/journeys/:refNo/runtime-tasks/:currentStepCode/submit` with a flat body `{ instanceId, ...formValues }` — no wrapper object. The values still pass through a key-remap step (`buildSubmitPayload`) that looks up each CMS component's `defaultValue` to translate a field's key to the backend's canonical name; since field keys are now usually already the canonical name, this is typically a passthrough, but it remains the mechanism for any field that still needs remapping.
 
 7. **Orchestrator validates, advances state, and returns the next step.**
    The response has the same shape as `start`: an updated `variables` bag (now including whatever was just submitted) and a new `screenCode` for the next step.
@@ -63,7 +67,7 @@ participant "Orchestrator (BE)" as BE
 
 == 1. Fetch journey screen sequence ==
 User -> App: Tap "Apply"
-App -> CMS: GET /navigator/:journeyCode
+App -> CMS: GET /navigators/:journeyCode
 CMS --> App: [{ screenCode, screenName, sequence }, ...]
 App -> Store: setNavigatorScreens(screens)
 
@@ -81,14 +85,19 @@ loop until terminal step
   App -> CMS: GET /template-screens/:template_id
   CMS --> App: ScreenConfig { components }
 
+  opt field has a dropdown data source
+    App -> CMS: GET dataSource.url (via useDropdownResponse)
+    CMS --> App: option list [{ key, value }, ...]
+  end
+
   == 5. Prefill form from session variables ==
   App -> Store: read variables
-  App -> App: resolveDefaultsFromVariables(\n  variables, components)
+  App -> App: useForm({ defaultValues: { ...variables } })\n(keys already match canonical variable names)
   App -> User: render form (prefilled)
 
   == 6. User submits ==
   User -> App: fill form + submit
-  App -> App: buildSubmitPayload(values, components)\n(remap keys -> canonical variable names)
+  App -> App: buildSubmitPayload(values, components)\n(remap -> canonical name; usually a passthrough)
   App -> BE: POST /journeys/:refNo/runtime-tasks/\n  :currentStepCode/submit\n  { instanceId, ...payload }
 
   == 7. Orchestrator advances state ==

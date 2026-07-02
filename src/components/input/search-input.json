@@ -27,9 +27,6 @@
     "type": {
       "type": "string"
     },
-    "defaultValue": {
-      "type": "string"
-    },
     "minLength": {
       "type": "integer"
     },

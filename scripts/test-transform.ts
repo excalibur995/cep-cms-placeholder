@@ -13,7 +13,6 @@ const fixture = {
       label: 'Email Address', placeholder: 'Enter your email address',
       required: true, type: 'email', minLength: 10, maxLength: 200,
       messages: { id: 100, required: 'Email is required', email: 'Enter a valid email', minLength: 'Min 10 chars' },
-      dynamic: { enabled: true, type: 'VALUE', target: 'defaultValue', source: { type: 'FACT', path: 'userEmail' } },
     },
     {
       __component: 'input.text-input', id: 11, span: '12', componentId: 'confirmEmailInput',

@@ -87,8 +87,6 @@ function shapeComponent(entry: ZoneEntry): Record<string, unknown> {
     shaped[k] = v;
   }
 
-  if ("defaultValue" in entry) shaped.defaultValue = entry.defaultValue ?? null;
-
   if (entry.__component === "input.dropdown") {
     const items = (entry.optionsGroup as { items?: OptionItem[] } | null)?.items;
     if (items?.length) {

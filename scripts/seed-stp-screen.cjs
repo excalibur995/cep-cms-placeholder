@@ -206,12 +206,6 @@ const SCREEN = {
         minLength: 'Email must be at least 5 characters',
         maxLength: 'Email must be at most 200 characters',
       },
-      dynamic: {
-        enabled: true,
-        type: 'VALUE',
-        target: 'defaultValue',
-        source: { type: 'FACT', path: 'userEmail' },
-      },
     },
 
     // ── dropdown with static choices ─────────────────────────────────────────
