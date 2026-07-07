@@ -11,9 +11,12 @@ export default factories.createCoreController(UID as never, ({ strapi }) => ({
     });
     if (!entity) return ctx.notFound();
     return {
-      contacts: entity.contacts,
-      guide: entity.guide,
-      about: entity.about,
+      data: {
+        contacts: entity.contacts,
+        guide: entity.guide,
+        about: entity.about,
+      },
+      meta: {},
     };
   },
 }));

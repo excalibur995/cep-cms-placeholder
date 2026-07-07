@@ -5,7 +5,12 @@ export default factories.createCoreController("api::navigator.navigator", ({ str
     const results = await strapi.documents("api::navigator.navigator").findMany({
       status: "published",
     });
-    return results;
+    return {
+      data: results,
+      meta: {
+        pagination: { page: 1, pageSize: results.length, total: results.length },
+      },
+    };
   },
   async findBySubJourney(ctx) {
     const { subJourneyId } = ctx.params as { subJourneyId: string };
@@ -19,6 +24,6 @@ export default factories.createCoreController("api::navigator.navigator", ({ str
     const entry = results[0];
     if (!entry) return ctx.notFound();
 
-    return entry.screens;
+    return { data: entry.screens, meta: {} };
   },
 }));
