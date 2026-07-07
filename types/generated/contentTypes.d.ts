@@ -457,12 +457,12 @@ export interface ApiHelpSupportSettingHelpSupportSetting
     };
   };
   attributes: {
-    about: Schema.Attribute.Component<'settings.about', false>;
-    contacts: Schema.Attribute.Component<'settings.contacts', false>;
+    about: Schema.Attribute.JSON;
+    contacts: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    guide: Schema.Attribute.Component<'settings.guide', false>;
+    guide: Schema.Attribute.JSON;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -573,7 +573,7 @@ export interface ApiNavigatorNavigator extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    screens: Schema.Attribute.Component<'navigation.screen-entry', true>;
+    screens: Schema.Attribute.JSON;
     subJourneyId: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -632,195 +632,6 @@ export interface ApiNotificationTemplateNotificationTemplate
   };
 }
 
-export interface ApiOptionsGroupOptionsGroup
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'options_groups';
-  info: {
-    displayName: 'Options Group';
-    mainField: 'slug';
-    pluralName: 'options-groups';
-    singularName: 'options-group';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    items: Schema.Attribute.Component<'options.option-item', true>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::options-group.options-group'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiOverlayOverlay extends Struct.CollectionTypeSchema {
-  collectionName: 'overlays';
-  info: {
-    displayName: 'Overlay';
-    pluralName: 'overlays';
-    singularName: 'overlay';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    body: Schema.Attribute.DynamicZone<
-      [
-        'input.uploader',
-        'core.typo',
-        'navigation.top-navigation',
-        'navigation.toolbar',
-        'input.toggle',
-        'status-and-feedback.toast',
-        'input.text-input',
-        'navigation.tab',
-        'input.slider',
-        'navigation.section-header',
-        'input.search-input',
-        'input.radio-button',
-        'status-and-feedback.progress-indicator',
-        'input.pin-input',
-        'input.number-input-stepper',
-        'navigation.navigation-header',
-        'container.list',
-        'asset.image',
-        'asset.icon',
-        'core.grid',
-        'overlay.edit-menu',
-        'input.dropdown',
-        'container.divider',
-        'overlay.coackmark-and-hint',
-        'action.chip',
-        'input.checkbox',
-        'container.card',
-        'action.button',
-        'navigation.bottom-tab-item',
-        'action.bottom-quick-action',
-        'navigation.bottom-navigation',
-        'container.bento',
-        'container.banner',
-        'status-and-feedback.badge',
-        'core.avatar',
-        'status-and-feedback.alert-banner',
-        'container.accordion',
-      ]
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    footer: Schema.Attribute.DynamicZone<
-      [
-        'input.uploader',
-        'core.typo',
-        'navigation.top-navigation',
-        'navigation.toolbar',
-        'input.toggle',
-        'status-and-feedback.toast',
-        'input.text-input',
-        'navigation.tab',
-        'input.slider',
-        'navigation.section-header',
-        'input.search-input',
-        'input.radio-button',
-        'status-and-feedback.progress-indicator',
-        'input.pin-input',
-        'input.number-input-stepper',
-        'navigation.navigation-header',
-        'container.list',
-        'asset.image',
-        'asset.icon',
-        'core.grid',
-        'overlay.edit-menu',
-        'input.dropdown',
-        'container.divider',
-        'overlay.coackmark-and-hint',
-        'action.chip',
-        'input.checkbox',
-        'container.card',
-        'action.button',
-        'navigation.bottom-tab-item',
-        'action.bottom-quick-action',
-        'navigation.bottom-navigation',
-        'container.bento',
-        'container.banner',
-        'status-and-feedback.badge',
-        'core.avatar',
-        'status-and-feedback.alert-banner',
-        'container.accordion',
-      ]
-    >;
-    header: Schema.Attribute.DynamicZone<
-      [
-        'input.uploader',
-        'core.typo',
-        'navigation.top-navigation',
-        'navigation.toolbar',
-        'input.toggle',
-        'status-and-feedback.toast',
-        'input.text-input',
-        'navigation.tab',
-        'input.slider',
-        'navigation.section-header',
-        'input.search-input',
-        'input.radio-button',
-        'status-and-feedback.progress-indicator',
-        'input.pin-input',
-        'input.number-input-stepper',
-        'navigation.navigation-header',
-        'container.list',
-        'asset.image',
-        'asset.icon',
-        'core.grid',
-        'overlay.edit-menu',
-        'input.dropdown',
-        'container.divider',
-        'overlay.coackmark-and-hint',
-        'action.chip',
-        'input.checkbox',
-        'container.card',
-        'action.button',
-        'navigation.bottom-tab-item',
-        'action.bottom-quick-action',
-        'navigation.bottom-navigation',
-        'container.bento',
-        'container.banner',
-        'status-and-feedback.badge',
-        'core.avatar',
-        'status-and-feedback.alert-banner',
-        'container.accordion',
-      ]
-    >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::overlay.overlay'
-    > &
-      Schema.Attribute.Private;
-    overlayId: Schema.Attribute.String & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    type: Schema.Attribute.Enumeration<
-      ['modal', 'bottom-sheet', 'full-screen', 'side-sheet']
-    > &
-      Schema.Attribute.DefaultTo<'modal'>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    version: Schema.Attribute.Integer;
-  };
-}
-
 export interface ApiScreenScreen extends Struct.CollectionTypeSchema {
   collectionName: 'screens';
   info: {
@@ -832,48 +643,7 @@ export interface ApiScreenScreen extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    components: Schema.Attribute.DynamicZone<
-      [
-        'action.bottom-quick-action',
-        'action.button',
-        'action.chip',
-        'action.quick-action-section',
-        'asset.icon',
-        'asset.image',
-        'container.accordion',
-        'container.banner',
-        'container.bento',
-        'container.card',
-        'container.divider',
-        'container.list',
-        'core.avatar',
-        'core.grid',
-        'core.typo',
-        'input.checkbox',
-        'input.dropdown',
-        'input.number-input-stepper',
-        'input.pin-input',
-        'input.radio-button',
-        'input.search-input',
-        'input.slider',
-        'input.text-input',
-        'input.toggle',
-        'input.uploader',
-        'navigation.bottom-navigation',
-        'navigation.bottom-tab-item',
-        'navigation.navigation-header',
-        'navigation.section-header',
-        'navigation.tab',
-        'navigation.toolbar',
-        'navigation.top-navigation',
-        'overlay.coackmark-and-hint',
-        'overlay.edit-menu',
-        'status-and-feedback.alert-banner',
-        'status-and-feedback.badge',
-        'status-and-feedback.progress-indicator',
-        'status-and-feedback.toast',
-      ]
-    >;
+    components: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -933,223 +703,22 @@ export interface ApiStpScreenStpScreen extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    body: Schema.Attribute.DynamicZone<
-      [
-        'input.uploader',
-        'core.typo',
-        'navigation.top-navigation',
-        'navigation.toolbar',
-        'input.toggle',
-        'status-and-feedback.toast',
-        'input.text-input',
-        'navigation.tab',
-        'input.slider',
-        'navigation.section-header',
-        'input.search-input',
-        'input.radio-button',
-        'status-and-feedback.progress-indicator',
-        'input.pin-input',
-        'input.number-input-stepper',
-        'navigation.navigation-header',
-        'container.list',
-        'asset.image',
-        'asset.icon',
-        'core.grid',
-        'overlay.edit-menu',
-        'input.dropdown',
-        'container.divider',
-        'overlay.coackmark-and-hint',
-        'action.chip',
-        'action.quick-action-section',
-        'input.checkbox',
-        'container.card',
-        'action.button',
-        'navigation.bottom-tab-item',
-        'action.bottom-quick-action',
-        'navigation.bottom-navigation',
-        'container.bento',
-        'container.banner',
-        'status-and-feedback.badge',
-        'core.avatar',
-        'status-and-feedback.alert-banner',
-        'container.accordion',
-      ]
-    >;
+    components: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    footer: Schema.Attribute.DynamicZone<
-      [
-        'input.uploader',
-        'core.typo',
-        'navigation.top-navigation',
-        'navigation.toolbar',
-        'input.toggle',
-        'status-and-feedback.toast',
-        'input.text-input',
-        'navigation.tab',
-        'input.slider',
-        'navigation.section-header',
-        'input.search-input',
-        'input.radio-button',
-        'status-and-feedback.progress-indicator',
-        'input.pin-input',
-        'input.number-input-stepper',
-        'navigation.navigation-header',
-        'container.list',
-        'asset.image',
-        'asset.icon',
-        'core.grid',
-        'overlay.edit-menu',
-        'input.dropdown',
-        'container.divider',
-        'overlay.coackmark-and-hint',
-        'action.chip',
-        'action.quick-action-section',
-        'input.checkbox',
-        'container.card',
-        'action.button',
-        'navigation.bottom-tab-item',
-        'action.bottom-quick-action',
-        'navigation.bottom-navigation',
-        'container.bento',
-        'container.banner',
-        'status-and-feedback.badge',
-        'core.avatar',
-        'status-and-feedback.alert-banner',
-        'container.accordion',
-      ]
-    >;
-    header: Schema.Attribute.DynamicZone<
-      [
-        'input.uploader',
-        'core.typo',
-        'navigation.top-navigation',
-        'navigation.toolbar',
-        'input.toggle',
-        'status-and-feedback.toast',
-        'input.text-input',
-        'navigation.tab',
-        'input.slider',
-        'navigation.section-header',
-        'input.search-input',
-        'input.radio-button',
-        'status-and-feedback.progress-indicator',
-        'input.pin-input',
-        'input.number-input-stepper',
-        'navigation.navigation-header',
-        'container.list',
-        'asset.image',
-        'asset.icon',
-        'core.grid',
-        'overlay.edit-menu',
-        'input.dropdown',
-        'container.divider',
-        'overlay.coackmark-and-hint',
-        'action.chip',
-        'action.quick-action-section',
-        'input.checkbox',
-        'container.card',
-        'action.button',
-        'navigation.bottom-tab-item',
-        'action.bottom-quick-action',
-        'navigation.bottom-navigation',
-        'container.bento',
-        'container.banner',
-        'status-and-feedback.badge',
-        'core.avatar',
-        'status-and-feedback.alert-banner',
-        'container.accordion',
-      ]
-    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::stp-screen.stp-screen'
     > &
       Schema.Attribute.Private;
-    overlay: Schema.Attribute.Relation<'oneToMany', 'api::overlay.overlay'>;
     publishedAt: Schema.Attribute.DateTime;
     screenId: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    url: Schema.Attribute.String;
     version: Schema.Attribute.Integer;
-  };
-}
-
-export interface ApiTemplateScreenTemplateScreen
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'template_screens';
-  info: {
-    displayName: 'Template Screen';
-    pluralName: 'template-screens';
-    singularName: 'template-screen';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    components: Schema.Attribute.DynamicZone<
-      [
-        'action.bottom-quick-action',
-        'action.button',
-        'action.chip',
-        'action.quick-action-section',
-        'asset.icon',
-        'asset.image',
-        'container.accordion',
-        'container.banner',
-        'container.bento',
-        'container.card',
-        'container.divider',
-        'container.list',
-        'core.avatar',
-        'core.grid',
-        'core.typo',
-        'input.checkbox',
-        'input.dropdown',
-        'input.number-input-stepper',
-        'input.pin-input',
-        'input.radio-button',
-        'input.search-input',
-        'input.slider',
-        'input.text-input',
-        'input.toggle',
-        'input.uploader',
-        'navigation.bottom-navigation',
-        'navigation.bottom-tab-item',
-        'navigation.navigation-header',
-        'navigation.section-header',
-        'navigation.tab',
-        'navigation.toolbar',
-        'navigation.top-navigation',
-        'overlay.coackmark-and-hint',
-        'overlay.edit-menu',
-        'status-and-feedback.alert-banner',
-        'status-and-feedback.badge',
-        'status-and-feedback.progress-indicator',
-        'status-and-feedback.toast',
-      ]
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::template-screen.template-screen'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    screenId: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    template: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
   };
 }
 
@@ -1669,12 +1238,9 @@ declare module '@strapi/strapi' {
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
       'api::navigator.navigator': ApiNavigatorNavigator;
       'api::notification-template.notification-template': ApiNotificationTemplateNotificationTemplate;
-      'api::options-group.options-group': ApiOptionsGroupOptionsGroup;
-      'api::overlay.overlay': ApiOverlayOverlay;
       'api::screen.screen': ApiScreenScreen;
       'api::security-image.security-image': ApiSecurityImageSecurityImage;
       'api::stp-screen.stp-screen': ApiStpScreenStpScreen;
-      'api::template-screen.template-screen': ApiTemplateScreenTemplateScreen;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

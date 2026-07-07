@@ -16,19 +16,13 @@
   },
   "attributes": {
     "contacts": {
-      "type": "component",
-      "component": "settings.contacts",
-      "repeatable": false
+      "type": "json"
     },
     "guide": {
-      "type": "component",
-      "component": "settings.guide",
-      "repeatable": false
+      "type": "json"
     },
     "about": {
-      "type": "component",
-      "component": "settings.about",
-      "repeatable": false
+      "type": "json"
     }
   }
 }

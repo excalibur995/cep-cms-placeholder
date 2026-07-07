@@ -17,9 +17,7 @@
       "unique": true
     },
     "screens": {
-      "type": "component",
-      "repeatable": true,
-      "component": "navigation.screen-entry"
+      "type": "json"
     }
   }
 }

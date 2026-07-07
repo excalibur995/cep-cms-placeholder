@@ -21,47 +21,7 @@
       "type": "integer"
     },
     "components": {
-      "type": "dynamiczone",
-      "components": [
-        "action.bottom-quick-action",
-        "action.button",
-        "action.chip",
-        "action.quick-action-section",
-        "asset.icon",
-        "asset.image",
-        "container.accordion",
-        "container.banner",
-        "container.bento",
-        "container.card",
-        "container.divider",
-        "container.list",
-        "core.avatar",
-        "core.grid",
-        "core.typo",
-        "input.checkbox",
-        "input.dropdown",
-        "input.number-input-stepper",
-        "input.pin-input",
-        "input.radio-button",
-        "input.search-input",
-        "input.slider",
-        "input.text-input",
-        "input.toggle",
-        "input.uploader",
-        "navigation.bottom-navigation",
-        "navigation.bottom-tab-item",
-        "navigation.navigation-header",
-        "navigation.section-header",
-        "navigation.tab",
-        "navigation.toolbar",
-        "navigation.top-navigation",
-        "overlay.coackmark-and-hint",
-        "overlay.edit-menu",
-        "status-and-feedback.alert-banner",
-        "status-and-feedback.badge",
-        "status-and-feedback.progress-indicator",
-        "status-and-feedback.toast"
-      ]
+      "type": "json"
     }
   }
 }
