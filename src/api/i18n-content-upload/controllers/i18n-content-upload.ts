@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import type { Context } from "koa";
+import type {} from "koa-body";
 import { containsDangerousContent } from "../../../lib/utils";
 
 export default {

@@ -128,7 +128,10 @@ dist
 build
 .strapi-updater.json
 .strapi-cloud.json
-
+.continue/
+.qwen/
+.windsurf/
+.remember/
 .claude
 claude.md
 docs/rbazzy
