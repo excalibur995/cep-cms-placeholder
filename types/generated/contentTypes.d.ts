@@ -442,7 +442,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 
 export interface ApiHelpSupportSettingHelpSupportSetting
   extends Struct.SingleTypeSchema {
-  collectionName: 'help_support_settings';
+  collectionName: 'help-support-settings';
   info: {
     displayName: 'Help Support Settings';
     pluralName: 'help-support-settings';
@@ -595,31 +595,47 @@ export interface ApiNotificationTemplateNotificationTemplate
     draftAndPublish: true;
   };
   attributes: {
+    category: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cta_deeplink_string: Schema.Attribute.String;
+    cta_description: Schema.Attribute.Text & Schema.Attribute.Required;
+    deliveryChannel: Schema.Attribute.String;
+    domain: Schema.Attribute.String & Schema.Attribute.Required;
     emailAuth: Schema.Attribute.String;
     emailImages: Schema.Attribute.Text;
     emailIsHtml: Schema.Attribute.Boolean & Schema.Attribute.Required;
     emailMsg: Schema.Attribute.Text;
     emailMsgHtml: Schema.Attribute.RichText;
     emailSubject: Schema.Attribute.String;
+    frequency: Schema.Attribute.String;
     iconName: Schema.Attribute.String;
+    landing_screen_path: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::notification-template.notification-template'
     > &
       Schema.Attribute.Private;
+    module: Schema.Attribute.String;
     note: Schema.Attribute.Text;
+    notification_name: Schema.Attribute.String & Schema.Attribute.Required;
+    notification_type: Schema.Attribute.String;
     parent_tbl_language_id: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     pushMsg1: Schema.Attribute.Text;
     pushMsg2: Schema.Attribute.Text;
     pushTitle1: Schema.Attribute.String;
     pushTitle2: Schema.Attribute.String;
+    requestor_email: Schema.Attribute.Email & Schema.Attribute.Required;
+    requestor_name: Schema.Attribute.String & Schema.Attribute.Required;
     smsMsg: Schema.Attribute.Text;
+    tab_category: Schema.Attribute.String & Schema.Attribute.Required;
+    tab_title: Schema.Attribute.String & Schema.Attribute.Required;
     templateId: Schema.Attribute.String & Schema.Attribute.Required;
+    trigger_description: Schema.Attribute.Text & Schema.Attribute.Required;
+    triggerBy: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

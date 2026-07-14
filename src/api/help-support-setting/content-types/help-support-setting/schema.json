@@ -1,6 +1,6 @@
 {
   "kind": "singleType",
-  "collectionName": "help_support_settings",
+  "collectionName": "help-support-settings",
   "info": {
     "singularName": "help-support-setting",
     "pluralName": "help-support-settings",

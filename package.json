@@ -12,6 +12,7 @@
     "start": "strapi start",
     "strapi": "strapi",
     "seed:navigator": "node scripts/seed-navigator.cjs",
+    "seed:notifications": "node scripts/seed-notification-templates.cjs",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
