@@ -552,6 +552,37 @@ export interface ApiI18NKeyI18NKey extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMediaAssetMediaAsset extends Struct.CollectionTypeSchema {
+  collectionName: 'media_assets';
+  info: {
+    displayName: 'Media Asset';
+    pluralName: 'media-assets';
+    singularName: 'media-asset';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    list: Schema.Attribute.JSON & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::media-asset.media-asset'
+    > &
+      Schema.Attribute.Private;
+    mediaId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiNavigatorNavigator extends Struct.CollectionTypeSchema {
   collectionName: 'navigators';
   info: {
@@ -1252,6 +1283,7 @@ declare module '@strapi/strapi' {
       'api::help-support-setting.help-support-setting': ApiHelpSupportSettingHelpSupportSetting;
       'api::i18n-content.i18n-content': ApiI18NContentI18NContent;
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
+      'api::media-asset.media-asset': ApiMediaAssetMediaAsset;
       'api::navigator.navigator': ApiNavigatorNavigator;
       'api::notification-template.notification-template': ApiNotificationTemplateNotificationTemplate;
       'api::screen.screen': ApiScreenScreen;
