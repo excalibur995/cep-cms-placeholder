@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "receipt_templates",
+  "info": {
+    "singularName": "receipt-template",
+    "pluralName": "receipt-templates",
+    "displayName": "Receipt Template"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "receiptTemplateId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "json": {
+      "type": "json"
+    }
+  }
+}

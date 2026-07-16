@@ -679,6 +679,37 @@ export interface ApiNotificationTemplateNotificationTemplate
   };
 }
 
+export interface ApiReceiptTemplateReceiptTemplate
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'receipt_templates';
+  info: {
+    displayName: 'Receipt Template';
+    pluralName: 'receipt-templates';
+    singularName: 'receipt-template';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    json: Schema.Attribute.JSON;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::receipt-template.receipt-template'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    receiptTemplateId: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    version: Schema.Attribute.Integer;
+  };
+}
+
 export interface ApiScreenScreen extends Struct.CollectionTypeSchema {
   collectionName: 'screens';
   info: {
@@ -1286,6 +1317,7 @@ declare module '@strapi/strapi' {
       'api::media-asset.media-asset': ApiMediaAssetMediaAsset;
       'api::navigator.navigator': ApiNavigatorNavigator;
       'api::notification-template.notification-template': ApiNotificationTemplateNotificationTemplate;
+      'api::receipt-template.receipt-template': ApiReceiptTemplateReceiptTemplate;
       'api::screen.screen': ApiScreenScreen;
       'api::security-image.security-image': ApiSecurityImageSecurityImage;
       'api::stp-screen.stp-screen': ApiStpScreenStpScreen;
