@@ -13,14 +13,13 @@
   "attributes": {
     "templateId": {
       "type": "string",
-      "required": true
+      "customField": "global::template-id"
     },
     "version": {
       "type": "integer"
     },
-    "parent_tbl_language_id": {
-      "type": "string",
-      "required": true
+    "parentLanguageId": {
+      "type": "string"
     },
     "iconName": {
       "type": "string"
@@ -107,7 +106,7 @@
     "landing_screen_path": {
       "type": "string"
     },
-    "cta_deeplink_string": {
+    "ctaLink": {
       "type": "string"
     },
     "requestor_name": {

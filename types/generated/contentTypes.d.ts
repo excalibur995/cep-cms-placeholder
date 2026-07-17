@@ -630,8 +630,8 @@ export interface ApiNotificationTemplateNotificationTemplate
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    cta_deeplink_string: Schema.Attribute.String;
     cta_description: Schema.Attribute.Text & Schema.Attribute.Required;
+    ctaLink: Schema.Attribute.String;
     deliveryChannel: Schema.Attribute.String;
     domain: Schema.Attribute.String & Schema.Attribute.Required;
     emailAuth: Schema.Attribute.String;
@@ -653,7 +653,7 @@ export interface ApiNotificationTemplateNotificationTemplate
     note: Schema.Attribute.Text;
     notification_name: Schema.Attribute.String & Schema.Attribute.Required;
     notification_type: Schema.Attribute.String;
-    parent_tbl_language_id: Schema.Attribute.String & Schema.Attribute.Required;
+    parentLanguageId: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     pushMsg1: Schema.Attribute.Text;
     pushMsg2: Schema.Attribute.Text;
@@ -664,7 +664,8 @@ export interface ApiNotificationTemplateNotificationTemplate
     smsMsg: Schema.Attribute.Text;
     tab_category: Schema.Attribute.String & Schema.Attribute.Required;
     tab_title: Schema.Attribute.String & Schema.Attribute.Required;
-    templateId: Schema.Attribute.String & Schema.Attribute.Required;
+    templateId: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'global::template-id'>;
     trigger_description: Schema.Attribute.Text & Schema.Attribute.Required;
     triggerBy: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

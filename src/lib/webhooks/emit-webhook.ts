@@ -1,10 +1,38 @@
 import crypto from "crypto";
+import { NOTIFICATION_TEMPLATE_API_URL, NOTIFICATION_TEMPLATE_UID } from "../constants";
 
 const staticKeys = ["uid", "version", "updatedBy", "updatedAt", "moduleName", "locale"] as const;
 
+const NOTIFICATION_TEMPLATE_EVENT_ROUTES: Record<string, { url: string; method: "POST" | "PUT" }> = {
+  "entry.create": { url: NOTIFICATION_TEMPLATE_API_URL, method: "POST" },
+  "entry.update": { url: NOTIFICATION_TEMPLATE_API_URL, method: "PUT" },
+  "entry.delete": { url: `${NOTIFICATION_TEMPLATE_API_URL}/soft-delete`, method: "PUT" },
+};
+
 export default async function emitWebhook(url: string, event: string, entry: Record<string, any>) {
   try {
+    const route = entry.uid === NOTIFICATION_TEMPLATE_UID ? NOTIFICATION_TEMPLATE_EVENT_ROUTES[event] : undefined;
+    console.log({route});
+    if (route) {
+      console.log({
+        method: route.method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(entry),
+      });
+      const res = await fetch(route.url, {
+        method: route.method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(entry),
+      });
+
+      if (!res.ok) {
+        strapi.log.warn(`Webhook returned ${res.status} for event "${event}"`);
+      }
+      return;
+    }
+
     const payload = { event } as any;
+
     staticKeys.forEach((key) => {
       if (entry[key]) payload[key] = entry[key];
     });

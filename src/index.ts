@@ -1,5 +1,6 @@
 import {Core} from "@strapi/strapi";
 import {webhookMiddleware} from "./lib/webhooks/webhook-middleware";
+import {generateTemplateIdMiddleware} from "./lib/notification-template/generate-template-id-middleware";
 
 
 export default {
@@ -9,7 +10,11 @@ export default {
      *
      * This gives you an opportunity to extend code.
      */
-    register(/* { strapi }: { strapi: Core.Strapi } */) {
+    register({ strapi }: { strapi: Core.Strapi }) {
+        strapi.customFields.register({
+            name: "template-id",
+            type: "string",
+        });
     },
 
     /**
@@ -20,6 +25,7 @@ export default {
      * run jobs, or perform some special logic.
      */
     async bootstrap({strapi}: { strapi: Core.Strapi }) {
+        strapi.documents.use(generateTemplateIdMiddleware);
         strapi.documents.use(webhookMiddleware);
     },
 };

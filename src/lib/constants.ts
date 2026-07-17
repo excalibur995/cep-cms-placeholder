@@ -2,6 +2,11 @@ import { UID } from "./webhooks/webhook.types";
 
 export const WEBHOOK_URL = process.env.WEBHOOK_URL || "";
 
+export const NOTIFICATION_TEMPLATE_API_URL =
+  process.env.NOTIFICATION_TEMPLATE_API_URL || "http://localhost:3001/mbpns/v5/notification-template";
+
+export const NOTIFICATION_TEMPLATE_UID = "api::notification-template.notification-template";
+
 export const WEBHOOK_EVENT_MAP = {
   create: "entry.create",
   update: "entry.update",
