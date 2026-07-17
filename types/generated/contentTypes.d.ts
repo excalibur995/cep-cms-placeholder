@@ -626,48 +626,34 @@ export interface ApiNotificationTemplateNotificationTemplate
     draftAndPublish: true;
   };
   attributes: {
-    category: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    cta_description: Schema.Attribute.Text & Schema.Attribute.Required;
+    cta_description: Schema.Attribute.Text;
     ctaLink: Schema.Attribute.String;
-    deliveryChannel: Schema.Attribute.String;
-    domain: Schema.Attribute.String & Schema.Attribute.Required;
     emailAuth: Schema.Attribute.String;
     emailImages: Schema.Attribute.Text;
-    emailIsHtml: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    emailIsHtml: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     emailMsg: Schema.Attribute.Text;
     emailMsgHtml: Schema.Attribute.RichText;
     emailSubject: Schema.Attribute.String;
-    frequency: Schema.Attribute.String;
     iconName: Schema.Attribute.String;
-    landing_screen_path: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::notification-template.notification-template'
     > &
       Schema.Attribute.Private;
-    module: Schema.Attribute.String;
     note: Schema.Attribute.Text;
-    notification_name: Schema.Attribute.String & Schema.Attribute.Required;
-    notification_type: Schema.Attribute.String;
     parentLanguageId: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     pushMsg1: Schema.Attribute.Text;
     pushMsg2: Schema.Attribute.Text;
     pushTitle1: Schema.Attribute.String;
     pushTitle2: Schema.Attribute.String;
-    requestor_email: Schema.Attribute.Email & Schema.Attribute.Required;
-    requestor_name: Schema.Attribute.String & Schema.Attribute.Required;
     smsMsg: Schema.Attribute.Text;
-    tab_category: Schema.Attribute.String & Schema.Attribute.Required;
-    tab_title: Schema.Attribute.String & Schema.Attribute.Required;
     templateId: Schema.Attribute.String &
       Schema.Attribute.CustomField<'global::template-id'>;
-    trigger_description: Schema.Attribute.Text & Schema.Attribute.Required;
-    triggerBy: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

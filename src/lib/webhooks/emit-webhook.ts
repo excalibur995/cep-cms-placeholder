@@ -9,28 +9,32 @@ const NOTIFICATION_TEMPLATE_EVENT_ROUTES: Record<string, { url: string; method: 
   "entry.delete": { url: `${NOTIFICATION_TEMPLATE_API_URL}/soft-delete`, method: "PUT" },
 };
 
-export default async function emitWebhook(url: string, event: string, entry: Record<string, any>) {
+
+async function emitNotificationTemplate(event: string, entry: Record<string, any>) {
+  const route = NOTIFICATION_TEMPLATE_EVENT_ROUTES[event];
+  if (!route) return;
+
   try {
-    const route = entry.uid === NOTIFICATION_TEMPLATE_UID ? NOTIFICATION_TEMPLATE_EVENT_ROUTES[event] : undefined;
-    console.log({route});
-    if (route) {
-      console.log({
-        method: route.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(entry),
-      });
-      const res = await fetch(route.url, {
-        method: route.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(entry),
-      });
+    const res = await fetch(route.url, {
+      method: route.method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(entry),
+    });
 
-      if (!res.ok) {
-        strapi.log.warn(`Webhook returned ${res.status} for event "${event}"`);
-      }
-      return;
+    if (!res.ok) {
+      strapi.log.warn(`Notification template API returned ${res.status} for event "${event}"`);
     }
+  } catch (error) {
+    strapi.log.error(`Error calling notification template API for event "${event}":`, error);
+  }
+}
 
+export default async function emitWebhook(url: string, event: string, entry: Record<string, any>) {
+  if (entry.uid === NOTIFICATION_TEMPLATE_UID) {
+    await emitNotificationTemplate(event, entry);
+  }
+
+  try {
     const payload = { event } as any;
 
     staticKeys.forEach((key) => {

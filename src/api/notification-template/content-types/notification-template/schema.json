@@ -65,7 +65,7 @@
     },
     "emailIsHtml": {
       "type": "boolean",
-      "required": true
+      "default": false
     },
     "emailAuth": {
       "type": "string"
@@ -76,60 +76,10 @@
     "smsMsg": {
       "type": "text"
     },
-    "tab_title": {
-      "type": "string",
-      "required": true
-    },
-    "tab_category": {
-      "type": "string",
-      "required": true
-    },
-    "domain": {
-      "type": "string",
-      "required": true
-    },
-    "notification_name": {
-      "type": "string",
-      "required": true
-    },
-    "notification_type": {
-      "type": "string"
-    },
-    "trigger_description": {
-      "type": "text",
-      "required": true
-    },
     "cta_description": {
-      "type": "text",
-      "required": true
-    },
-    "landing_screen_path": {
-      "type": "string"
+      "type": "text"
     },
     "ctaLink": {
-      "type": "string"
-    },
-    "requestor_name": {
-      "type": "string",
-      "required": true
-    },
-    "requestor_email": {
-      "type": "email",
-      "required": true
-    },
-    "category": {
-      "type": "string"
-    },
-    "module": {
-      "type": "string"
-    },
-    "frequency": {
-      "type": "string"
-    },
-    "triggerBy": {
-      "type": "string"
-    },
-    "deliveryChannel": {
       "type": "string"
     }
   }
