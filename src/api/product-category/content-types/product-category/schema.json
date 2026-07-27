@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_categories",
+  "info": {
+    "singularName": "product-category",
+    "pluralName": "product-categories",
+    "displayName": "Product Category"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "productGroupCode": {
+      "type": "customField",
+      "customField": "global::product-group-code",
+      "required": true,
+      "unique": true
+    },
+    "categories": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

@@ -19,7 +19,8 @@
       "type": "integer"
     },
     "parentLanguageId": {
-      "type": "string"
+      "type": "string",
+      "customField": "global::parent-language-id"
     },
     "iconName": {
       "type": "string"

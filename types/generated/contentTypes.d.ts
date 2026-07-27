@@ -645,7 +645,8 @@ export interface ApiNotificationTemplateNotificationTemplate
     > &
       Schema.Attribute.Private;
     note: Schema.Attribute.Text;
-    parentLanguageId: Schema.Attribute.String;
+    parentLanguageId: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'global::parent-language-id'>;
     publishedAt: Schema.Attribute.DateTime;
     pushMsg1: Schema.Attribute.Text;
     pushMsg2: Schema.Attribute.Text;
@@ -663,6 +664,104 @@ export interface ApiNotificationTemplateNotificationTemplate
     webInboxMsg: Schema.Attribute.Text;
     webInboxSubject: Schema.Attribute.String;
     webInboxTemplateId: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiProductCategoryProductCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_categories';
+  info: {
+    displayName: 'Product Category';
+    pluralName: 'product-categories';
+    singularName: 'product-category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    categories: Schema.Attribute.JSON & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-category.product-category'
+    > &
+      Schema.Attribute.Private;
+    productGroupCode: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.CustomField<'global::product-group-code'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProductGroupProductGroup
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_groups';
+  info: {
+    displayName: 'Product Group';
+    pluralName: 'product-groups';
+    singularName: 'product-group';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    groups: Schema.Attribute.JSON & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-group.product-group'
+    > &
+      Schema.Attribute.Private;
+    moduleId: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    screenId: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProductProduct extends Struct.CollectionTypeSchema {
+  collectionName: 'products';
+  info: {
+    displayName: 'Product';
+    pluralName: 'products';
+    singularName: 'product';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    data: Schema.Attribute.JSON & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product.product'
+    > &
+      Schema.Attribute.Private;
+    productCategoryCode: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<'global::product-category-code'>;
+    productGroupCode: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<'global::product-group-code'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1304,6 +1403,9 @@ declare module '@strapi/strapi' {
       'api::media-asset.media-asset': ApiMediaAssetMediaAsset;
       'api::navigator.navigator': ApiNavigatorNavigator;
       'api::notification-template.notification-template': ApiNotificationTemplateNotificationTemplate;
+      'api::product-category.product-category': ApiProductCategoryProductCategory;
+      'api::product-group.product-group': ApiProductGroupProductGroup;
+      'api::product.product': ApiProductProduct;
       'api::receipt-template.receipt-template': ApiReceiptTemplateReceiptTemplate;
       'api::screen.screen': ApiScreenScreen;
       'api::security-image.security-image': ApiSecurityImageSecurityImage;
