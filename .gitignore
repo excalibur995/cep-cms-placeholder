@@ -128,6 +128,13 @@ dist
 build
 .strapi-updater.json
 .strapi-cloud.json
+
+############################
+# ngrok (contains authtoken)
+############################
+
+docker-compose.ngrok.yml
+docker/ngrok/ngrok.yml
 .continue/
 .qwen/
 .windsurf/
