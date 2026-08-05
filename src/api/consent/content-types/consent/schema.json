@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "consents",
+  "info": {
+    "singularName": "consent",
+    "pluralName": "consents",
+    "displayName": "Consent"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "consentId": {
+      "type": "string",
+      "required": true
+    },
+    "version": {
+      "type": "integer",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["dynamic", "static"],
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "effectiveDate": {
+      "type": "date"
+    },
+    "htmlContent": {
+      "type": "richtext",
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "type" }, "dynamic"]
+        }
+      }
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["files", "images"],
+      "conditions": {
+        "visible": {
+          "==": [{ "var": "type" }, "static"]
+        }
+      }
+    }
+  }
+}

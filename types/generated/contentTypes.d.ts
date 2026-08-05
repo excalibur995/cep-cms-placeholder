@@ -440,6 +440,41 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiConsentConsent extends Struct.CollectionTypeSchema {
+  collectionName: 'consents';
+  info: {
+    displayName: 'Consent';
+    pluralName: 'consents';
+    singularName: 'consent';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    consentId: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    effectiveDate: Schema.Attribute.Date;
+    file: Schema.Attribute.Media<'files' | 'images'>;
+    htmlContent: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::consent.consent'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['dynamic', 'static']> &
+      Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    version: Schema.Attribute.Integer & Schema.Attribute.Required;
+  };
+}
+
 export interface ApiHelpSupportSettingHelpSupportSetting
   extends Struct.SingleTypeSchema {
   collectionName: 'help-support-settings';
@@ -1397,6 +1432,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::consent.consent': ApiConsentConsent;
       'api::help-support-setting.help-support-setting': ApiHelpSupportSettingHelpSupportSetting;
       'api::i18n-content.i18n-content': ApiI18NContentI18NContent;
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
