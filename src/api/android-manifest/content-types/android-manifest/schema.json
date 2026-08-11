@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "android_manifests",
+  "info": {
+    "singularName": "android-manifest",
+    "pluralName": "android-manifests",
+    "displayName": "Android Manifest"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "manifest": {
+      "type": "json"
+    }
+  }
+}

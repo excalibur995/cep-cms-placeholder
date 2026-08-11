@@ -440,6 +440,35 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAndroidManifestAndroidManifest
+  extends Struct.SingleTypeSchema {
+  collectionName: 'android_manifests';
+  info: {
+    displayName: 'Android Manifest';
+    pluralName: 'android-manifests';
+    singularName: 'android-manifest';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::android-manifest.android-manifest'
+    > &
+      Schema.Attribute.Private;
+    manifest: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiConsentConsent extends Struct.CollectionTypeSchema {
   collectionName: 'consents';
   info: {
@@ -580,6 +609,34 @@ export interface ApiI18NKeyI18NKey extends Struct.CollectionTypeSchema {
       'api::i18n-key.i18n-key'
     > &
       Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiIosManifestIosManifest extends Struct.SingleTypeSchema {
+  collectionName: 'ios_manifests';
+  info: {
+    displayName: 'iOS Manifest';
+    pluralName: 'ios-manifests';
+    singularName: 'ios-manifest';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ios-manifest.ios-manifest'
+    > &
+      Schema.Attribute.Private;
+    manifest: Schema.Attribute.JSON;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1432,10 +1489,12 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::android-manifest.android-manifest': ApiAndroidManifestAndroidManifest;
       'api::consent.consent': ApiConsentConsent;
       'api::help-support-setting.help-support-setting': ApiHelpSupportSettingHelpSupportSetting;
       'api::i18n-content.i18n-content': ApiI18NContentI18NContent;
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
+      'api::ios-manifest.ios-manifest': ApiIosManifestIosManifest;
       'api::media-asset.media-asset': ApiMediaAssetMediaAsset;
       'api::navigator.navigator': ApiNavigatorNavigator;
       'api::notification-template.notification-template': ApiNotificationTemplateNotificationTemplate;

@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "ios_manifests",
+  "info": {
+    "singularName": "ios-manifest",
+    "pluralName": "ios-manifests",
+    "displayName": "iOS Manifest"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "manifest": {
+      "type": "json"
+    }
+  }
+}
