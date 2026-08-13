@@ -1,0 +1,15 @@
+export default {
+    promotionArticleId: "Promotion Article ID",
+    title: "Title",
+    shortDescription: "Short Description",
+    bodyContent: "Body Content",
+    image: "Image",
+    tags: "Tags",
+    countries: "Countries",
+    recommended: "Recommended",
+    publishedDate: "Published Date",
+    startDate: "Start Date",
+    endDate: "End Date",
+    learnMoreType: "Learn More Type",
+    learnMoreLink: "Learn More Link",
+};

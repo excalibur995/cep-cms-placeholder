@@ -165,7 +165,45 @@ dropdown, mirroring `product-category`.
 
 ---
 
-## 7. Screen separation decision (should Rewards leave `screen`?)
+## 7. API filtering requirements (Promotions List)
+
+FSD 5.0 needs more than generic `?filters[x][$eq]` pass-through (the mode `screen` /
+`receipt-template` controllers use today). Needs a **custom endpoint**, same shape as
+`product.findAggregated` — bespoke query handling in the controller, not default `find()`.
+
+**Always enforced server-side** (not client-optional): only `status: published` AND
+`startDate <= now <= endDate` — expired/unpublished articles never return, regardless of
+what the client asks for.
+
+**Query params** (`GET /promotion-articles`):
+
+| Param | Behavior |
+|---|---|
+| `country` | `All \| ID \| MY \| SG \| PH \| KH`. Filters `countries` array-contains; `All` = no country filter. |
+| `tags` | multi-value; array-contains-any against `tags`. Fed by the "Category" filter pills (`All` pill = clear). |
+| `search` | matches article title only, **min 2 chars** (FSD: no API call below 2 chars — enforce client-side too, but don't trust it; a `search` param under 2 chars should no-op server-side rather than full-scan). Fuzzy/`$containsi`, not exact. |
+| `sort` | `recommended \| ending-soon \| newest`. Default `recommended`. |
+| `page` / `pageSize` | lazy-load, 10 per page per FSD 3.4/5.0 pattern. |
+
+**Sort logic — cannot be a plain Strapi `sort` array, needs code:**
+- **`recommended`** (default): `recommended === true` first, tie-broken by **applicable-country count descending** (5→1), then within same country-count by fixed priority `ID > MY > SG > PH > KH` when scoped to one country tab, then `publishedDate` desc, then `title` alpha. This is a multi-key computed sort — build an in-memory comparator, don't try to express it in Strapi's `sort`.
+- **`ending-soon`**: same country-count/priority tiering, but final tiebreak is `endDate` ascending (soonest-expiring first).
+- **`newest`**: same tiering, final tiebreak `publishedDate`/upload date descending.
+
+**Recommended flag note:** FSD literally says *"Need to add a tagging in CMS for admin to be
+able to select that promotion article as recommended"* — confirms `recommended: boolean` in
+§6 is not optional, it's explicitly called out as an admin-facing CMS field.
+
+**Implementation shape:** mirror `product.findAggregated` — `strapi.documents(UID).findMany()`
+with `filters` for country/tags/search/date-window/published, pulled into memory, then a
+custom comparator function per `sort` value (can't push the tiered logic into the DB filter).
+For tags/countries array-contains, confirm at build time whether the target DB (sqlite dev /
+prod client) filters JSON array fields natively via Document Service `$contains` — if not
+reliable, filter in-memory alongside the sort, same pass.
+
+---
+
+## 8. Screen separation decision (should Rewards leave `screen`?)
 
 - **Promotions Articles → always own collection** (content ≠ screen layout).
 - **Rewards screen shells → default: keep in `screen`, categorize by `journeyId="rewards"`.**
@@ -179,23 +217,27 @@ dropdown, mirroring `product-category`.
 
 ---
 
-## 8. Open questions (confirm before build)
+## 9. Open questions (confirm before build)
 
 1. Does a **separate team** author Rewards content? (decides RBAC + screen split)
 2. Which items are CMS-authored vs. **Alpabit/NGBO**-owned? (lock the ownership boundary)
 3. Promotions Articles: exact field list + validation vs. Figma; is `bodyContent` rich HTML or plain?
 4. Tags: free controlled vocab (registry collection) or fixed enum?
 5. Referral TnC/FAQ: reuse `help-support-setting` or new content page?
+6. Confirm sqlite (dev) vs. prod DB client both handle the tags/countries array-contains
+   filter the same way — or plan to filter in-memory for both to avoid dev/prod drift.
 
 ---
 
-## 9. Build outline (only if approved)
+## 10. Build outline (only if approved)
 
 1. `promotion-article` (+ optional `promotion-category`) — clone Product Catalog pattern:
    schema + thin controller + i18n + admin dropdown + list layout + field labels.
-2. `npx strapi ts:generate-types`; `npm run dev` boots clean.
-3. Enter Rewards notification templates into existing `notification-template`.
-4. Land Rewards UI copy → `i18n-content`; media → `media-asset`.
+2. Custom `findPromotions` controller/route per §7 (filters + tiered sort), routed ahead of
+   the default `find` (`GET /promotion-articles`), mirroring `product.findAggregated`.
+3. `npx strapi ts:generate-types`; `npm run dev` boots clean.
+4. Enter Rewards notification templates into existing `notification-template`.
+5. Land Rewards UI copy → `i18n-content`; media → `media-asset`.
 
 **Verify:** create a Promotions Article in admin → `GET` returns it, locale switch works,
 webhook fires, CDN image resolves; add one notification template → pushes to

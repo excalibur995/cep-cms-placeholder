@@ -1,0 +1,90 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promotion_articles",
+  "info": {
+    "singularName": "promotion-article",
+    "pluralName": "promotion-articles",
+    "displayName": "Promotion Article"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "promotionArticleId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 26,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "shortDescription": {
+      "type": "string",
+      "maxLength": 63,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "bodyContent": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "image": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::promotion-tag.promotion-tag"
+    },
+    "countries": {
+      "type": "json"
+    },
+    "recommended": {
+      "type": "boolean",
+      "default": false
+    },
+    "publishedDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "startDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "endDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "learnMoreType": {
+      "type": "enumeration",
+      "enum": ["web-viewer", "in-app"]
+    },
+    "learnMoreLink": {
+      "type": "string"
+    }
+  }
+}

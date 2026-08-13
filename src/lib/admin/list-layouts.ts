@@ -16,6 +16,8 @@ const LIST_LAYOUTS: Record<string, string[]> = {
     "api::product-group.product-group": ["id", "screenId", "moduleId", "updatedAt"],
     "api::product-category.product-category": ["id", "productGroupCode", "updatedAt"],
     "api::product.product": ["id", "productGroupCode", "productCategoryCode", "updatedAt"],
+    "api::promotion-article.promotion-article": ["id", "promotionArticleId", "title", "recommended", "updatedAt"],
+    "api::promotion-tag.promotion-tag": ["id", "tagCode", "tagName", "updatedAt"],
 };
 
 export async function applyListLayouts(strapi: Core.Strapi): Promise<void> {

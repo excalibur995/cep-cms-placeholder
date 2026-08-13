@@ -2,6 +2,8 @@ import notificationTemplate from "./notification-template";
 import productGroup from "./product-group";
 import productCategory from "./product-category";
 import product from "./product";
+import promotionArticle from "./promotion-article";
+import promotionTag from "./promotion-tag";
 
 /**
  * Content Manager field labels, one module per content type.
@@ -16,4 +18,6 @@ export const FIELD_LABELS: Record<string, Record<string, string>> = {
     "api::product-group.product-group": productGroup,
     "api::product-category.product-category": productCategory,
     "api::product.product": product,
+    "api::promotion-article.promotion-article": promotionArticle,
+    "api::promotion-tag.promotion-tag": promotionTag,
 };

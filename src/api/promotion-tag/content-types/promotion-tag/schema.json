@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promotion_tags",
+  "info": {
+    "singularName": "promotion-tag",
+    "pluralName": "promotion-tags",
+    "displayName": "Promotion Tag"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "tagCode": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "tagName": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

@@ -14,6 +14,7 @@
     "seed:navigator": "node scripts/seed-navigator.cjs",
     "seed:notifications": "node scripts/seed-notification-templates.cjs",
     "seed:bundles": "node scripts/seed-bundles.cjs",
+    "seed:promotions": "node scripts/seed-promotion-articles.cjs",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },

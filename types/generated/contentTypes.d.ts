@@ -857,6 +857,125 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPromotionArticlePromotionArticle
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'promotion_articles';
+  info: {
+    displayName: 'Promotion Article';
+    pluralName: 'promotion-articles';
+    singularName: 'promotion-article';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    bodyContent: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    countries: Schema.Attribute.JSON;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    endDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    image: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    learnMoreLink: Schema.Attribute.String;
+    learnMoreType: Schema.Attribute.Enumeration<['web-viewer', 'in-app']>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::promotion-article.promotion-article'
+    >;
+    promotionArticleId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    publishedDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    recommended: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    shortDescription: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 63;
+      }>;
+    startDate: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    tags: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::promotion-tag.promotion-tag'
+    >;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 26;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPromotionTagPromotionTag
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'promotion_tags';
+  info: {
+    displayName: 'Promotion Tag';
+    pluralName: 'promotion-tags';
+    singularName: 'promotion-tag';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::promotion-tag.promotion-tag'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    tagCode: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    tagName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiReceiptTemplateReceiptTemplate
   extends Struct.CollectionTypeSchema {
   collectionName: 'receipt_templates';
@@ -1501,6 +1620,8 @@ declare module '@strapi/strapi' {
       'api::product-category.product-category': ApiProductCategoryProductCategory;
       'api::product-group.product-group': ApiProductGroupProductGroup;
       'api::product.product': ApiProductProduct;
+      'api::promotion-article.promotion-article': ApiPromotionArticlePromotionArticle;
+      'api::promotion-tag.promotion-tag': ApiPromotionTagPromotionTag;
       'api::receipt-template.receipt-template': ApiReceiptTemplateReceiptTemplate;
       'api::screen.screen': ApiScreenScreen;
       'api::security-image.security-image': ApiSecurityImageSecurityImage;
