@@ -82,6 +82,12 @@
     },
     "ctaLink": {
       "type": "string"
+    },
+    "ctaButtonLabel": {
+      "type": "string"
+    },
+    "pushDeepLink": {
+      "type": "string"
     }
   }
 }

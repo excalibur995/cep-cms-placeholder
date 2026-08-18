@@ -22,4 +22,6 @@ export default {
     smsMsg: "SMS Message",
     cta_description: "CTA Description",
     ctaLink: "CTA Link",
+    ctaButtonLabel: "CTA Button Label",
+    pushDeepLink: "Push Deep Link",
 };
